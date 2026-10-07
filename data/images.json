@@ -24,9 +24,9 @@
     "images/stages/integration.jpg"
   ],
   "video":[
-    "images/stages/01.mp4",
-    "images/stages/02.mp4",
-    "images/stages/03.mp4",
-    "images/stages/04.mp4"
+    "video/01.mp4",
+    "video/02.mp4",
+    "video/03.mp4",
+    "video/04.mp4"
   ]
 }
