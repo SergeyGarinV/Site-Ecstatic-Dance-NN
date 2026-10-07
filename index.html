@@ -2078,6 +2078,10 @@ p + p {
 
         </div>
 
+        <p class="video-item__caption">
+          
+        </p>
+
       </div>
 
 
@@ -2095,6 +2099,9 @@ p + p {
 
         </div>
 
+        <p class="video-item__caption">
+          
+        </p>
 
       </div>
 
@@ -2113,6 +2120,9 @@ p + p {
 
         </div>
 
+        <p class="video-item__caption">
+          
+        </p>
 
       </div>
 
@@ -2758,9 +2768,10 @@ p + p {
    ============================================================ */
 
 const EVENT = {
-  iso: '2026-10-24T16:00:00+03:00',
-  dateLabel: '24 октября 2026',
-  timeLabel: '16:00',
+  iso: null,
+  dateLabel: null,
+  timeLabel: null,
+  fallbackLabel: 'Дата и время уточняется', 
   title: 'Экстатик / ESO Tango',
   venue: 'Большая Печёрская улица, 55/9',
   city: 'Нижний Новгород',
@@ -2834,39 +2845,76 @@ function formatTime(iso) {
 
 function applyEventData() {
 
-  document.querySelectorAll('[data-event="date"]').forEach((element) => {
+  const dateEls = document.querySelectorAll('[data-event="date"]');
+  const timeEls = document.querySelectorAll('[data-event="time"]');
 
-    if (!EVENT.dateLabel) {
-      return;
-    }
+  const hasDate = Boolean(EVENT.dateLabel);
+  const hasTime = Boolean(EVENT.timeLabel);
 
-    element.textContent = EVENT.dateLabel;
-    element.classList.remove('ph');
+  /* ----------------------------------------------------------
+     Данные есть — показываем как обычно
+     ---------------------------------------------------------- */
+  if (hasDate || hasTime) {
 
-  });
+    dateEls.forEach((element) => {
 
+      element.textContent = hasDate ? EVENT.dateLabel : '';
+      element.classList.toggle('ph', !hasDate);
 
-  document.querySelectorAll('[data-event="time"]').forEach((element) => {
+      /* если даты нет — прячем весь блок «Дата» */
+      const item = element.closest('.hero__event__item, .info-list__row');
+      if (item) item.style.display = hasDate ? '' : 'none';
 
-    if (!EVENT.timeLabel) {
-      return;
-    }
+    });
 
-    element.textContent = EVENT.timeLabel;
-    element.classList.remove('ph');
+    timeEls.forEach((element) => {
 
-  });
+      element.textContent = hasTime ? EVENT.timeLabel : '';
+      element.classList.toggle('ph', !hasTime);
 
+      /* если времени нет — прячем весь блок «Время» */
+      const item = element.closest('.hero__event__item, .info-list__row');
+      if (item) item.style.display = hasTime ? '' : 'none';
 
+    });
+
+  }
+  /* ----------------------------------------------------------
+     Данных нет — показываем «Дата и время уточняется»
+     ---------------------------------------------------------- */
+  else {
+
+    dateEls.forEach((element) => {
+      element.textContent = EVENT.fallbackLabel;
+      element.classList.remove('ph');
+
+      /* скрываем подпись «Дата» перед fallback-строкой */
+      const label = element.parentElement?.querySelector(
+        '.hero__event__label, .info-list__label'
+      );
+      if (label) label.style.display = 'none';
+
+      /* прячем весь блок «Время», чтобы не дублировать */
+      const parent = element.closest('.hero__event__item, .info-list__row');
+      if (parent) parent.style.display = '';
+    });
+
+    timeEls.forEach((element) => {
+      const item = element.closest('.hero__event__item, .info-list__row');
+      if (item) item.style.display = 'none';
+    });
+
+  }
+
+  /* ----------------------------------------------------------
+     Ссылки на билеты (если где-то используется data-ticket-link)
+     ---------------------------------------------------------- */
   document.querySelectorAll('a[data-ticket-link]').forEach((link) => {
-
     if (EVENT.ticketUrl) {
       link.href = EVENT.ticketUrl;
     }
-
   });
 }
-
 
 /* ============================================================
    ОБРАТНЫЙ ОТСЧЁТ
