@@ -922,6 +922,10 @@ p + p {
   opacity: .85;
 }
 
+.voice__text:last-child {
+  margin-bottom: 0;
+}
+
 /* ============================================================
    FAQ
    ============================================================ */
@@ -1011,18 +1015,27 @@ p + p {
    КОНТАКТЫ
    ============================================================ */
 
+.contacts {
+  text-align: center;
+}
+
+.contacts .rule {
+  margin: 30px auto 0;
+}
+
 .contact-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: 26px;
-  margin-top: 44px;
+  gap: 34px;
+  margin-top: 50px;
+  justify-content: center;
 }
 
 .contact-icon {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: inherit;
   text-decoration: none;
 }
@@ -1031,8 +1044,8 @@ p + p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 56px;
+  height: 56px;
   border: 1px solid color-mix(
     in srgb,
     currentColor 40%,
@@ -1271,12 +1284,13 @@ p + p {
   }
 
   .contact-icons {
-    gap: 20px;
+    gap: 22px;
+    margin-top: 40px;
   }
 
   .contact-icon__circle {
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
   }
 
   .contact-icon__circle svg {
@@ -2174,18 +2188,13 @@ p + p {
         </div>
 
         <div class="guide__role">
-          Ecstatic Dance DJ
+          Сертифицированный Ecstatic Dance DJ
         </div>
 
         <p class="guide__bio">
           Я создаю музыкальное путешествие: от спокойного начала через ритм
           и движение к пику и постепенному завершению.
-        </p>
 
-        <p class="guide__bio">
-          <span class="ph">
-            [ОПЫТ / ОБРАЗОВАНИЕ / ДОСТИЖЕНИЯ — УТОЧНИТЬ И ПОДТВЕРДИТЬ ДЛЯ ПУБЛИКАЦИИ]
-          </span>
         </p>
 
       </div>
@@ -2205,24 +2214,19 @@ p + p {
         </figure>
 
         <div class="guide__name">
-          Вероника
+          Вероника Гарина
         </div>
 
         <div class="guide__role">
-          Проводник практики
+          Гештальт терапевт, контактер-ченнелер, мастре поточного танца
         </div>
 
         <p class="guide__bio">
           Помогает участникам войти в практику, почувствовать тело
           и двигаться в своём темпе, сохраняя внимание к собственным границам.
+	Создаёт безопасное начало: объясняет формат, правила и границы, настраивает на присутствие.
+Завершает мягко через замедление, тишину, благодарность телу и интеграцию опыта.
         </p>
-
-        <p class="guide__bio">
-          <span class="ph">
-            [ТОЧНАЯ РОЛЬ / ОБРАЗОВАНИЕ / ОПЫТ — УТОЧНИТЬ]
-          </span>
-        </p>
-
       </div>
 
     </div>
@@ -2363,8 +2367,39 @@ p + p {
 
       <div class="voice reveal reveal-d2">
         <p class="voice__text">
-          [ОТЗЫВЫ — ДОБАВИТЬ ПОЗЖЕ: реальные отзывы участников,
-          имена/фото по согласованию]
+          Вы когда-нибудь чувствовали кости стопы по отдельности?
+          Каждую из 26?<br>
+          А микродвижения, которые совершают кости черепа?<br>
+          Или как лопатки крепятся к плечам?<br>
+          И что движение может начинаться именно с них?
+        </p>
+
+        <p class="voice__text">
+          …Таким я запомнила прошлый экстатик. Танец моего тела, рассказ,
+          физическое ощущение, острота чувствования — в клочья разнесли
+          всё, что я знала о теле с уроков биологии. И показали новые
+          возможности тела. Связь. Чувствование. Контакт. Память…
+        </p>
+
+        <p class="voice__text">
+          Это был просто танец.<br>
+          Экстатик.<br>
+          Свободные телодвижения.<br>
+          Музыка.<br>
+          Ведущая.<br>
+          И диджей…
+        </p>
+
+        <p class="voice__text">
+          Я рада, что нашла своего проводника в мир музыки и танца.
+          Везде стоит искать своего — врача, учителя, мастера… СВОЕГО…<br>
+          Того, с кем безопасно, с кем на одной волне, кому доверяю себя,
+          свою уязвимость…
+        </p>
+
+        <p class="voice__text">
+          Я рада, что нашла своего, даже своих.<br>
+          Сергей, Вероника, спасибо вам за вас и ваше служение ❤️
         </p>
       </div>
 
@@ -2595,14 +2630,14 @@ p + p {
      ============================================================ -->
 
 <section
-  class="section--light"
+  class="section--light contacts"
   style="background: linear-gradient(180deg, #E8D8C4 0%, #F5F0E8 100%); padding-bottom: 120px;"
 >
 
   <div class="container">
 
     <h2 class="title-en reveal">
-      Контакты
+      Присоединяйтесь к нам в соцсетях
     </h2>
 
     <div class="rule reveal"></div>
@@ -2631,6 +2666,33 @@ p + p {
 
         <span class="contact-icon__label">
           Telegram
+        </span>
+
+      </a>
+
+
+      <a
+        href="https://www.youtube.com/@djSergeyGarin"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="contact-icon"
+        aria-label="YouTube Сергея Гарина"
+      >
+
+        <span class="contact-icon__circle">
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.4 31.4 0 0 0 0 12a31.4 31.4 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.4 31.4 0 0 0 24 12a31.4 31.4 0 0 0-.5-5.8zM9.6 15.6V8.4L15.8 12l-6.2 3.6z"/>
+          </svg>
+
+        </span>
+
+        <span class="contact-icon__label">
+          YouTube
         </span>
 
       </a>
@@ -2690,21 +2752,6 @@ p + p {
       </a>
 
     </div>
-
-    <p class="contact__note reveal reveal-d2">
-
-      Для анонсов ближайших мероприятий:
-
-      <a
-        href="https://t.me/ecstaticnn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        t.me/ecstaticnn
-      </a>
-
-    </p>
-
   </div>
 
   <canvas
@@ -2755,7 +2802,7 @@ p + p {
 'use strict';
 
 /* ============================================================
-   КОНФИГУРАЦИЯ СОБЫТИЯ
+   КОНФИГУРАЦИЯ СОБЫТИЯ (fallback, если сеть недоступна)
    ============================================================ */
 
 const EVENT = {
@@ -2830,7 +2877,7 @@ function formatTime(iso) {
 
 
 /* ============================================================
-   ДАННЫЕ СОБЫТИЯ
+   ДАННЫЕ СОБЫТИЯ — ОТРИСОВКА В DOM
    ============================================================ */
 
 function applyEventData() {
@@ -2985,63 +3032,105 @@ function applyFromData(data) {
     return;
   }
 
-
+  /* --- основной путь: пришёл ISO-старт --- */
   if (data.start) {
 
-    EVENT.iso = data.start;
+    const parsed = parseDate(data.start);
 
-    const date = formatRuDate(data.start);
-    const time = formatTime(data.start);
+    if (parsed) {
 
-    if (date) {
-      EVENT.dateLabel = date;
+      EVENT.iso = data.start;
+
+      EVENT.dateLabel =
+        formatRuDate(data.start) || EVENT.dateLabel;
+
+      EVENT.timeLabel =
+        formatTime(data.start) || EVENT.timeLabel;
+
+    } else {
+
+      console.warn(
+        '[event] Невалидный ISO в поле start:',
+        data.start
+      );
+
     }
 
-    if (time) {
-      EVENT.timeLabel = time;
-    }
-
-  } else {
+  }
+  /* --- резервный путь: пришли date + time строками --- */
+  else {
 
     if (data.date) {
-      EVENT.dateLabel = String(data.date);
+      EVENT.dateLabel = String(data.date).trim();
     }
 
     if (data.time) {
-      EVENT.timeLabel = String(data.time);
+      EVENT.timeLabel = String(data.time).trim();
+    }
+
+    const iso = buildIsoFromLabels(
+      EVENT.dateLabel,
+      EVENT.timeLabel
+    );
+
+    if (iso) {
+      EVENT.iso = iso;
     }
 
   }
 
-
-  if (data.title) {
-    EVENT.title = String(data.title);
-  }
-
-  if (data.venue) {
-    EVENT.venue = String(data.venue);
-  }
-
-  if (data.city) {
-    EVENT.city = String(data.city);
-  }
-
-  if (data.age) {
-    EVENT.age = String(data.age);
-  }
-
-  if (data.ticket_url) {
-    EVENT.ticketUrl = String(data.ticket_url);
-  }
-
+  if (data.title)      { EVENT.title     = String(data.title); }
+  if (data.venue)      { EVENT.venue     = String(data.venue); }
+  if (data.city)       { EVENT.city      = String(data.city);  }
+  if (data.age)        { EVENT.age       = String(data.age);   }
+  if (data.ticket_url) { EVENT.ticketUrl = String(data.ticket_url); }
 
   applyEventData();
   startCountdown();
 }
 
 
+/* ------------------------------------------------------------
+   Сборка ISO из строк вида "24 октября 2026" + "16:00"
+   ------------------------------------------------------------ */
+
+function buildIsoFromLabels(dateLabel, timeLabel) {
+
+  if (!dateLabel || !timeLabel) {
+    return null;
+  }
+
+  const m = String(dateLabel).match(
+    /(\d{1,2})\s+([а-яё]+)\s+(\d{4})/i
+  );
+
+  const t = String(timeLabel).match(
+    /^(\d{1,2}):(\d{2})$/
+  );
+
+  if (!m || !t) {
+    return null;
+  }
+
+  const monthIdx = MONTHS_NOM.findIndex(
+    (name) => name.toLowerCase() === m[2].toLowerCase()
+  );
+
+  if (monthIdx < 0) {
+    return null;
+  }
+
+  const day   = String(m[1]).padStart(2, '0');
+  const month = String(monthIdx + 1).padStart(2, '0');
+  const hh    = String(t[1]).padStart(2, '0');
+
+  /* предполагаем московское время +03:00 */
+  return `${m[3]}-${month}-${day}T${hh}:${t[2]}:00+03:00`;
+}
+
+
 /* ============================================================
-   ПЕРВИЧНАЯ ОТРИСОВКА
+   ПЕРВИЧНАЯ ОТРИСОВКА ИЗ FALLBACK
    ============================================================ */
 
 applyEventData();
@@ -3049,80 +3138,123 @@ startCountdown();
 
 
 /* ============================================================
-   ЗАГРУЗКА EVENT.JSON / NETLIFY
+   ЗАГРУЗКА ДАННЫХ СОБЫТИЯ
+
+   Приоритет источников:
+     1) event.json         — локальный кэш
+     2) Netlify Function   — прокси к cbiletom.ru (обходит CORS)
    ============================================================ */
 
-(async function fetchEventData() {
-
-  try {
-
-    const response = await fetch(
-      'event.json',
-      {
-        cache: 'no-store'
-      }
-    );
-
-    if (response.ok) {
-
-      const data = await response.json();
-
-      applyFromData(data);
-
-      console.info(
-        'Данные события загружены из event.json'
-      );
-
-      return;
-    }
-
-  } catch (error) {
-
-    console.warn(
-      'Не удалось загрузить event.json:',
-      error
-    );
-
+const EVENT_SOURCES = [
+  {
+    url: 'event.json',
+    label: 'event.json'
+  },
+  {
+    url: '/.netlify/functions/event',
+    label: 'Netlify Function'
   }
+];
 
 
-  try {
+async function fetchWithTimeout(url, ms = 6000) {
 
-    const response = await fetch(
-      '/.netlify/functions/event',
-      {
-        cache: 'no-store'
-      }
-    );
+  const controller = new AbortController();
 
-    if (response.ok) {
-
-      const data = await response.json();
-
-      applyFromData(data);
-
-      console.info(
-        'Данные события загружены из Netlify Function'
-      );
-
-      return;
-    }
-
-  } catch (error) {
-
-    console.warn(
-      'Не удалось загрузить Netlify Function:',
-      error
-    );
-
-  }
-
-
-  console.info(
-    'Используется fallback-конфигурация события.'
+  const timer = setTimeout(
+    () => controller.abort(),
+    ms
   );
 
-})();
+  try {
+
+    return await fetch(url, {
+      cache: 'no-store',
+      signal: controller.signal,
+      headers: {
+        'Accept': 'application/json'
+      }
+    });
+
+  } finally {
+
+    clearTimeout(timer);
+
+  }
+
+}
+
+
+function isValidEventData(data) {
+
+  if (!data || typeof data !== 'object') {
+    return false;
+  }
+
+  return Boolean(
+    data.start ||
+    (data.date && data.time)
+  );
+
+}
+
+
+async function loadEventData() {
+
+  for (const source of EVENT_SOURCES) {
+
+    try {
+
+      const response = await fetchWithTimeout(source.url);
+
+      if (!response.ok) {
+
+        console.warn(
+          `[event] ${source.label}: HTTP ${response.status}`
+        );
+
+        continue;
+      }
+
+      const data = await response.json();
+
+      if (!isValidEventData(data)) {
+
+        console.warn(
+          `[event] ${source.label}: некорректные данные`,
+          data
+        );
+
+        continue;
+      }
+
+      applyFromData(data);
+
+      console.info(
+        `[event] ✓ Данные загружены из ${source.label}`,
+        data
+      );
+
+      return;
+
+    } catch (error) {
+
+      console.warn(
+        `[event] ${source.label}: ${error.message}`
+      );
+
+    }
+
+  }
+
+  console.info(
+    '[event] Используется fallback-конфигурация из EVENT.'
+  );
+
+}
+
+
+loadEventData();
 
 
 /* ============================================================
@@ -3160,18 +3292,10 @@ function resolveAssetPath(rel) {
 
   const str = String(rel);
 
-  /*
-   * Если в будущем в JSON появится внешний URL,
-   * он останется работать как есть.
-   */
   if (/^https?:\/\//i.test(str)) {
     return str;
   }
 
-  /*
-   * Для локальных файлов:
-   * images/...
-   */
   return str.replace(/^\/+/, '');
 
 }
@@ -3179,12 +3303,6 @@ function resolveAssetPath(rel) {
 
 /* ------------------------------------------------------------
    ПОЛУЧЕНИЕ РЕСУРСА ПО КЛЮЧУ
-
-   Примеры:
-     hero
-     stages[0]
-     people[1]
-     video[2]
    ------------------------------------------------------------ */
 
 function getAssetByKey(key) {
@@ -3211,11 +3329,6 @@ function getAssetByKey(key) {
     return null;
   }
 
-  /*
-   * Если индекс существует — берём его.
-   * Если индекс больше массива — используем первый элемент,
-   * чтобы сайт не ломался.
-   */
   return bucket[index] ?? bucket[0];
 
 }
@@ -3223,9 +3336,6 @@ function getAssetByKey(key) {
 
 /* ------------------------------------------------------------
    ПОДСТАНОВКА ФОТО И ВИДЕО
-
-   Все элементы с data-image получают src
-   только после загрузки data/images.json.
    ------------------------------------------------------------ */
 
 function applyImagesFromData() {
@@ -3243,6 +3353,7 @@ function applyImagesFromData() {
     const resolved = resolveAssetPath(relative);
 
     if (!resolved) {
+
       console.warn(
         `Не найден ресурс для data-image="${key}"`
       );
@@ -3251,18 +3362,10 @@ function applyImagesFromData() {
     }
 
 
-    /* --------------------------------------------------------
-       VIDEO
-       -------------------------------------------------------- */
-
     if (element.tagName === 'VIDEO') {
 
       element.src = resolved;
 
-      /*
-       * load() заставляет браузер перечитать источник
-       * и заново получить метаданные видео.
-       */
       try {
 
         element.load();
@@ -3280,10 +3383,6 @@ function applyImagesFromData() {
     }
 
 
-    /* --------------------------------------------------------
-       IMAGE
-       -------------------------------------------------------- */
-
     if (element.tagName === 'IMG') {
 
       element.src = resolved;
@@ -3297,16 +3396,6 @@ function applyImagesFromData() {
 
 /* ------------------------------------------------------------
    ГАЛЕРЕЯ
-
-   Берёт изображения из:
-
-   "gallery": [
-     "images/gallery/01.jpg",
-     ...
-   ]
-
-   Каждый раз выбирается случайная подборка,
-   максимум 8 фотографий.
    ------------------------------------------------------------ */
 
 function renderGalleryFromData() {
@@ -3337,9 +3426,6 @@ function renderGalleryFromData() {
     Math.min(8, list.length);
 
 
-  /*
-   * Перемешиваем массив.
-   */
   const shuffled = list
     .map((src) => ({
       src,
@@ -3389,10 +3475,6 @@ function renderGalleryFromData() {
   });
 
 
-  /*
-   * Старое содержимое галереи заменяется
-   * изображениями из JSON.
-   */
   container.replaceChildren(fragment);
 
 }
@@ -3427,16 +3509,8 @@ function renderGalleryFromData() {
       await response.json();
 
 
-    /*
-     * Сначала подставляем hero,
-     * stages, people и video.
-     */
     applyImagesFromData();
 
-
-    /*
-     * Затем строим галерею.
-     */
     renderGalleryFromData();
 
 
@@ -3451,14 +3525,6 @@ function renderGalleryFromData() {
       'Не удалось загрузить data/images.json:',
       error
     );
-
-    /*
-     * Намеренно НЕ возвращаем старые src.
-     *
-     * Теперь data/images.json является
-     * единственным источником путей
-     * к изображениям и видео.
-     */
 
   }
 
