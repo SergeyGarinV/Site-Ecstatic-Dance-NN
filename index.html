@@ -1,0 +1,2162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Экстатик Денс — Нижний Новгород</title>
+
+<meta name="description"
+      content="Экстатик Денс в Нижнем Новгороде. Свободный танец без хореографии и оценок. Музыка ведёт от мягкого начала к свободному движению и спокойному завершению.">
+
+<meta name="theme-color" content="#1A1A2E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Jost:wght@200;300;400&family=Montserrat:wght@200;300&display=swap"
+  rel="stylesheet">
+
+<style>
+/* ============================================================
+   ОСНОВА
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --font-head: 'Jost', 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --ease: cubic-bezier(.4, 0, .2, 1);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+body {
+  min-width: 320px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 17px;
+  line-height: 1.65;
+  background: #1A1A2E;
+  color: #F2EDE4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; }
+button, a { -webkit-tap-highlight-color: transparent; }
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 2;
+}
+
+section {
+  position: relative;
+  padding: 130px 0 160px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.section--dark { color: #F2EDE4; }
+.section--light { color: #2A2418; }
+
+.section--dark::after,
+.section--light::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section--dark::after {
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(255,255,255,.10), transparent 70%);
+}
+.section--light::after {
+  background: radial-gradient(ellipse 60% 50% at 50% 30%, rgba(255,255,255,.45), transparent 70%);
+}
+
+/* ============================================================
+   НАВИГАЦИЯ
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 50;
+  background: rgba(26,26,46,.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.nav__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav__brand {
+  font-family: var(--font-head);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: #F2EDE4;
+  text-decoration: none;
+  opacity: .9;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.nav__brand:focus-visible,
+.nav__links a:focus-visible,
+.btn:focus-visible,
+.contact-icon:focus-visible,
+.mobile-cta a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 5px;
+}
+
+.nav__links {
+  display: flex;
+  gap: 22px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.nav__links::-webkit-scrollbar { display: none; }
+
+.nav__links a {
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #F2EDE4;
+  text-decoration: none;
+  opacity: .7;
+  white-space: nowrap;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: opacity .3s var(--ease), border-color .3s var(--ease);
+}
+.nav__links a:hover { opacity: 1; border-color: currentColor; }
+
+/* ============================================================
+   ТИПОГРАФИКА
+   ============================================================ */
+.title-en {
+  font-family: var(--font-head);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .25em;
+  font-size: clamp(22px, 3.4vw, 38px);
+  line-height: 1.25;
+}
+
+.lead {
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.75;
+  max-width: 620px;
+  font-weight: 300;
+}
+
+p + p { margin-top: 1.1em; }
+
+.ph {
+  font-style: italic;
+  opacity: .6;
+  border-bottom: 1px dashed currentColor;
+  padding-bottom: 1px;
+  white-space: nowrap;
+}
+
+/* ============================================================
+   КНОПКИ
+   ============================================================ */
+.btn {
+  display: inline-block;
+  position: relative;
+  padding: 17px 46px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  font-family: var(--font-head);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background .7s var(--ease), border-color .7s var(--ease), letter-spacing .7s var(--ease);
+}
+.btn:hover {
+  background: color-mix(in srgb, currentColor 16%, transparent);
+  letter-spacing: .28em;
+}
+
+/* ============================================================
+   ОСЦИЛЛОГРАММА
+   ============================================================ */
+.osc {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 140px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .9;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 160px 0 180px;
+  background: linear-gradient(135deg, #556B2F 0%, #2C3E50 50%, #1A1A2E 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, rgba(85,107,47,.78) 0%, rgba(44,62,80,.72) 50%, rgba(26,26,46,.9) 100%);
+  pointer-events: none;
+}
+.hero::after {
+  background: radial-gradient(ellipse 55% 45% at 50% 45%, rgba(200,220,180,.18), transparent 72%);
+}
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  z-index: -1;
+  filter: saturate(.8);
+}
+.hero__title {
+  font-family: var(--font-head);
+  font-weight: 200;
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: clamp(34px, 7.5vw, 82px);
+  line-height: 1.08;
+  margin-bottom: 18px;
+}
+.hero__subtitle {
+  font-family: var(--font-head);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .35em;
+  font-size: clamp(12px, 1.4vw, 15px);
+  opacity: .6;
+  margin-bottom: 40px;
+}
+.hero__lead {
+  font-family: var(--font-head);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: clamp(15px, 1.6vw, 20px);
+  line-height: 1.4;
+  max-width: 560px;
+  margin-bottom: 26px;
+  opacity: .95;
+}
+.hero__text {
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.7;
+  max-width: 540px;
+  margin-bottom: 24px;
+  opacity: .9;
+}
+
+/* ============================================================
+   КАРТОЧКА СОБЫТИЯ
+   ============================================================ */
+.hero__event {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+  margin: 0 0 22px;
+  padding: 20px 26px;
+  border: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  max-width: 360px;
+}
+.hero__event__item {
+  font-family: var(--font-head);
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .95;
+}
+.hero__event__label {
+  opacity: .5;
+  margin-right: 10px;
+}
+
+/* ============================================================
+   ОБРАТНЫЙ ОТСЧЁТ
+   ============================================================ */
+.countdown {
+  display: flex;
+  gap: 22px;
+  margin: 0 0 34px;
+  max-width: 420px;
+}
+.countdown__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+}
+.countdown__num {
+  font-family: var(--font-head);
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 300;
+  letter-spacing: .04em;
+  line-height: 1;
+  color: #F2EDE4;
+  font-variant-numeric: tabular-nums;
+}
+.countdown__label {
+  font-family: var(--font-head);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  opacity: .5;
+  margin-top: 8px;
+}
+.countdown--empty { display: none; }
+
+/* ============================================================
+   SCROLL HINT
+   ============================================================ */
+.scroll-hint {
+  position: absolute;
+  bottom: 48px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: var(--font-head);
+  font-size: 10px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  opacity: .45;
+  animation: floaty 4s ease-in-out infinite;
+}
+@keyframes floaty {
+  0%, 100% { transform: translate(-50%, 0); opacity: .35; }
+  50%      { transform: translate(-50%, 8px); opacity: .7; }
+}
+
+/* ============================================================
+   ЭТАПЫ
+   ============================================================ */
+.stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+  gap: 72px;
+  align-items: center;
+}
+.stage--reverse .stage__text { order: 2; }
+.stage--reverse .stage__photo { order: 1; }
+
+.stage__inner { max-width: 620px; }
+
+.stage__poem {
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.85;
+  margin-top: 34px;
+}
+.stage__inner p + p { margin-top: 1em; }
+
+.stage__card {
+  margin-top: 34px;
+  padding: 22px 26px;
+  border-left: 1px solid color-mix(in srgb, currentColor 45%, transparent);
+  font-size: clamp(16px, 1.5vw, 18px);
+  line-height: 1.75;
+}
+.stage__card p { margin: 0; }
+.stage__card p + p { margin-top: .35em; }
+
+.rule {
+  width: 60px;
+  height: 1px;
+  background: currentColor;
+  opacity: .3;
+  margin: 30px 0 0;
+}
+
+/* ============================================================
+   КАК ПРОХОДИТ
+   ============================================================ */
+.how__body { max-width: 660px; margin-top: 40px; }
+.how__body p { font-size: clamp(17px, 1.6vw, 20px); line-height: 1.8; }
+.how__body p + p { margin-top: 1.4em; }
+.how__lead { opacity: .9; }
+
+/* ============================================================
+   ЧТО ЗАБРАТЬ
+   ============================================================ */
+.take-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+  margin-top: 40px;
+  max-width: 780px;
+}
+.take-list span {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-size: 12px;
+  padding: 13px 22px;
+  border: 1px solid color-mix(in srgb, currentColor 65%, transparent);
+  background: color-mix(in srgb, currentColor 10%, transparent);
+  color: inherit;
+  font-weight: 400;
+  box-shadow: 0 4px 14px -8px rgba(0,0,0,.25);
+}
+
+/* ============================================================
+   СЦЕНАРИИ
+   ============================================================ */
+.why {
+  margin-top: 56px;
+  max-width: 640px;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.8;
+  opacity: .95;
+}
+.scenarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  margin-top: 56px;
+  max-width: 960px;
+}
+.scenario {
+  padding: 26px 26px 28px;
+  border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  border-radius: 2px;
+  box-shadow: 0 10px 30px -18px rgba(0,0,0,.3);
+}
+.scenario__title {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 12.5px;
+  margin-bottom: 14px;
+  font-weight: 400;
+  color: inherit;
+  opacity: .95;
+}
+.scenario__title::after {
+  content: '';
+  display: block;
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: .45;
+  margin-top: 12px;
+}
+.scenario__text {
+  font-size: clamp(15px, 1.4vw, 17px);
+  line-height: 1.75;
+  opacity: .95;
+}
+
+/* ============================================================
+   МОЖНО ПРОСТО ПРИЙТИ
+   ============================================================ */
+.alone {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+.alone .title-en { margin-bottom: 0; }
+.alone .rule { margin: 30px auto 0; }
+.alone__text {
+  margin-top: 40px;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.85;
+  opacity: .92;
+}
+
+/* ============================================================
+   ВИДЕО
+   ============================================================ */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  margin-top: 70px;
+  max-width: 1080px;
+}
+.video-item {
+  max-width: 360px;
+  width: 100%;
+  margin: 0 auto;
+}
+.video-item__frame {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: #000;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 40px 70px -30px rgba(0,0,0,.6);
+}
+.video-item__frame iframe,
+.video-item__frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+}
+.video-item__frame video {
+  object-fit: contain;
+}
+.video-item__caption {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.65;
+  opacity: .85;
+}
+
+.photo-photos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 60px;
+}
+.photo-photos .photo { aspect-ratio: 1 / 1; }
+
+/* ============================================================
+   ФОТО
+   ============================================================ */
+.photo {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.45);
+  background: rgba(0,0,0,.12);
+}
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.6s var(--ease), filter 1.6s var(--ease);
+  filter: saturate(.85);
+}
+.photo:hover img { transform: scale(1.04); filter: saturate(1); }
+
+.stage__photo { aspect-ratio: 4 / 5; }
+
+/* ============================================================
+   ВЕДУЩИЕ
+   ============================================================ */
+.guides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 56px;
+  margin-top: 60px;
+}
+.guide__name {
+  font-family: var(--font-head);
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.guide__role {
+  font-size: 13px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  opacity: .6;
+  margin-bottom: 18px;
+}
+.guide__bio {
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: .9;
+}
+.guide__bio p + p { margin-top: 1em; }
+.guide__photo {
+  aspect-ratio: 4 / 5;
+  margin-bottom: 28px;
+  max-width: 420px;
+}
+
+.guides__outro {
+  margin-top: 72px;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.8;
+  max-width: 620px;
+  font-style: italic;
+  opacity: .9;
+}
+
+/* ============================================================
+   СОБЫТИЕ
+   ============================================================ */
+.event__subtitle {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 15px;
+  opacity: .85;
+  margin-top: 22px;
+}
+.event__what {
+  margin-top: 22px;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.8;
+  max-width: 620px;
+  opacity: .9;
+}
+.info-list {
+  margin-top: 50px;
+  max-width: 640px;
+  border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+}
+.info-list__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+}
+.info-list__label {
+  flex: 0 0 190px;
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  font-size: 11px;
+  opacity: .55;
+  padding-top: 4px;
+}
+.info-list__value { flex: 1 1 220px; font-size: 16px; }
+.event__cta { margin-top: 52px; }
+
+/* ============================================================
+   ОТЗЫВЫ
+   ============================================================ */
+.voices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 36px;
+  margin-top: 56px;
+}
+.voice {
+  padding: 34px 32px;
+  border: 1px dashed color-mix(in srgb, currentColor 30%, transparent);
+  border-radius: 2px;
+}
+.voice__text {
+  font-style: italic;
+  line-height: 1.75;
+  margin-bottom: 22px;
+  opacity: .85;
+}
+
+/* ============================================================
+   FAQ
+   ============================================================ */
+.faq { margin-top: 50px; max-width: 720px; }
+.faq__item {
+  padding: 28px 0;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+}
+.faq__item:first-child {
+  border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
+}
+.faq__q {
+  font-family: var(--font-head);
+  font-weight: 300;
+  letter-spacing: .1em;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.faq__a { font-size: 15.5px; opacity: .85; line-height: 1.7; }
+.faq__a p + p { margin-top: .8em; }
+
+/* ============================================================
+   CTA
+   ============================================================ */
+.cta { text-align: center; }
+.cta .lead { margin: 0 auto; }
+.cta__body {
+  max-width: 620px;
+  margin: 34px auto 0;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.85;
+}
+.cta__body p + p { margin-top: 1.2em; }
+.cta__when {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: .22em;
+  font-size: 14px;
+  opacity: .75;
+  margin: 40px 0 36px;
+}
+.cta__small {
+  margin-top: 30px;
+  font-size: 12px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  font-family: var(--font-head);
+  opacity: .5;
+}
+
+/* ============================================================
+   КОНТАКТЫ
+   ============================================================ */
+.contact-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 26px;
+  margin-top: 44px;
+}
+.contact-icon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.contact-icon__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
+  border-radius: 50%;
+  transition: background .4s var(--ease), border-color .4s var(--ease), transform .4s var(--ease);
+}
+.contact-icon:hover .contact-icon__circle {
+  background: color-mix(in srgb, currentColor 12%, transparent);
+  border-color: currentColor;
+  transform: translateY(-2px);
+}
+.contact-icon__circle svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+.contact-icon__label {
+  font-family: var(--font-head);
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .7;
+}
+
+.contact__note {
+  margin-top: 44px;
+  font-size: 15px;
+  opacity: .85;
+  line-height: 1.7;
+}
+.contact__note a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer {
+  padding: 46px 0;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-family: var(--font-head);
+  background: #F5F0E8;
+  color: #8A8070;
+}
+
+/* ============================================================
+   АНИМАЦИЯ ПОЯВЛЕНИЯ
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 1.5s var(--ease), transform 1.5s var(--ease);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .15s; }
+.reveal-d2 { transition-delay: .3s; }
+.reveal-d3 { transition-delay: .45s; }
+
+/* ============================================================
+   МОБИЛЬНАЯ ФИКСИРОВАННАЯ КНОПКА
+   ============================================================ */
+.mobile-cta {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 100;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(26,26,46,.94);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,.14);
+  text-align: center;
+}
+.mobile-cta a {
+  display: block;
+  padding: 15px 20px;
+  border: 1px solid #F2EDE4;
+  color: #F2EDE4;
+  text-decoration: none;
+  font-family: var(--font-head);
+  font-size: 13px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  transition: background .5s var(--ease);
+}
+.mobile-cta a:hover { background: rgba(255,255,255,.08); }
+
+/* ============================================================
+   АДАПТИВ
+   ============================================================ */
+@media (max-width: 900px) {
+  .stage {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .stage--reverse .stage__text,
+  .stage--reverse .stage__photo { order: 0; }
+  .stage__photo { aspect-ratio: 4 / 3; }
+
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 720px;
+  }
+  .video-item { max-width: none; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 88px 0 120px; }
+  .hero { padding: 130px 0 150px; min-height: auto; }
+  .osc { height: 100px; }
+  .info-list__label { flex: 0 0 100%; }
+  .guides-grid { gap: 40px; margin-top: 44px; }
+  .btn { padding: 15px 34px; font-size: 11px; }
+  .mobile-cta { display: block; }
+  body { padding-bottom: 84px; }
+  .hero__event { padding: 16px 18px; gap: 8px 20px; }
+  .countdown { gap: 14px; }
+  .scenarios { gap: 18px; margin-top: 44px; }
+  .scenario { padding: 22px 22px 24px; }
+  .take-list span { padding: 11px 18px; font-size: 11.5px; }
+  .nav__inner { padding: 12px 20px; }
+  .nav__links { gap: 16px; }
+  .nav__links a { font-size: 10px; }
+  .contact-icons { gap: 20px; }
+  .contact-icon__circle { width: 46px; height: 46px; }
+  .contact-icon__circle svg { width: 20px; height: 20px; }
+  .contact-icon__label { font-size: 10px; }
+  .video-grid { margin-top: 50px; }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .hero__title { letter-spacing: .16em; }
+  .hero__subtitle { letter-spacing: .25em; }
+  .video-grid {
+    grid-template-columns: 1fr;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .countdown { flex-wrap: wrap; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+  .photo img { transition: none; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     НАВИГАЦИЯ
+     ============================================================ -->
+<nav class="nav" aria-label="Основная навигация">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand">Экстатик Денс</a>
+    <div class="nav__links">
+      <a href="#about">О практике</a>
+      <a href="#how">Как проходит</a>
+      <a href="#why">Зачем приходить</a>
+      <a href="#guides">Ведущие</a>
+      <a href="#voices">Отзывы</a>
+      <a href="#join">Твой билет</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============================================================
+     1. ПЕРВЫЙ ЭКРАН
+     ============================================================ -->
+<section class="hero section--dark" id="top">
+
+  <img
+    class="hero__bg"
+    data-img="hero"
+    src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/hero/hero.jpg"
+    alt=""
+    fetchpriority="high"
+    decoding="async"
+  >
+
+  <div class="container">
+    <h1 class="hero__title reveal">Экстатик Денс</h1>
+    <div class="hero__subtitle reveal reveal-d1">Нижний Новгород</div>
+
+    <p class="hero__lead reveal reveal-d1">
+      Свободный танец без хореографии
+    </p>
+
+    <p class="hero__text reveal reveal-d2">
+      Пространство, где тело говорит на языке танца.<br>
+      Свобода движения. Глубина присутствия.
+    </p>
+
+    <div class="hero__event reveal reveal-d3">
+      <span class="hero__event__item">
+        <span class="hero__event__label">Дата</span>
+        <span class="ph" data-event="date">[ДАТА]</span>
+      </span>
+      <span class="hero__event__item">
+        <span class="hero__event__label">Время</span>
+        <span class="ph" data-event="time">[ВРЕМЯ]</span>
+      </span>
+    </div>
+
+    <div class="countdown reveal reveal-d3" id="countdown" aria-label="До события осталось" aria-live="off">
+      <div class="countdown__item">
+        <span class="countdown__num" data-cd="days">—</span>
+        <span class="countdown__label">дней</span>
+      </div>
+      <div class="countdown__item">
+        <span class="countdown__num" data-cd="hours">—</span>
+        <span class="countdown__label">часов</span>
+      </div>
+      <div class="countdown__item">
+        <span class="countdown__num" data-cd="mins">—</span>
+        <span class="countdown__label">минут</span>
+      </div>
+      <div class="countdown__item">
+        <span class="countdown__num" data-cd="secs">—</span>
+        <span class="countdown__label">секунд</span>
+      </div>
+    </div>
+
+    <div class="reveal reveal-d3">
+      <a href="https://cbiletom.ru/poster/index.php?id=369500" target="_blank" rel="noopener noreferrer" class="btn">
+        Купить билет
+      </a>
+    </div>
+  </div>
+
+  <canvas class="osc" data-type="sine" data-color="#C9E4A8" aria-hidden="true"></canvas>
+  <div class="scroll-hint" aria-hidden="true">Листайте</div>
+
+</section>
+
+
+<!-- ============================================================
+     2. О ПРАКТИКЕ
+     ============================================================ -->
+<section class="section--dark" id="about"
+         style="background: linear-gradient(180deg, #4A5D23 0%, #6B7B3A 40%, #8B7355 100%);">
+  <div class="container">
+    <div class="stage">
+      <div class="stage__text">
+        <h2 class="title-en reveal">О практике</h2>
+        <div class="rule reveal"></div>
+
+        <div class="stage__inner reveal reveal-d1">
+          <p class="stage__poem">
+            Ты слышишь музыку, чувствуешь тело и двигаешься так,
+            как хочется именно тебе.
+          </p>
+          <p>
+            Можно танцевать активно.<br>
+            Можно замедлиться.<br>
+            Можно закрыть глаза.<br>
+            Можно остановиться.<br>
+            Можно двигаться маленькими или большими движениями.
+          </p>
+          <p style="margin-top: 1.4em; opacity: .85;">
+            Мы создаём безопасную среду для телесного исследования
+            и эмоционального освобождения.
+          </p>
+        </div>
+      </div>
+
+      <figure class="photo stage__photo reveal reveal-d2">
+        <img
+          data-img="stage:0"
+          src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/stages/about.avif"
+          alt="Момент практики Экстатик Денс"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#E4D9A8" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     3. КАК ПРОХОДИТ
+     ============================================================ -->
+<section class="section--dark" id="how"
+         style="background: linear-gradient(180deg, #3B4A1E 0%, #556B2F 60%, #6B7B3A 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">От первого движения до тишины</h2>
+    <div class="rule reveal"></div>
+
+    <div class="how__body reveal reveal-d1">
+      <p class="how__lead">
+        Музыка постепенно меняется: от спокойного начала — к ритму
+        и более свободному движению, затем к пику и постепенному замедлению.
+      </p>
+      <p>
+        Не нужно заранее знать, что делать. Тебя ведёт музыка,
+        а тело постепенно находит своё движение.
+      </p>
+      <p>
+        Четыре этапа сменяют друг друга: органика, движение, пик, интеграция.
+      </p>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#D9E4A0" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     4.1 ОРГАНИКА
+     ============================================================ -->
+<section class="section--dark"
+         style="background: linear-gradient(180deg, #3B4A1E 0%, #5C6B2E 60%, #8B7355 100%);">
+  <div class="container">
+    <div class="stage stage--reverse">
+      <div class="stage__text">
+        <h2 class="title-en reveal">Органика</h2>
+        <div class="rule reveal"></div>
+
+        <div class="stage__inner reveal reveal-d1">
+          <div class="stage__card">
+            <p>Вернуться в тело.</p>
+            <p>
+              Музыка начинается мягко. Можно замедлиться, почувствовать
+              дыхание и заметить ощущения в теле.
+            </p>
+          </div>
+          <p style="margin-top: 1.4em;">
+            Постепенно внимание переключается с внешнего мира
+            на движение и ощущения.
+          </p>
+        </div>
+      </div>
+
+      <figure class="photo stage__photo reveal reveal-d2">
+        <img
+          data-img="stage:1"
+          src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/stages/organic.jpg"
+          alt="Момент органики в Экстатик Денс"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#D9E4A0" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     4.2 ДВИЖЕНИЕ
+     ============================================================ -->
+<section class="section--light"
+         style="background: linear-gradient(180deg, #DAA520 0%, #E07B39 50%, #F4A460 100%);">
+  <div class="container">
+    <div class="stage">
+      <div class="stage__text">
+        <h2 class="title-en reveal">Движение</h2>
+        <div class="rule reveal"></div>
+
+        <div class="stage__inner reveal reveal-d1">
+          <div class="stage__card">
+            <p>Почувствовать телом вкус движения.</p>
+            <p>
+              Ритм становится живее. Не нужно думать о правильном танце.
+              Можно поймать музыку и двигаться так, как хочется.
+            </p>
+          </div>
+          <p style="margin-top: 1.4em;">
+            Ты можешь двигаться свободнее — в своём темпе и в своём настроении.
+          </p>
+        </div>
+      </div>
+
+      <figure class="photo stage__photo reveal reveal-d2">
+        <img
+          data-img="stage:2"
+          src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/stages/move.jpg"
+          alt="Движение в свободном танце"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    </div>
+  </div>
+  <canvas class="osc" data-type="peaks" data-color="#FFF4D6" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     4.3 ПИК
+     ============================================================ -->
+<section class="section--dark"
+         style="background: linear-gradient(180deg, #1A1A2E 0%, #2C2C54 40%, #4A0E4E 100%);">
+  <div class="container">
+    <div class="stage stage--reverse">
+      <div class="stage__text">
+        <h2 class="title-en reveal">Пик</h2>
+        <div class="rule reveal"></div>
+
+        <div class="stage__inner reveal reveal-d1">
+          <div class="stage__card">
+            <p>Здесь ты отпускаешь контроль.</p>
+            <p>
+              Музыка становится сильнее. Можно позволить себе больше
+              движения, энергии и выразительности.
+            </p>
+          </div>
+          <p style="margin-top: 1.4em;">
+            Для кого-то это самый свободный и интенсивный момент танца.
+          </p>
+        </div>
+      </div>
+
+      <figure class="photo stage__photo reveal reveal-d2">
+        <img
+          data-img="stage:3"
+          src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/stages/peak.jpg"
+          alt="Пик практики Экстатик Денс"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    </div>
+  </div>
+  <canvas class="osc" data-type="spikes" data-color="#C77DFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     4.4 ИНТЕГРАЦИЯ
+     ============================================================ -->
+<section class="section--light"
+         style="background: linear-gradient(180deg, #C4A4C4 0%, #E8B4B8 50%, #F5E6D3 100%);">
+  <div class="container">
+    <div class="stage">
+      <div class="stage__text">
+        <h2 class="title-en reveal">Интеграция</h2>
+        <div class="rule reveal"></div>
+
+        <div class="stage__inner reveal reveal-d1">
+          <div class="stage__card">
+            <p>И наконец можно выдохнуть.</p>
+            <p>
+              Музыка стихает. Движение становится спокойнее. Можно просто
+              побыть с собой, отдохнуть и почувствовать завершение танца.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="photo stage__photo reveal reveal-d2">
+        <img
+          data-img="stage:4"
+          src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/stages/integration.jpg"
+          alt="Интеграция после танца"
+          loading="lazy"
+          decoding="async"
+        >
+      </figure>
+    </div>
+  </div>
+  <canvas class="osc" data-type="flat" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     5. ЧТО МОЖНО ЗАБРАТЬ С СОБОЙ
+     ============================================================ -->
+<section class="section--light"
+         style="background: linear-gradient(180deg, #F5E6D3 0%, #D2B48C 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Что можно забрать с собой</h2>
+    <div class="rule reveal"></div>
+
+    <div class="take-list reveal reveal-d1">
+      <span>Почувствовать тело</span>
+      <span>Переключить голову</span>
+      <span>Подвигаться</span>
+      <span>Проживание чувств</span>
+      <span>Отпустить часть напряжения</span>
+      <span>Попробовать двигаться свободнее</span>
+      <span>Выдохнуть</span>
+      <span>Зарядиться</span>
+      <span>Побыть собой</span>
+      <span>Провести время среди людей, которые тоже пришли танцевать</span>
+      <span>Прийти одному и чувствовать себя нормально</span>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     6. ЗАЧЕМ ЛЮДИ ПРИХОДЯТ
+     ============================================================ -->
+<section class="section--light" id="why"
+         style="background: linear-gradient(180deg, #D2B48C 0%, #E8D8C4 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Зачем люди приходят</h2>
+    <div class="rule reveal"></div>
+
+    <p class="why reveal reveal-d1">
+      Чтобы на несколько часов выйти из привычного режима — работы,
+      контроля, мыслей и социальных ролей — и снова почувствовать себя живым
+      через музыку, движение и собственное тело.
+    </p>
+
+    <div class="scenarios reveal reveal-d2">
+      <div class="scenario">
+        <div class="scenario__title">Перезагрузка</div>
+        <p class="scenario__text">
+          Хочется выключить голову, снять накопившееся напряжение
+          и почувствовать тело.
+        </p>
+      </div>
+      <div class="scenario">
+        <div class="scenario__title">Танец и досуг</div>
+        <p class="scenario__text">
+          Хочется музыки и движения, но в другом формате — без клуба,
+          алкоголя и необходимости соответствовать чужому сценарию.
+        </p>
+      </div>
+      <div class="scenario">
+        <div class="scenario__title">Свои люди</div>
+        <p class="scenario__text">
+          Хочется куда-то прийти одному и оказаться среди людей,
+          которым тоже хочется танцевать и быть собой.
+        </p>
+      </div>
+    </div>
+  </div>
+  <canvas class="osc" data-type="peaks" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     7. МОЖНО ПРОСТО ПРИЙТИ
+     ============================================================ -->
+<section class="section--dark"
+         style="background: linear-gradient(180deg, #2C3E50 0%, #1A1A2E 100%);">
+  <div class="container">
+    <div class="alone">
+      <h2 class="title-en reveal">Можно просто прийти</h2>
+      <div class="rule reveal"></div>
+      <p class="alone__text reveal reveal-d1">
+        Здесь не нужно искать партнёра или знакомиться через силу.
+        Каждый занят своим движением. Можно просто танцевать, замечать
+        людей вокруг и быть частью общего пространства в своём темпе.
+      </p>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#C9E4A8" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     8. ВИДЕО И ФОТО
+     ============================================================ -->
+<section class="section--light"
+         style="background: linear-gradient(180deg, #F5E6D3 0%, #E8D8C4 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Не представляй. Посмотри.</h2>
+    <div class="rule reveal"></div>
+
+    <div class="lead reveal reveal-d1" style="margin-top: 40px;">
+      <p>Настоящие люди. Настоящая музыка. Настоящее движение.</p>
+    </div>
+
+    <!-- Видео подгружается из data/images.json -->
+    <div class="video-grid reveal reveal-d2" id="videoGrid">
+      <!-- Fallback: VK iframes. JS заменит их, если в JSON есть video[] -->
+      <div class="video-item">
+        <div class="video-item__frame">
+          <iframe
+            src="https://vk.com/video_ext.php?oid=324380641&id=456239773&hd=2"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            title="Видео 1 — Первые минуты"
+          ></iframe>
+        </div>
+        <p class="video-item__caption">
+          Первые минуты. Пространство, музыка и знакомство с собственным ритмом.
+        </p>
+      </div>
+
+      <div class="video-item">
+        <div class="video-item__frame">
+          <iframe
+            src="https://vk.com/video_ext.php?oid=324380641&id=456239703&hd=2"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            title="Видео 2 — Свободное движение"
+          ></iframe>
+        </div>
+        <p class="video-item__caption">
+          Когда движение становится свободнее, а музыка ведёт сама.
+        </p>
+      </div>
+
+      <div class="video-item">
+        <div class="video-item__frame">
+          <iframe
+            src="https://vk.com/video_ext.php?oid=97712190&id=456239318&hd=2"
+            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+            allowfullscreen
+            loading="lazy"
+            title="Видео 3 — Танцпол в моменте"
+          ></iframe>
+        </div>
+        <p class="video-item__caption">
+          Танцпол в моменте — без постановки и без необходимости выглядеть красиво.
+        </p>
+      </div>
+    </div>
+
+    <!-- Галерея подгружается из data/images.json -->
+    <div
+      class="photo-photos reveal reveal-d3"
+      id="randomPhotos"
+      aria-label="Фотографии с Экстатик Денс"
+    >
+      <!-- Fallback из HTML, если JSON не загрузился -->
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/01.jpg"
+             alt="Момент практики" loading="lazy" decoding="async">
+      </figure>
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/02.jpg"
+             alt="Свободное движение" loading="lazy" decoding="async">
+      </figure>
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/03.jpg"
+             alt="Пик танца" loading="lazy" decoding="async">
+      </figure>
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/04.jpg"
+             alt="Завершение танца" loading="lazy" decoding="async">
+      </figure>
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/05.jpg"
+             alt="Момент практики" loading="lazy" decoding="async">
+      </figure>
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/06.jpg"
+             alt="Момент практики" loading="lazy" decoding="async">
+      </figure>
+      <figure class="photo">
+        <img src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/gallery/07.jpg"
+             alt="Момент практики" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     9. ВЕДУЩИЕ
+     ============================================================ -->
+<section class="section--light" id="guides"
+         style="background: linear-gradient(180deg, #B8860B 0%, #CC7722 50%, #FF8C42 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Кто создаёт это пространство</h2>
+    <div class="rule reveal"></div>
+
+    <div class="guides-grid">
+
+      <div class="guide reveal">
+        <figure class="photo guide__photo">
+          <img
+            data-img="person:0"
+            src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/people/sergey.jpg"
+            alt="Сергей Гарин — Ecstatic Dance DJ"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
+        <div class="guide__name">Сергей Гарин</div>
+        <div class="guide__role">Ecstatic Dance DJ</div>
+        <p class="guide__bio">
+          Я создаю музыкальное путешествие: от спокойного начала через ритм
+          и движение к пику и постепенному завершению.
+        </p>
+        <p class="guide__bio">
+          <span class="ph">
+            [ОПЫТ / ОБРАЗОВАНИЕ / ДОСТИЖЕНИЯ — УТОЧНИТЬ И ПОДТВЕРДИТЬ ДЛЯ ПУБЛИКАЦИИ]
+          </span>
+        </p>
+      </div>
+
+      <div class="guide reveal reveal-d1">
+        <figure class="photo guide__photo">
+          <img
+            data-img="person:1"
+            src="https://raw.githubusercontent.com/SergeyGarinV/Site-Ecstatic-Dance-NN/main/images/people/veronica.jpg"
+            alt="Вероника — проводник практики"
+            loading="lazy"
+            decoding="async"
+          >
+        </figure>
+        <div class="guide__name">Вероника</div>
+        <div class="guide__role">Проводник практики</div>
+        <p class="guide__bio">
+          Помогает участникам войти в практику, почувствовать тело
+          и двигаться в своём темпе, сохраняя внимание к собственным границам.
+        </p>
+        <p class="guide__bio">
+          <span class="ph">[ТОЧНАЯ РОЛЬ / ОБРАЗОВАНИЕ / ОПЫТ — УТОЧНИТЬ]</span>
+        </p>
+      </div>
+
+    </div>
+
+    <p class="guides__outro reveal reveal-d2">
+      Музыка ведёт. Тело отвечает. А пространство позволяет этому
+      происходить без оценки и давления.
+    </p>
+  </div>
+  <canvas class="osc" data-type="peaks" data-color="#FFF0D0" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     10. БЛИЖАЙШЕЕ СОБЫТИЕ
+     ============================================================ -->
+<section class="section--light" id="event"
+         style="background: linear-gradient(180deg, #D2B48C 0%, #E8D8C4 50%, #F5F0E8 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Ближайшее событие и твой билет</h2>
+    <div class="rule reveal"></div>
+
+    <div class="event__subtitle reveal reveal-d1">Ближайший Экстатик Денс</div>
+    <p class="event__what reveal reveal-d1">
+      Свободный танец · музыка · движение · время для себя
+    </p>
+
+    <div class="info-list reveal reveal-d2">
+      <div class="info-list__row">
+        <div class="info-list__label">Дата</div>
+        <div class="info-list__value">
+          <span class="ph" data-event="date">[ДАТА]</span>
+        </div>
+      </div>
+      <div class="info-list__row">
+        <div class="info-list__label">Время</div>
+        <div class="info-list__value">
+          <span class="ph" data-event="time">[ВРЕМЯ]</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="event__cta reveal reveal-d3">
+      <a href="https://cbiletom.ru/poster/index.php?id=369500" target="_blank" rel="noopener noreferrer" class="btn">
+        Купить билет
+      </a>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     11. ОТЗЫВЫ
+     ============================================================ -->
+<section class="section--light" id="voices"
+         style="background: linear-gradient(180deg, #D8BFD8 0%, #F5DEB3 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Отзывы</h2>
+    <div class="rule reveal"></div>
+
+    <div class="voices-grid">
+      <div class="voice reveal">
+        <p class="voice__text">
+          [ОТЗЫВЫ — ДОБАВИТЬ ПОЗЖЕ: реальные отзывы участников,
+          имена/фото по согласованию]
+        </p>
+      </div>
+      <div class="voice reveal reveal-d1">
+        <p class="voice__text">
+          [ОТЗЫВЫ — ДОБАВИТЬ ПОЗЖЕ: реальные отзывы участников,
+          имена/фото по согласованию]
+        </p>
+      </div>
+      <div class="voice reveal reveal-d2">
+        <p class="voice__text">
+          [ОТЗЫВЫ — ДОБАВИТЬ ПОЗЖЕ: реальные отзывы участников,
+          имена/фото по согласованию]
+        </p>
+      </div>
+    </div>
+  </div>
+  <canvas class="osc" data-type="flat" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     12. FAQ
+     ============================================================ -->
+<section class="section--light"
+         style="background: linear-gradient(180deg, #F5F0E8 0%, #E8D8C4 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Частые вопросы</h2>
+    <div class="rule reveal"></div>
+
+    <div class="faq">
+      <div class="faq__item reveal">
+        <div class="faq__q">Нужно ли уметь танцевать?</div>
+        <p class="faq__a">Нет. Здесь нет хореографии и правильных движений.
+          Ты двигаешься так, как удобно тебе.</p>
+      </div>
+
+      <div class="faq__item reveal">
+        <div class="faq__q">Можно ли прийти одному?</div>
+        <p class="faq__a">Да. Многие могут прийти без компании.
+          Не нужно заранее искать партнёра или знакомых.</p>
+      </div>
+
+      <div class="faq__item reveal">
+        <div class="faq__q">А если я стесняюсь танцевать?</div>
+        <p class="faq__a">Можно начать с небольших движений и постепенно
+          привыкнуть к пространству. Никто не требует выступать
+          или танцевать «правильно».</p>
+      </div>
+
+      <div class="faq__item reveal">
+        <div class="faq__q">Что надеть?</div>
+        <p class="faq__a">
+          <span class="ph">[ДОПОЛНИТЬ ПРАВИЛАМИ СОБЫТИЯ]</span><br>
+          Базовый принцип — одежда, в которой удобно свободно двигаться.
+        </p>
+      </div>
+
+      <div class="faq__item reveal">
+        <div class="faq__q">Можно ли уйти раньше?</div>
+        <p class="faq__a">
+          <span class="ph">[ДОПОЛНИТЬ ПРАВИЛАМИ СОБЫТИЯ]</span>
+        </p>
+      </div>
+
+      <div class="faq__item reveal">
+        <div class="faq__q">Как обеспечивается безопасность и уважение границ?</div>
+        <p class="faq__a">
+          <span class="ph">[ДОПОЛНИТЬ ПРАВИЛАМИ СОБЫТИЯ]</span>
+        </p>
+      </div>
+
+      <div class="faq__item reveal">
+        <div class="faq__q">Можно ли прийти без подготовки?</div>
+        <p class="faq__a">Да. Специально готовиться не нужно. Достаточно
+          прийти в удобной одежде и быть готовым попробовать двигаться.</p>
+      </div>
+    </div>
+  </div>
+  <canvas class="osc" data-type="sine" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     13. ФИНАЛЬНЫЙ CTA
+     ============================================================ -->
+<section class="cta section--dark" id="join"
+         style="background: linear-gradient(180deg, #1A1A2E 0%, #2C2C54 100%);">
+  <div class="container">
+    <h2 class="title-en reveal">Возможно, тебе просто пора выдохнуть.</h2>
+
+    <div class="cta__body reveal reveal-d1">
+      <p>
+        Оставить на несколько часов работу, контроль и привычный ритм.
+        Услышать музыку. Почувствовать тело. Потанцевать. Побыть собой.
+      </p>
+    </div>
+
+    <div class="cta__when reveal reveal-d2">
+      <span class="ph" data-event="date">[ДАТА]</span>
+      ·
+      <span class="ph" data-event="time">[ВРЕМЯ]</span>
+    </div>
+
+    <div class="reveal reveal-d3">
+      <a href="https://cbiletom.ru/poster/index.php?id=369500" target="_blank" rel="noopener noreferrer" class="btn">
+        Купить билет
+      </a>
+    </div>
+
+    <div class="cta__small reveal reveal-d3">Танцуй</div>
+  </div>
+  <canvas class="osc" data-type="spikes" data-color="#9BB8FF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     14. КОНТАКТЫ
+     ============================================================ -->
+<section class="section--light"
+         style="background: linear-gradient(180deg, #E8D8C4 0%, #F5F0E8 100%); padding-bottom: 120px;">
+  <div class="container">
+    <h2 class="title-en reveal">Контакты</h2>
+    <div class="rule reveal"></div>
+
+    <div class="contact-icons reveal reveal-d1">
+      <a href="https://t.me/ecstaticnn" target="_blank" rel="noopener noreferrer"
+         class="contact-icon" aria-label="Telegram Экстатик Денс">
+        <span class="contact-icon__circle">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+          </svg>
+        </span>
+        <span class="contact-icon__label">Telegram</span>
+      </a>
+
+      <a href="https://vk.ru/djsergeygarin" target="_blank" rel="noopener noreferrer"
+         class="contact-icon" aria-label="VK Сергея Гарина">
+        <span class="contact-icon__circle">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974H.859c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.304 2.708z"/>
+          </svg>
+        </span>
+        <span class="contact-icon__label">Сергей</span>
+      </a>
+
+      <a href="https://vk.ru/ps.veronichka" target="_blank" rel="noopener noreferrer"
+         class="contact-icon" aria-label="VK Вероники">
+        <span class="contact-icon__circle">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.629-.145-1.241-.205-1.809-.205-2.273 0-3.841.953-2.95 1.119 1.571.293 1.42 3.692 1.054 5.16-.638 2.556-3.036-2.024-4.035-4.305-.241-.548-.315-.974-1.175-.974H.859c-.492 0-.787.16-.787.516 0 .602 2.96 6.72 5.786 9.77 2.756 2.975 5.48 2.708 7.304 2.708z"/>
+          </svg>
+        </span>
+        <span class="contact-icon__label">Вероника</span>
+      </a>
+    </div>
+
+    <p class="contact__note reveal reveal-d2">
+      Для анонсов ближайших мероприятий:
+      <a href="https://t.me/ecstaticnn" target="_blank" rel="noopener noreferrer">
+        t.me/ecstaticnn
+      </a>
+    </p>
+  </div>
+  <canvas class="osc" data-type="flat" data-color="#FFFFFF" aria-hidden="true"></canvas>
+</section>
+
+
+<!-- ============================================================
+     15. ПОДВАЛ
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">Экстатик Денс · Нижний Новгород · 2026</div>
+</footer>
+
+
+<!-- ============================================================
+     МОБИЛЬНАЯ КНОПКА
+     ============================================================ -->
+<div class="mobile-cta" role="complementary" aria-label="Купить билет">
+  <a href="https://cbiletom.ru/poster/index.php?id=369500" target="_blank" rel="noopener noreferrer">
+    Купить билет
+  </a>
+</div>
+
+
+<script>
+'use strict';
+
+/* ============================================================
+   КОНФИГУРАЦИЯ СОБЫТИЯ (fallback)
+   ============================================================ */
+const EVENT = {
+  iso: '2026-10-24T16:00:00+03:00',
+  dateLabel: '24 октября 2026',
+  timeLabel: '16:00',
+  title: 'Экстатик / ESO Tango',
+  venue: 'Большая Печёрская улица, 55/9',
+  city: 'Нижний Новгород',
+  age: '18+',
+  priceLabel: null,
+  ticketUrl: 'https://cbiletom.ru/poster/index.php?id=369500'
+};
+
+const MONTHS_NOM = [
+  'января','февраля','марта','апреля','мая','июня',
+  'июля','августа','сентября','октября','ноября','декабря'
+];
+
+function parseDate(value) {
+  if (!value) return null;
+  const date = new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatRuDate(iso) {
+  const date = parseDate(iso);
+  return date ? `${date.getDate()} ${MONTHS_NOM[date.getMonth()]} ${date.getFullYear()}` : null;
+}
+
+function formatTime(iso) {
+  const date = parseDate(iso);
+  if (!date) return null;
+  const h = String(date.getHours()).padStart(2, '0');
+  const m = String(date.getMinutes()).padStart(2, '0');
+  return `${h}:${m}`;
+}
+
+function applyEventData() {
+  document.querySelectorAll('[data-event="date"]').forEach((el) => {
+    if (!EVENT.dateLabel) return;
+    el.textContent = EVENT.dateLabel;
+    el.classList.remove('ph');
+  });
+  document.querySelectorAll('[data-event="time"]').forEach((el) => {
+    if (!EVENT.timeLabel) return;
+    el.textContent = EVENT.timeLabel;
+    el.classList.remove('ph');
+  });
+}
+
+let countdownTimer = null;
+
+function stopCountdown() {
+  if (countdownTimer !== null) {
+    clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
+}
+
+function startCountdown() {
+  const root = document.getElementById('countdown');
+  if (!root) return;
+  stopCountdown();
+
+  if (!EVENT.iso) {
+    root.classList.add('countdown--empty');
+    return;
+  }
+
+  const target = parseDate(EVENT.iso)?.getTime();
+  if (!Number.isFinite(target)) {
+    root.classList.add('countdown--empty');
+    return;
+  }
+
+  const fields = {
+    days:  root.querySelector('[data-cd="days"]'),
+    hours: root.querySelector('[data-cd="hours"]'),
+    mins:  root.querySelector('[data-cd="mins"]'),
+    secs:  root.querySelector('[data-cd="secs"]')
+  };
+  if (!fields.days || !fields.hours || !fields.mins || !fields.secs) {
+    root.classList.add('countdown--empty');
+    return;
+  }
+  root.classList.remove('countdown--empty');
+
+  const pad = (value, length = 2) => String(value).padStart(length, '0');
+
+  function tick() {
+    const diff = target - Date.now();
+    if (diff <= 0) {
+      fields.days.textContent = '00';
+      fields.hours.textContent = '00';
+      fields.mins.textContent = '00';
+      fields.secs.textContent = '00';
+      stopCountdown();
+      return;
+    }
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+    fields.days.textContent = pad(days, days >= 100 ? 3 : 2);
+    fields.hours.textContent = pad(hours);
+    fields.mins.textContent = pad(minutes);
+    fields.secs.textContent = pad(seconds);
+  }
+
+  tick();
+  countdownTimer = setInterval(tick, 1000);
+}
+
+function applyFromData(data) {
+  if (!data || typeof data !== 'object') return;
+
+  if (data.start) {
+    EVENT.iso = data.start;
+    const date = formatRuDate(data.start);
+    const time = formatTime(data.start);
+    if (date) EVENT.dateLabel = date;
+    if (time) EVENT.timeLabel = time;
+  } else {
+    if (data.date) EVENT.dateLabel = String(data.date);
+    if (data.time) EVENT.timeLabel = String(data.time);
+  }
+
+  if (data.title) EVENT.title = String(data.title);
+  if (data.venue) EVENT.venue = String(data.venue);
+  if (data.city) EVENT.city = String(data.city);
+  if (data.age) EVENT.age = String(data.age);
+  if (data.ticket_url) EVENT.ticketUrl = String(data.ticket_url);
+
+  applyEventData();
+  startCountdown();
+}
+
+applyEventData();
+startCountdown();
+
+(async function fetchEventData() {
+  try {
+    const response = await fetch('event.json', { cache: 'no-store' });
+    if (response.ok) {
+      const data = await response.json();
+      applyFromData(data);
+      console.info('Данные события загружены из event.json');
+      return;
+    }
+  } catch (error) {
+    console.warn('Не удалось загрузить event.json:', error);
+  }
+
+  try {
+    const response = await fetch('/.netlify/functions/event', { cache: 'no-store' });
+    if (response.ok) {
+      const data = await response.json();
+      applyFromData(data);
+      console.info('Данные события загружены из Netlify Function');
+      return;
+    }
+  } catch (error) {
+    console.warn('Не удалось загрузить Netlify Function:', error);
+  }
+
+  console.info('Используется fallback-конфигурация события.');
+})();
+
+
+/* ============================================================
+   ЗАГРУЗКА ИЗОБРАЖЕНИЙ И ВИДЕО ИЗ data/images.json
+   ============================================================ */
+
+function applyImagesFromJson(data) {
+  if (!data || typeof data !== 'object') return;
+
+  // --- Hero ---
+  const heroEl = document.querySelector('[data-img="hero"]');
+  if (heroEl && Array.isArray(data.hero) && data.hero[0]) {
+    heroEl.src = data.hero[0];
+  }
+
+  // --- Stages: stage:0 … stage:N ---
+  document.querySelectorAll('[data-img^="stage:"]').forEach((el) => {
+    const idx = parseInt(el.dataset.img.split(':')[1], 10);
+    if (!Number.isNaN(idx) && Array.isArray(data.stages) && data.stages[idx]) {
+      el.src = data.stages[idx];
+    }
+  });
+
+  // --- People: person:0 … person:N ---
+  document.querySelectorAll('[data-img^="person:"]').forEach((el) => {
+    const idx = parseInt(el.dataset.img.split(':')[1], 10);
+    if (!Number.isNaN(idx) && Array.isArray(data.people) && data.people[idx]) {
+      el.src = data.people[idx];
+    }
+  });
+
+  // --- Gallery ---
+  const galleryEl = document.getElementById('randomPhotos');
+  if (galleryEl && Array.isArray(data.gallery) && data.gallery.length) {
+    const shuffled = data.gallery
+      .map((src) => ({ src, r: Math.random() }))
+      .sort((a, b) => a.r - b.r)
+      .slice(0, 8);
+
+    const fragment = document.createDocumentFragment();
+    shuffled.forEach(({ src }) => {
+      const figure = document.createElement('figure');
+      figure.className = 'photo';
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = 'Момент практики Экстатик Денс';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      figure.appendChild(img);
+      fragment.appendChild(figure);
+    });
+    galleryEl.replaceChildren(fragment);
+  }
+
+  // --- Video ---
+  const videoGrid = document.getElementById('videoGrid');
+  if (videoGrid && Array.isArray(data.video) && data.video.length) {
+    const captions = [
+      'Первые минуты. Пространство, музыка и знакомство с собственным ритмом.',
+      'Когда движение становится свободнее, а музыка ведёт сама.',
+      'Танцпол в моменте — без постановки и без необходимости выглядеть красиво.',
+      'Движение продолжается.'
+    ];
+
+    const fragment = document.createDocumentFragment();
+    data.video.slice(0, 4).forEach((src, i) => {
+      const item = document.createElement('div');
+      item.className = 'video-item';
+
+      const frame = document.createElement('div');
+      frame.className = 'video-item__frame';
+
+      const video = document.createElement('video');
+      video.src = src;
+      video.controls = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      video.setAttribute('title', `Видео ${i + 1}`);
+      // Если браузер не может определить тип — не падаем
+      video.addEventListener('error', () => {
+        console.warn('Не удалось воспроизвести видео:', src);
+      });
+
+      frame.appendChild(video);
+      item.appendChild(frame);
+
+      const caption = document.createElement('p');
+      caption.className = 'video-item__caption';
+      caption.textContent = captions[i] || '';
+      item.appendChild(caption);
+
+      fragment.appendChild(item);
+    });
+    videoGrid.replaceChildren(fragment);
+  }
+}
+
+(async function loadImagesJson() {
+  try {
+    const response = await fetch('data/images.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    const data = await response.json();
+    applyImagesFromJson(data);
+    console.info('Изображения загружены из data/images.json');
+  } catch (error) {
+    console.warn('Не удалось загрузить data/images.json, используются fallback-URL:', error);
+  }
+})();
+
+
+/* ============================================================
+   ОСЦИЛЛОГРАММА
+   ============================================================ */
+
+function waveValue(type, u, t) {
+  switch (type) {
+    case 'sine':
+      return Math.sin(u * Math.PI * 4 + t * 0.75);
+    case 'peaks': {
+      const base = Math.sin(u * Math.PI * 6 + t * 1.05);
+      const envelope = 0.5 + 0.5 * Math.sin(u * Math.PI * 1.6 - t * 0.55);
+      return base * envelope;
+    }
+    case 'spikes': {
+      const sine = Math.sin(u * Math.PI * 9 + t * 1.6);
+      return Math.sign(sine) * Math.pow(Math.abs(sine), 7);
+    }
+    case 'flat':
+      return Math.sin(u * Math.PI * 2 + t * 0.35) * 0.14;
+    default:
+      return 0;
+  }
+}
+
+const oscItems = [];
+const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+document.querySelectorAll('canvas.osc').forEach((canvas) => {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const item = {
+    canvas,
+    ctx,
+    type: canvas.dataset.type || 'sine',
+    color: canvas.dataset.color || '#FFFFFF',
+    phase: Math.random() * 100,
+    visible: true,
+    w: 0,
+    h: 0
+  };
+  oscItems.push(item);
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => { item.visible = entry.isIntersecting; });
+      },
+      { rootMargin: '120px' }
+    );
+    observer.observe(canvas);
+  }
+});
+
+function resizeCanvas(item) {
+  const rect = item.canvas.getBoundingClientRect();
+  item.w = rect.width;
+  item.h = rect.height;
+  if (item.w <= 0 || item.h <= 0) return;
+  item.canvas.width  = Math.max(1, Math.floor(item.w * dpr));
+  item.canvas.height = Math.max(1, Math.floor(item.h * dpr));
+  item.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+function resizeAll() { oscItems.forEach(resizeCanvas); }
+
+window.addEventListener('resize', resizeAll, { passive: true });
+window.addEventListener('load', resizeAll, { once: true });
+resizeAll();
+
+let startTime = performance.now();
+
+function draw(now) {
+  const elapsed = (now - startTime) / 1000;
+
+  oscItems.forEach((item) => {
+    if (!item.visible || !item.w || !item.h) return;
+
+    const { ctx, w, h, color, type } = item;
+    const midY = h / 2;
+    const amplitude = h * 0.36;
+
+    ctx.clearRect(0, 0, w, h);
+
+    ctx.shadowBlur = 14;
+    ctx.shadowColor = color;
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = .85;
+    ctx.lineWidth = 1.2;
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+
+    const step = 3;
+    for (let x = 0; x <= w; x += step) {
+      const u = w > 0 ? x / w : 0;
+      const taper = Math.sin(Math.PI * u);
+      const value = waveValue(type, u, elapsed + item.phase);
+      const y = midY - value * amplitude * taper;
+      if (x === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    ctx.shadowBlur = 0;
+    ctx.globalAlpha = 1;
+  });
+
+  requestAnimationFrame(draw);
+}
+requestAnimationFrame(draw);
+
+
+/* ============================================================
+   ПЛАВНОЕ ПОЯВЛЕНИЕ
+   ============================================================ */
+
+const revealElements = document.querySelectorAll('.reveal');
+
+if ('IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: .12, rootMargin: '0px 0px -8% 0px' }
+  );
+  revealElements.forEach((el) => revealObserver.observe(el));
+} else {
+  revealElements.forEach((el) => el.classList.add('is-visible'));
+}
+
+
+/* ============================================================
+   УЧЁТ REDUCED MOTION
+   ============================================================ */
+
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+if (reducedMotion.matches) {
+  oscItems.forEach((item) => { item.visible = false; });
+}
+</script>
+
+</body>
+</html>
