@@ -1380,7 +1380,6 @@ p + p {
   <img
     class="hero__bg"
     data-image="hero"
-    src="images/hero/hero.jpg"
     alt=""
     fetchpriority="high"
     decoding="async"
@@ -1525,7 +1524,6 @@ p + p {
 
         <img
           data-image="stages[0]"
-          src="images/stages/about.avif"
           alt="Момент практики Экстатик Денс"
           loading="lazy"
           decoding="async"
@@ -1640,7 +1638,6 @@ p + p {
 
         <img
           data-image="stages[1]"
-          src="images/stages/organic.jpg"
           alt="Момент органики в Экстатик Денс"
           loading="lazy"
           decoding="async"
@@ -1710,7 +1707,6 @@ p + p {
 
         <img
           data-image="stages[2]"
-          src="images/stages/move.jpg"
           alt="Движение в свободном танце"
           loading="lazy"
           decoding="async"
@@ -1780,7 +1776,6 @@ p + p {
 
         <img
           data-image="stages[3]"
-          src="images/stages/peak.jpg"
           alt="Пик практики Экстатик Денс"
           loading="lazy"
           decoding="async"
@@ -1846,7 +1841,6 @@ p + p {
 
         <img
           data-image="stages[4]"
-          src="images/stages/integration.jpg"
           alt="Интеграция после танца"
           loading="lazy"
           decoding="async"
@@ -2126,44 +2120,7 @@ p + p {
       id="randomPhotos"
       aria-label="Фотографии с Экстатик Денс"
     >
-      <!-- Рендерится динамически из data/images.json → gallery -->
-      <!-- Fallback, если JSON недоступен -->
-
-      <figure class="photo">
-        <img
-          src="images/gallery/01.jpg"
-          alt="Момент практики"
-          loading="lazy"
-          decoding="async"
-        >
-      </figure>
-
-      <figure class="photo">
-        <img
-          src="images/gallery/02.jpg"
-          alt="Свободное движение"
-          loading="lazy"
-          decoding="async"
-        >
-      </figure>
-
-      <figure class="photo">
-        <img
-          src="images/gallery/03.jpg"
-          alt="Пик танца"
-          loading="lazy"
-          decoding="async"
-        >
-      </figure>
-
-      <figure class="photo">
-        <img
-          src="images/gallery/04.jpg"
-          alt="Завершение танца"
-          loading="lazy"
-          decoding="async"
-        >
-      </figure>
+      <!-- Галерея полностью загружается из data/images.json -->
 
     </div>
 
@@ -2205,7 +2162,6 @@ p + p {
 
           <img
             data-image="people[0]"
-            src="images/people/sergey.jpg"
             alt="Сергей Гарин — Ecstatic Dance DJ"
             loading="lazy"
             decoding="async"
@@ -2241,7 +2197,6 @@ p + p {
 
           <img
             data-image="people[1]"
-            src="images/people/veronica.jpg"
             alt="Вероника — проводник практики"
             loading="lazy"
             decoding="async"
@@ -2836,6 +2791,7 @@ const MONTHS_NOM = [
 ];
 
 function parseDate(value) {
+
   if (!value) {
     return null;
   }
@@ -2848,6 +2804,7 @@ function parseDate(value) {
 }
 
 function formatRuDate(iso) {
+
   const date = parseDate(iso);
 
   if (!date) {
@@ -2858,6 +2815,7 @@ function formatRuDate(iso) {
 }
 
 function formatTime(iso) {
+
   const date = parseDate(iso);
 
   if (!date) {
@@ -3018,7 +2976,7 @@ function startCountdown() {
 
 
 /* ============================================================
-   ПРИМЕНЕНИЕ ДАННЫХ ИЗ API
+   ПРИМЕНЕНИЕ ДАННЫХ СОБЫТИЯ ИЗ API / JSON
    ============================================================ */
 
 function applyFromData(data) {
@@ -3169,20 +3127,31 @@ startCountdown();
 
 /* ============================================================
    ИЗОБРАЖЕНИЯ И ВИДЕО ИЗ data/images.json
-   ────────────────────────────────────────────────────────────
-   Разметка использует атрибут data-image с ключом:
-     - "hero"           → первый элемент массива hero
-     - "stages[0]"      → элемент stages[0]
-     - "people[1]"      → элемент people[1]
-     - "video[2]"       → элемент video[2]
-   Скрипт один раз читает JSON и подставляет src.
+
+   Структура JSON:
+
+   hero[0]
+   stages[0...4]
+   people[0...1]
+   video[0...]
+   gallery[...]
+
+   HTML использует data-image:
+     data-image="hero"
+     data-image="stages[0]"
+     data-image="people[1]"
+     data-image="video[2]"
+
+   Все пути к фото и видео берутся только из JSON.
    ============================================================ */
 
 let IMAGES_DATA = null;
 
-/* Разрешаем относительные пути как есть — они работают
-   и на Netlify, и локально, если файлы в той же структуре.
-   Абсолютные URL (http/https) пропускаем без изменений. */
+
+/* ------------------------------------------------------------
+   РАЗРЕШЕНИЕ ПУТИ
+   ------------------------------------------------------------ */
+
 function resolveAssetPath(rel) {
 
   if (!rel) {
@@ -3191,15 +3160,33 @@ function resolveAssetPath(rel) {
 
   const str = String(rel);
 
+  /*
+   * Если в будущем в JSON появится внешний URL,
+   * он останется работать как есть.
+   */
   if (/^https?:\/\//i.test(str)) {
     return str;
   }
 
+  /*
+   * Для локальных файлов:
+   * images/...
+   */
   return str.replace(/^\/+/, '');
 
 }
 
-/* Достаём значение по ключу вида "stages[2]" или "hero" */
+
+/* ------------------------------------------------------------
+   ПОЛУЧЕНИЕ РЕСУРСА ПО КЛЮЧУ
+
+   Примеры:
+     hero
+     stages[0]
+     people[1]
+     video[2]
+   ------------------------------------------------------------ */
+
 function getAssetByKey(key) {
 
   if (!IMAGES_DATA || !key) {
@@ -3215,6 +3202,7 @@ function getAssetByKey(key) {
   }
 
   const bucket = IMAGES_DATA[match[1]];
+
   const index = match[2] !== undefined
     ? parseInt(match[2], 10)
     : 0;
@@ -3223,17 +3211,28 @@ function getAssetByKey(key) {
     return null;
   }
 
-  return bucket[index % bucket.length];
+  /*
+   * Если индекс существует — берём его.
+   * Если индекс больше массива — используем первый элемент,
+   * чтобы сайт не ломался.
+   */
+  return bucket[index] ?? bucket[0];
 
 }
 
-/* Подставляем src во все элементы с data-image */
+
+/* ------------------------------------------------------------
+   ПОДСТАНОВКА ФОТО И ВИДЕО
+
+   Все элементы с data-image получают src
+   только после загрузки data/images.json.
+   ------------------------------------------------------------ */
+
 function applyImagesFromData() {
 
   if (!IMAGES_DATA) {
     return;
   }
-
 
   document.querySelectorAll('[data-image]').forEach((element) => {
 
@@ -3244,36 +3243,48 @@ function applyImagesFromData() {
     const resolved = resolveAssetPath(relative);
 
     if (!resolved) {
+      console.warn(
+        `Не найден ресурс для data-image="${key}"`
+      );
+
       return;
     }
 
-    /* <video> */
+
+    /* --------------------------------------------------------
+       VIDEO
+       -------------------------------------------------------- */
+
     if (element.tagName === 'VIDEO') {
 
-      if (element.src !== resolved) {
+      element.src = resolved;
 
-        element.src = resolved;
+      /*
+       * load() заставляет браузер перечитать источник
+       * и заново получить метаданные видео.
+       */
+      try {
 
-        /*
-         * load() нужен, чтобы браузер перечитал
-         * новый источник и обновил метаданные.
-         */
-        try {
-          element.load();
-        } catch (error) {
-          console.warn(
-            'Не удалось перезагрузить видео:',
-            error
-          );
-        }
+        element.load();
+
+      } catch (error) {
+
+        console.warn(
+          'Не удалось загрузить видео:',
+          error
+        );
 
       }
 
       return;
     }
 
-    /* <img>, <source> и остальное с src */
-    if ('src' in element) {
+
+    /* --------------------------------------------------------
+       IMAGE
+       -------------------------------------------------------- */
+
+    if (element.tagName === 'IMG') {
 
       element.src = resolved;
 
@@ -3283,7 +3294,21 @@ function applyImagesFromData() {
 
 }
 
-/* Рендер галереи из массива gallery */
+
+/* ------------------------------------------------------------
+   ГАЛЕРЕЯ
+
+   Берёт изображения из:
+
+   "gallery": [
+     "images/gallery/01.jpg",
+     ...
+   ]
+
+   Каждый раз выбирается случайная подборка,
+   максимум 8 фотографий.
+   ------------------------------------------------------------ */
+
 function renderGalleryFromData() {
 
   const container =
@@ -3297,41 +3322,86 @@ function renderGalleryFromData() {
     ? IMAGES_DATA.gallery
     : [];
 
+
   if (list.length === 0) {
+
+    console.warn(
+      'Массив gallery в data/images.json пуст.'
+    );
+
     return;
   }
 
-  const LIMIT = Math.min(8, list.length);
 
+  const LIMIT =
+    Math.min(8, list.length);
+
+
+  /*
+   * Перемешиваем массив.
+   */
   const shuffled = list
-    .map((src) => ({ src, random: Math.random() }))
+    .map((src) => ({
+      src,
+      random: Math.random()
+    }))
     .sort((a, b) => a.random - b.random)
     .slice(0, LIMIT);
 
-  const fragment = document.createDocumentFragment();
+
+  const fragment =
+    document.createDocumentFragment();
+
 
   shuffled.forEach(({ src }) => {
 
-    const figure = document.createElement('figure');
+    const resolved =
+      resolveAssetPath(src);
+
+    if (!resolved) {
+      return;
+    }
+
+
+    const figure =
+      document.createElement('figure');
+
     figure.className = 'photo';
 
-    const image = document.createElement('img');
 
-    image.src = resolveAssetPath(src);
-    image.alt = 'Момент практики Экстатик Денс';
+    const image =
+      document.createElement('img');
+
+    image.src = resolved;
+
+    image.alt =
+      'Момент практики Экстатик Денс';
+
     image.loading = 'lazy';
+
     image.decoding = 'async';
 
+
     figure.appendChild(image);
+
     fragment.appendChild(figure);
 
   });
 
+
+  /*
+   * Старое содержимое галереи заменяется
+   * изображениями из JSON.
+   */
   container.replaceChildren(fragment);
 
 }
 
-/* Основной загрузчик */
+
+/* ------------------------------------------------------------
+   ЗАГРУЗКА DATA/IMAGES.JSON
+   ------------------------------------------------------------ */
+
 (async function loadImagesData() {
 
   try {
@@ -3343,32 +3413,52 @@ function renderGalleryFromData() {
       }
     );
 
+
     if (!response.ok) {
+
       throw new Error(
         `HTTP ${response.status}`
       );
+
     }
 
-    IMAGES_DATA = await response.json();
 
+    IMAGES_DATA =
+      await response.json();
+
+
+    /*
+     * Сначала подставляем hero,
+     * stages, people и video.
+     */
     applyImagesFromData();
+
+
+    /*
+     * Затем строим галерею.
+     */
     renderGalleryFromData();
 
+
     console.info(
-      'Изображения и видео загружены из data/images.json'
+      'Фото и видео загружены из data/images.json'
     );
+
 
   } catch (error) {
 
-    /*
-     * Если JSON недоступен — остаются
-     * fallback src прямо из HTML.
-     */
-
-    console.warn(
+    console.error(
       'Не удалось загрузить data/images.json:',
       error
     );
+
+    /*
+     * Намеренно НЕ возвращаем старые src.
+     *
+     * Теперь data/images.json является
+     * единственным источником путей
+     * к изображениям и видео.
+     */
 
   }
 
@@ -3384,6 +3474,7 @@ function waveValue(type, u, t) {
   switch (type) {
 
     case 'sine':
+
       return Math.sin(
         u * Math.PI * 4 +
         t * 0.75
@@ -3407,6 +3498,7 @@ function waveValue(type, u, t) {
         );
 
       return base * envelope;
+
     }
 
 
@@ -3422,6 +3514,7 @@ function waveValue(type, u, t) {
         Math.sign(sine) *
         Math.pow(Math.abs(sine), 7)
       );
+
     }
 
 
@@ -3436,23 +3529,30 @@ function waveValue(type, u, t) {
 
 
     default:
+
       return 0;
+
   }
+
 }
 
 
 const oscItems = [];
 
-const dpr = Math.min(
-  window.devicePixelRatio || 1,
-  2
-);
+
+const dpr =
+  Math.min(
+    window.devicePixelRatio || 1,
+    2
+  );
 
 
 document.querySelectorAll('canvas.osc').forEach(
   (canvas) => {
 
-    const ctx = canvas.getContext('2d');
+    const ctx =
+      canvas.getContext('2d');
+
 
     if (!ctx) {
       return;
@@ -3481,6 +3581,7 @@ document.querySelectorAll('canvas.osc').forEach(
       w: 0,
 
       h: 0
+
     };
 
 
@@ -3522,6 +3623,7 @@ function resizeCanvas(item) {
 
 
   item.w = rect.width;
+
   item.h = rect.height;
 
 
@@ -3573,6 +3675,7 @@ window.addEventListener(
     passive: true
   }
 );
+
 
 window.addEventListener(
   'load',
@@ -3633,16 +3736,24 @@ function draw(now) {
 
 
     ctx.shadowBlur = 14;
-    ctx.shadowColor = color;
 
-    ctx.strokeStyle = color;
+    ctx.shadowColor =
+      color;
 
-    ctx.globalAlpha = .85;
+    ctx.strokeStyle =
+      color;
 
-    ctx.lineWidth = 1.2;
+    ctx.globalAlpha =
+      .85;
 
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
+    ctx.lineWidth =
+      1.2;
+
+    ctx.lineJoin =
+      'round';
+
+    ctx.lineCap =
+      'round';
 
     ctx.beginPath();
 
@@ -3684,9 +3795,19 @@ function draw(now) {
 
 
       if (x === 0) {
-        ctx.moveTo(x, y);
+
+        ctx.moveTo(
+          x,
+          y
+        );
+
       } else {
-        ctx.lineTo(x, y);
+
+        ctx.lineTo(
+          x,
+          y
+        );
+
       }
 
     }
@@ -3696,6 +3817,7 @@ function draw(now) {
 
 
     ctx.shadowBlur = 0;
+
     ctx.globalAlpha = 1;
 
   });
@@ -3781,7 +3903,9 @@ const reducedMotion =
 if (reducedMotion.matches) {
 
   oscItems.forEach((item) => {
+
     item.visible = false;
+
   });
 
 }
