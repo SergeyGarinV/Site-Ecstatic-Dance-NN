@@ -20,6 +20,9 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+<!-- Preload hero-изображения -->
+<link rel="preload" as="image" href="images/hero/start.jpg" fetchpriority="high">
+
 <!-- ============================================================
      OPEN GRAPH
      ============================================================ -->
@@ -38,6 +41,8 @@
 <!-- Open Graph: параметры события -->
 <meta property="event:start_time"
       content="2026-10-24T15:00:00+03:00">
+<meta property="event:end_time"
+      content="2026-10-24T19:00:00+03:00">
 
 <!-- ============================================================
      TWITTER CARD
@@ -53,7 +58,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Jost:wght@200;300;400&family=Montserrat:wght@200;300&display=swap"
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Jost:wght@200;300;400&display=swap"
   rel="stylesheet">
 
 <!-- ============================================================
@@ -66,7 +71,7 @@
   "name": "Экстатик Денс — Нижний Новгород",
   "description": "Свободный танец без хореографии и оценок. Музыка ведёт от мягкого начала к свободному движению и спокойному завершению.",
   "startDate": "2026-10-24T15:00:00+03:00",
-  "endDate": "2026-10-24T18:00:00+03:00",
+  "endDate": "2026-10-24T19:00:00+03:00",
   "eventStatus": "https://schema.org/EventScheduled",
   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
   "inLanguage": "ru",
@@ -124,7 +129,7 @@
 }
 
 :root {
-  --font-head: 'Jost', 'Montserrat', sans-serif;
+  --font-head: 'Jost', sans-serif;
   --font-body: 'Inter', sans-serif;
   --ease: cubic-bezier(.4, 0, .2, 1);
 }
@@ -346,11 +351,9 @@ p + p {
 }
 
 .btn:hover {
-  background: color-mix(
-    in srgb,
-    currentColor 16%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  background: rgba(128,128,128,.15);
+  background: color-mix(in srgb, currentColor 16%, transparent);
   letter-spacing: .28em;
 }
 
@@ -478,16 +481,11 @@ p + p {
   gap: 10px 30px;
   margin: 0 0 22px;
   padding: 20px 26px;
-  border: 1px solid color-mix(
-    in srgb,
-    currentColor 26%,
-    transparent
-  );
-  background: color-mix(
-    in srgb,
-    currentColor 6%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border: 1px solid rgba(128,128,128,.26);
+  border: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+  background: rgba(128,128,128,.06);
+  background: color-mix(in srgb, currentColor 6%, transparent);
   max-width: 360px;
 }
 
@@ -616,11 +614,9 @@ p + p {
 .stage__card {
   margin-top: 34px;
   padding: 22px 26px;
-  border-left: 1px solid color-mix(
-    in srgb,
-    currentColor 45%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border-left: 1px solid rgba(128,128,128,.45);
+  border-left: 1px solid color-mix(in srgb, currentColor 45%, transparent);
   font-size: clamp(16px, 1.5vw, 18px);
   line-height: 1.75;
 }
@@ -681,16 +677,11 @@ p + p {
   letter-spacing: .14em;
   font-size: 12px;
   padding: 13px 22px;
-  border: 1px solid color-mix(
-    in srgb,
-    currentColor 65%,
-    transparent
-  );
-  background: color-mix(
-    in srgb,
-    currentColor 10%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border: 1px solid rgba(128,128,128,.65);
+  border: 1px solid color-mix(in srgb, currentColor 65%, transparent);
+  background: rgba(128,128,128,.10);
+  background: color-mix(in srgb, currentColor 10%, transparent);
   color: inherit;
   font-weight: 400;
   box-shadow: 0 4px 14px -8px rgba(0,0,0,.25);
@@ -719,16 +710,11 @@ p + p {
 
 .scenario {
   padding: 26px 26px 28px;
-  border: 1px solid color-mix(
-    in srgb,
-    currentColor 55%,
-    transparent
-  );
-  background: color-mix(
-    in srgb,
-    currentColor 8%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border: 1px solid rgba(128,128,128,.55);
+  border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
+  background: rgba(128,128,128,.08);
+  background: color-mix(in srgb, currentColor 8%, transparent);
   border-radius: 2px;
   box-shadow: 0 10px 30px -18px rgba(0,0,0,.3);
 }
@@ -813,8 +799,7 @@ p + p {
   box-shadow: 0 40px 70px -30px rgba(0,0,0,.6);
 }
 
-.video-item__frame video,
-.video-item__frame iframe {
+.video-item__frame video {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -852,6 +837,11 @@ p + p {
   overflow: hidden;
   border-radius: 2px;
   box-shadow: 0 30px 60px -30px rgba(0,0,0,.45);
+}
+
+/* AVIF-fallback: <picture> не должен влиять на layout */
+.photo picture {
+  display: contents;
 }
 
 .photo img {
@@ -952,11 +942,9 @@ p + p {
 .info-list {
   margin-top: 50px;
   max-width: 640px;
-  border-top: 1px solid color-mix(
-    in srgb,
-    currentColor 18%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border-top: 1px solid rgba(128,128,128,.18);
+  border-top: 1px solid color-mix(in srgb, currentColor 18%, transparent);
 }
 
 .info-list__row {
@@ -964,11 +952,9 @@ p + p {
   flex-wrap: wrap;
   gap: 8px 24px;
   padding: 20px 0;
-  border-bottom: 1px solid color-mix(
-    in srgb,
-    currentColor 18%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border-bottom: 1px solid rgba(128,128,128,.18);
+  border-bottom: 1px solid color-mix(in srgb, currentColor 18%, transparent);
 }
 
 .info-list__label {
@@ -1004,11 +990,9 @@ p + p {
 
 .voice {
   padding: 34px 32px;
-  border: 1px dashed color-mix(
-    in srgb,
-    currentColor 30%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border: 1px dashed rgba(128,128,128,.30);
+  border: 1px dashed color-mix(in srgb, currentColor 30%, transparent);
   border-radius: 2px;
 }
 
@@ -1034,19 +1018,14 @@ p + p {
 
 .faq__item {
   padding: 28px 0;
-  border-bottom: 1px solid color-mix(
-    in srgb,
-    currentColor 16%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border-bottom: 1px solid rgba(128,128,128,.16);
+  border-bottom: 1px solid color-mix(in srgb, currentColor 16%, transparent);
 }
 
 .faq__item:first-child {
-  border-top: 1px solid color-mix(
-    in srgb,
-    currentColor 16%,
-    transparent
-  );
+  border-top: 1px solid rgba(128,128,128,.16);
+  border-top: 1px solid color-mix(in srgb, currentColor 16%, transparent);
 }
 
 .faq__q {
@@ -1143,11 +1122,9 @@ p + p {
   justify-content: center;
   width: 56px;
   height: 56px;
-  border: 1px solid color-mix(
-    in srgb,
-    currentColor 40%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  border: 1px solid rgba(128,128,128,.40);
+  border: 1px solid color-mix(in srgb, currentColor 40%, transparent);
   border-radius: 50%;
 
   transition:
@@ -1157,11 +1134,9 @@ p + p {
 }
 
 .contact-icon:hover .contact-icon__circle {
-  background: color-mix(
-    in srgb,
-    currentColor 12%,
-    transparent
-  );
+  /* fallback для color-mix() */
+  background: rgba(128,128,128,.12);
+  background: color-mix(in srgb, currentColor 12%, transparent);
   border-color: currentColor;
   transform: translateY(-2px);
 }
@@ -1201,7 +1176,8 @@ p + p {
   text-transform: uppercase;
   font-family: var(--font-head);
   background: #F5F0E8;
-  color: #8A8070;
+  /* было #8A8070 (контраст ~3.5:1); теперь ~7:1 */
+  color: #5A5044;
 }
 
 /* ============================================================
@@ -1280,6 +1256,21 @@ p + p {
 
 .mobile-cta a:hover {
   background: rgba(255,255,255,.08);
+}
+
+/* ============================================================
+   NOSCRIPT
+   ============================================================ */
+
+.noscript-note {
+  margin-top: 24px;
+  padding: 16px 20px;
+  border: 1px dashed rgba(128,128,128,.5);
+  border: 1px dashed color-mix(in srgb, currentColor 40%, transparent);
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: .85;
+  max-width: 620px;
 }
 
 /* ============================================================
@@ -1525,12 +1516,12 @@ p + p {
 
       <span class="hero__event__item">
         <span class="hero__event__label">Дата</span>
-        <span class="ph" data-event="date">[ДАТА]</span>
+        <span data-event="date">24 октября 2026</span>
       </span>
 
       <span class="hero__event__item">
         <span class="hero__event__label">Время</span>
-        <span class="ph" data-event="time">[ВРЕМЯ]</span>
+        <span data-event="time">15:00</span>
       </span>
 
     </div>
@@ -1640,13 +1631,19 @@ p + p {
 
       <figure class="photo stage__photo reveal reveal-d2">
 
-        <img
-          data-image="stages[0]"
-          src="images/stages/about.avif"
-          alt="Момент практики Экстатик Денс"
-          loading="lazy"
-          decoding="async"
-        >
+        <picture>
+          <source
+            data-image="stages[0]"
+            srcset="images/stages/about.avif"
+            type="image/avif"
+          >
+          <img
+            src="images/stages/about.jpg"
+            alt="Момент практики Экстатик Денс"
+            loading="lazy"
+            decoding="async"
+          >
+        </picture>
 
       </figure>
 
@@ -1975,13 +1972,6 @@ p + p {
 
   </div>
 
-  <canvas
-    class="osc"
-    data-type="flat"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
-
 </section>
 
 
@@ -2017,13 +2007,6 @@ p + p {
     </div>
 
   </div>
-
-  <canvas
-    class="osc"
-    data-type="sine"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
 
 </section>
 
@@ -2097,13 +2080,6 @@ p + p {
 
   </div>
 
-  <canvas
-    class="osc"
-    data-type="peaks"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
-
 </section>
 
 
@@ -2135,13 +2111,6 @@ p + p {
     </div>
 
   </div>
-
-  <canvas
-    class="osc"
-    data-type="sine"
-    data-color="#C9E4A8"
-    aria-hidden="true"
-  ></canvas>
 
 </section>
 
@@ -2234,16 +2203,14 @@ p + p {
     >
       <!-- Галерея полностью загружается из data/images.json -->
 
+      <noscript>
+        <p class="noscript-note">
+          Для отображения галереи включите JavaScript.
+        </p>
+      </noscript>
     </div>
 
   </div>
-
-  <canvas
-    class="osc"
-    data-type="sine"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
 
 </section>
 
@@ -2268,7 +2235,7 @@ p + p {
 
     <div class="guides-grid">
 
-      <div class="guide reveal">
+      <article class="guide reveal">
 
         <figure class="photo guide__photo">
 
@@ -2282,9 +2249,9 @@ p + p {
 
         </figure>
 
-        <div class="guide__name">
+        <h3 class="guide__name">
           Сергей Гарин
-        </div>
+        </h3>
 
         <div class="guide__role">
           Сертифицированный Ecstatic Dance DJ
@@ -2296,10 +2263,10 @@ p + p {
 
         </p>
 
-      </div>
+      </article>
 
 
-      <div class="guide reveal reveal-d1">
+      <article class="guide reveal reveal-d1">
 
         <figure class="photo guide__photo">
 
@@ -2313,9 +2280,9 @@ p + p {
 
         </figure>
 
-        <div class="guide__name">
+        <h3 class="guide__name">
           Вероника Гарина
-        </div>
+        </h3>
 
         <div class="guide__role">
           Танцевально-двигательный терапевт, Гештальт психолог, контактер-ченнелер, мастер поточного танца
@@ -2324,10 +2291,12 @@ p + p {
         <p class="guide__bio">
           Помогает участникам войти в практику, почувствовать тело
           и двигаться в своём темпе, сохраняя внимание к собственным границам.
-	Создаёт безопасное начало: объясняет формат, правила и границы, настраивает на присутствие.
-Завершает мягко через замедление, тишину, благодарность телу и интеграцию опыта.
+          Создаёт безопасное начало: объясняет формат, правила и границы,
+          настраивает на присутствие.
+          Завершает мягко через замедление, тишину, благодарность телу
+          и интеграцию опыта.
         </p>
-      </div>
+      </article>
 
     </div>
 
@@ -2337,13 +2306,6 @@ p + p {
     </p>
 
   </div>
-
-  <canvas
-    class="osc"
-    data-type="peaks"
-    data-color="#FFF0D0"
-    aria-hidden="true"
-  ></canvas>
 
 </section>
 
@@ -2383,8 +2345,8 @@ p + p {
         </div>
 
         <div class="info-list__value">
-          <span class="ph" data-event="date">
-            [ДАТА]
+          <span data-event="date">
+            24 октября 2026
           </span>
         </div>
 
@@ -2397,8 +2359,8 @@ p + p {
         </div>
 
         <div class="info-list__value">
-          <span class="ph" data-event="time">
-            [ВРЕМЯ]
+          <span data-event="time">
+            15:00
           </span>
         </div>
 
@@ -2421,13 +2383,6 @@ p + p {
     </div>
 
   </div>
-
-  <canvas
-    class="osc"
-    data-type="sine"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
 
 </section>
 
@@ -2508,13 +2463,6 @@ p + p {
 
   </div>
 
-  <canvas
-    class="osc"
-    data-type="flat"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
-
 </section>
 
 
@@ -2539,13 +2487,14 @@ p + p {
 
       <div class="faq__item reveal">
 
-        <div class="faq__q">
+        <h3 class="faq__q">
           А если я не умею танцевать? Стоит ли приходить?
-        </div>
+        </h3>
 
         <p class="faq__a">
-          Обязательно стоит! Ведь практика Ecstatic Dance как раз не о заученных движениях, а о том как можно двигаться, откликаясь на музыку, 
-		что звучит и импульсы в теле.
+          Обязательно стоит! Ведь практика Ecstatic Dance как раз не о
+          заученных движениях, а о том как можно двигаться, откликаясь
+          на музыку, что звучит и импульсы в теле.
         </p>
 
       </div>
@@ -2553,9 +2502,9 @@ p + p {
 
       <div class="faq__item reveal">
 
-        <div class="faq__q">
+        <h3 class="faq__q">
           Можно ли прийти одному?
-        </div>
+        </h3>
 
         <p class="faq__a">
           Да. Многие могут прийти без компании.
@@ -2567,9 +2516,9 @@ p + p {
 
       <div class="faq__item reveal">
 
-        <div class="faq__q">
+        <h3 class="faq__q">
           А если я стесняюсь танцевать?
-        </div>
+        </h3>
 
         <p class="faq__a">
           Можно начать с небольших движений и постепенно
@@ -2582,34 +2531,23 @@ p + p {
 
       <div class="faq__item reveal">
 
-        <div class="faq__q">
+        <h3 class="faq__q">
           Что мне надеть на Ecstatic Dance?
-        </div>
+        </h3>
 
-	<p class="faq__a">
-		Удобную одежду, не сковывающая движений. В зале будет тепло, а в танце даже жарко - легкие ткани и максимальный комфорт.
-		Танцуем мы босиком или в носках - сменная обувь не нужна.
+        <p class="faq__a">
+          Удобную одежду, не сковывающая движений. В зале будет тепло,
+          а в танце даже жарко — легкие ткани и максимальный комфорт.
+          Танцуем мы босиком или в носках — сменная обувь не нужна.
           <br>
-
           Базовый принцип — одежда, в которой удобно свободно двигаться.
-
         </p>
-
-      </div>
-
-
-      
 
       </div>
 
     </div>
 
-  <canvas
-    class="osc"
-    data-type="sine"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
+  </div>
 
 </section>
 
@@ -2641,14 +2579,14 @@ p + p {
 
     <div class="cta__when reveal reveal-d2">
 
-      <span class="ph" data-event="date">
-        [ДАТА]
+      <span data-event="date">
+        24 октября 2026
       </span>
 
-      ·
+      <span class="cta__when-sep" aria-hidden="true">·</span>
 
-      <span class="ph" data-event="time">
-        [ВРЕМЯ]
+      <span data-event="time">
+        15:00
       </span>
 
     </div>
@@ -2812,13 +2750,6 @@ p + p {
     </div>
   </div>
 
-  <canvas
-    class="osc"
-    data-type="flat"
-    data-color="#FFFFFF"
-    aria-hidden="true"
-  ></canvas>
-
 </section>
 
 
@@ -2861,19 +2792,37 @@ p + p {
 'use strict';
 
 /* ============================================================
+   ОТЛАДКА
+   ============================================================ */
+
+const DEBUG = false;
+
+function debugInfo(...args) {
+  if (DEBUG && typeof console !== 'undefined') {
+    console.info(...args);
+  }
+}
+
+function debugWarn(...args) {
+  if (DEBUG && typeof console !== 'undefined') {
+    console.warn(...args);
+  }
+}
+
+
+/* ============================================================
    КОНФИГУРАЦИЯ СОБЫТИЯ (fallback, если сеть недоступна)
    ============================================================ */
 
 const EVENT = {
-  iso: '2026-10-24T15:00:00+03:00',
-  dateLabel: '24 октября 2026',
-  timeLabel: '15:00',
+  iso: null,
+  dateLabel: null,
+  timeLabel: null,
   fallbackLabel: 'Дата и время уточняется',
   title: 'Экстатик Денс — Нижний Новгород',
   venue: 'Большая Печёрская улица, 55/9',
   city: 'Нижний Новгород',
   age: '18+',
-  priceLabel: null,
   ticketUrl: 'https://cbiletom.ru/poster/index.php?id=369500'
 };
 
@@ -2970,9 +2919,6 @@ function applyEventData() {
   const hasDate = Boolean(EVENT.dateLabel);
   const hasTime = Boolean(EVENT.timeLabel);
 
-  /* ----------------------------------------------------------
-     Данные есть — показываем как обычно
-     ---------------------------------------------------------- */
   if (hasDate || hasTime) {
 
     dateEls.forEach((element) => {
@@ -2980,8 +2926,7 @@ function applyEventData() {
       element.textContent = hasDate ? EVENT.dateLabel : '';
       element.classList.toggle('ph', !hasDate);
 
-      /* если даты нет — прячем весь блок «Дата» */
-      const item = element.closest('.hero__event__item, .info-list__row, .cta__when');
+      const item = element.closest('.hero__event__item, .info-list__row');
       if (item) item.style.display = hasDate ? '' : 'none';
 
     });
@@ -2991,48 +2936,99 @@ function applyEventData() {
       element.textContent = hasTime ? EVENT.timeLabel : '';
       element.classList.toggle('ph', !hasTime);
 
-      /* если времени нет — прячем весь блок «Время» */
-      const item = element.closest('.hero__event__item, .info-list__row, .cta__when');
+      /* Скрываем только конкретный span времени, не весь .cta__when */
+      const item = element.closest('.hero__event__item, .info-list__row');
       if (item) item.style.display = hasTime ? '' : 'none';
 
     });
 
-  }
-  /* ----------------------------------------------------------
-     Данных нет — показываем «Дата и время уточняется»
-     ---------------------------------------------------------- */
-  else {
+  } else {
 
     dateEls.forEach((element) => {
       element.textContent = EVENT.fallbackLabel;
       element.classList.remove('ph');
 
-      /* скрываем подпись «Дата» перед fallback-строкой */
       const label = element.parentElement?.querySelector(
         '.hero__event__label, .info-list__label'
       );
       if (label) label.style.display = 'none';
 
-      /* прячем весь блок «Время», чтобы не дублировать */
-      const parent = element.closest('.hero__event__item, .info-list__row, .cta__when');
+      const parent = element.closest('.hero__event__item, .info-list__row');
       if (parent) parent.style.display = '';
     });
 
     timeEls.forEach((element) => {
-      const item = element.closest('.hero__event__item, .info-list__row, .cta__when');
+      const item = element.closest('.hero__event__item, .info-list__row');
       if (item) item.style.display = 'none';
     });
 
   }
 
-  /* ----------------------------------------------------------
-     Ссылки на билеты (если где-то используется data-ticket-link)
-     ---------------------------------------------------------- */
   document.querySelectorAll('a[data-ticket-link]').forEach((link) => {
     if (EVENT.ticketUrl) {
       link.href = EVENT.ticketUrl;
     }
   });
+
+  applyCtaWhen();
+}
+
+
+/* ------------------------------------------------------------
+   CTA-блок даты/времени (секция 13) — отдельная логика,
+   чтобы не было висящего разделителя "·"
+   ------------------------------------------------------------ */
+
+function applyCtaWhen() {
+
+  const root = document.querySelector('.cta__when');
+
+  if (!root) {
+    return;
+  }
+
+  const dateEl = root.querySelector('[data-event="date"]');
+  const timeEl = root.querySelector('[data-event="time"]');
+  const sepEl  = root.querySelector('.cta__when-sep');
+
+  const hasDate = Boolean(EVENT.dateLabel);
+  const hasTime = Boolean(EVENT.timeLabel);
+
+  /* Нет ни даты, ни времени — показываем только fallback-текст */
+  if (!hasDate && !hasTime) {
+
+    if (dateEl) {
+      dateEl.textContent = EVENT.fallbackLabel || 'Дата и время уточняется';
+      dateEl.hidden = false;
+    }
+
+    if (timeEl) {
+      timeEl.hidden = true;
+    }
+
+    if (sepEl) {
+      sepEl.hidden = true;
+    }
+
+    return;
+  }
+
+  /* Есть хотя бы что-то — показываем только заполненные поля */
+  if (dateEl) {
+    dateEl.textContent = hasDate ? EVENT.dateLabel : '';
+    dateEl.hidden = !hasDate;
+  }
+
+  if (timeEl) {
+    timeEl.textContent = hasTime ? EVENT.timeLabel : '';
+    timeEl.hidden = !hasTime;
+  }
+
+  /* Разделитель "·" — только когда есть и дата, и время */
+  if (sepEl) {
+    sepEl.hidden = !(hasDate && hasTime);
+  }
+
 }
 
 /* ============================================================
@@ -3151,7 +3147,9 @@ function applyFromData(data) {
     return;
   }
 
-  /* --- основной путь: пришёл ISO-старт --- */
+  /* --- Основной путь: пришёл ISO-старт --- */
+  let usedStart = false;
+
   if (data.start) {
 
     const parsed = parseDate(data.start);
@@ -3166,9 +3164,11 @@ function applyFromData(data) {
       EVENT.timeLabel =
         formatTime(data.start) || EVENT.timeLabel;
 
+      usedStart = true;
+
     } else {
 
-      console.warn(
+      debugWarn(
         '[event] Невалидный ISO в поле start:',
         data.start
       );
@@ -3176,8 +3176,9 @@ function applyFromData(data) {
     }
 
   }
-  /* --- резервный путь: пришли date + time строками --- */
-  else {
+
+  /* --- Резервный путь: date + time (в т.ч. если start невалиден) --- */
+  if (!usedStart) {
 
     if (data.date) {
       EVENT.dateLabel = String(data.date).trim();
@@ -3257,16 +3258,11 @@ startCountdown();
 
 
 /* ============================================================
-   ЗАГРУЗКА ДАТЫ и Времени СОБЫТИЯ
-   из 
-     event.json         — локальный кэш
+   ЗАГРУЗКА ДАТЫ и ВРЕМЕНИ СОБЫТИЯ ИЗ event.json
    ============================================================ */
 
 const EVENT_SOURCES = [
-  {
-    url: 'event.json',
-    label: 'event.json'
-  },
+  { url: 'event.json', label: 'event.json' }
 ];
 
 
@@ -3322,7 +3318,7 @@ async function loadEventData() {
 
       if (!response.ok) {
 
-        console.warn(
+        debugWarn(
           `[event] ${source.label}: HTTP ${response.status}`
         );
 
@@ -3333,7 +3329,7 @@ async function loadEventData() {
 
       if (!isValidEventData(data)) {
 
-        console.warn(
+        debugWarn(
           `[event] ${source.label}: некорректные данные`,
           data
         );
@@ -3343,7 +3339,7 @@ async function loadEventData() {
 
       applyFromData(data);
 
-      console.info(
+      debugInfo(
         `[event] ✓ Данные загружены из ${source.label}`,
         data
       );
@@ -3352,7 +3348,7 @@ async function loadEventData() {
 
     } catch (error) {
 
-      console.warn(
+      debugWarn(
         `[event] ${source.label}: ${error.message}`
       );
 
@@ -3360,7 +3356,7 @@ async function loadEventData() {
 
   }
 
-  console.info(
+  debugInfo(
     '[event] Используется fallback-конфигурация из EVENT.'
   );
 
@@ -3373,29 +3369,18 @@ loadEventData();
 /* ============================================================
    ИЗОБРАЖЕНИЯ И ВИДЕО ИЗ data/images.json
 
-   Структура JSON:
-
-   hero[0]
-   stages[0...4]
-   people[0...1]
-   video[0...]
-   gallery[...]
-
    HTML использует data-image:
      data-image="hero"
      data-image="stages[0]"
      data-image="people[1]"
      data-image="video[2]"
 
-   Все пути к фото и видео берутся только из JSON.
+   Для <picture> с AVIF-fallback: data-image ставится на <source>,
+   а <img> внутри — это уже fallback (jpg), который не перезаписывается.
    ============================================================ */
 
 let IMAGES_DATA = null;
 
-
-/* ------------------------------------------------------------
-   РАЗРЕШЕНИЕ ПУТИ
-   ------------------------------------------------------------ */
 
 function resolveAssetPath(rel) {
 
@@ -3413,10 +3398,6 @@ function resolveAssetPath(rel) {
 
 }
 
-
-/* ------------------------------------------------------------
-   ПОЛУЧЕНИЕ РЕСУРСА ПО КЛЮЧУ
-   ------------------------------------------------------------ */
 
 function getAssetByKey(key) {
 
@@ -3447,10 +3428,6 @@ function getAssetByKey(key) {
 }
 
 
-/* ------------------------------------------------------------
-   ПОДСТАНОВКА ФОТО И ВИДЕО
-   ------------------------------------------------------------ */
-
 function applyImagesFromData() {
 
   if (!IMAGES_DATA) {
@@ -3467,7 +3444,7 @@ function applyImagesFromData() {
 
     if (!resolved) {
 
-      console.warn(
+      debugWarn(
         `Не найден ресурс для data-image="${key}"`
       );
 
@@ -3480,17 +3457,19 @@ function applyImagesFromData() {
       element.src = resolved;
 
       try {
-
         element.load();
-
       } catch (error) {
-
-        console.warn(
-          'Не удалось загрузить видео:',
-          error
-        );
-
+        debugWarn('Не удалось загрузить видео:', error);
       }
+
+      return;
+    }
+
+
+    /* <source> внутри <picture> для AVIF */
+    if (element.tagName === 'SOURCE') {
+
+      element.srcset = resolved;
 
       return;
     }
@@ -3527,7 +3506,7 @@ function renderGalleryFromData() {
 
   if (list.length === 0) {
 
-    console.warn(
+    debugWarn(
       'Массив gallery в data/images.json пуст.'
     );
 
@@ -3552,7 +3531,7 @@ function renderGalleryFromData() {
     document.createDocumentFragment();
 
 
-  shuffled.forEach(({ src }) => {
+  shuffled.forEach(({ src }, index) => {
 
     const resolved =
       resolveAssetPath(src);
@@ -3574,7 +3553,7 @@ function renderGalleryFromData() {
     image.src = resolved;
 
     image.alt =
-      'Момент практики Экстатик Денс';
+      `Экстатик Денс — кадр ${index + 1} из ${shuffled.length}`;
 
     image.loading = 'lazy';
 
@@ -3588,58 +3567,59 @@ function renderGalleryFromData() {
   });
 
 
-  container.replaceChildren(fragment);
+  /* сохраняем <noscript> внутри контейнера */
+  const noscript = container.querySelector('noscript');
+
+  container.replaceChildren();
+
+  if (noscript) {
+    container.appendChild(noscript);
+  }
+
+  container.appendChild(fragment);
 
 }
 
 
 /* ------------------------------------------------------------
-   ЗАГРУЗКА DATA/IMAGES.JSON
+   ЗАГРУЗКА IMAGES.JSON
    ------------------------------------------------------------ */
 
 (async function loadImagesData() {
 
-  try {
+  /* Путь согласован с фактическим именем файла images.json.
+     Если файл будет лежать в data/, поменяйте на 'data/images.json'. */
+  const SOURCES = ['images.json', 'data/images.json'];
 
-    const response = await fetch(
-      'data/images.json',
-      {
-        cache: 'default'
+  for (const url of SOURCES) {
+
+    try {
+
+      const response = await fetch(url, { cache: 'default' });
+
+      if (!response.ok) {
+        debugWarn(`[images] ${url}: HTTP ${response.status}`);
+        continue;
       }
-    );
 
+      IMAGES_DATA = await response.json();
 
-    if (!response.ok) {
+      applyImagesFromData();
+      renderGalleryFromData();
 
-      throw new Error(
-        `HTTP ${response.status}`
-      );
+      debugInfo(`Фото и видео загружены из ${url}`);
+
+      return;
+
+    } catch (error) {
+
+      debugWarn(`[images] ${url}: ${error.message}`);
 
     }
 
-
-    IMAGES_DATA =
-      await response.json();
-
-
-    applyImagesFromData();
-
-    renderGalleryFromData();
-
-
-    console.info(
-      'Фото и видео загружены из data/images.json'
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      'Не удалось загрузить data/images.json:',
-      error
-    );
-
   }
+
+  debugWarn('Не удалось загрузить images.json');
 
 })();
 
@@ -3850,18 +3830,14 @@ function resizeAll() {
 window.addEventListener(
   'resize',
   resizeAll,
-  {
-    passive: true
-  }
+  { passive: true }
 );
 
 
 window.addEventListener(
   'load',
   resizeAll,
-  {
-    once: true
-  }
+  { once: true }
 );
 
 
@@ -3883,7 +3859,35 @@ if (reducedMotion.matches) {
 }
 
 
+/* ---- Ограничение FPS и отключение при скрытой вкладке ---- */
+
+const FRAME_INTERVAL = 1000 / 30;  /* ~30 fps */
+let lastDraw = 0;
+let paused = document.hidden;
+
+document.addEventListener('visibilitychange', () => {
+  paused = document.hidden;
+  if (!paused) {
+    lastDraw = 0;
+    if (!reducedMotion.matches) {
+      requestAnimationFrame(draw);
+    }
+  }
+});
+
+
 function draw(now) {
+
+  if (paused) {
+    return;
+  }
+
+  if (now - lastDraw < FRAME_INTERVAL) {
+    requestAnimationFrame(draw);
+    return;
+  }
+
+  lastDraw = now;
 
   const elapsed =
     (now - startTime) / 1000;
@@ -3925,10 +3929,7 @@ function draw(now) {
     );
 
 
-    ctx.shadowBlur = 14;
-
-    ctx.shadowColor =
-      color;
+    /* shadowBlur убран — дорогая операция для производительности */
 
     ctx.strokeStyle =
       color;
@@ -4005,8 +4006,6 @@ function draw(now) {
 
     ctx.stroke();
 
-
-    ctx.shadowBlur = 0;
 
     ctx.globalAlpha = 1;
 
