@@ -11,12 +11,104 @@
 
 <meta name="theme-color" content="#1A1A2E">
 
+<script>document.documentElement.classList.add('js');</script>
+
+<link rel="canonical" href="https://ecstaticnn.ru/">
+
+<!-- Favicon (положите файлы в корень сайта) -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<!-- ============================================================
+     OPEN GRAPH
+     ============================================================ -->
+<meta property="og:type" content="event">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Экстатик Денс — Нижний Новгород">
+<meta property="og:url" content="https://ecstaticnn.ru/">
+<meta property="og:title" content="Экстатик Денс — Нижний Новгород">
+<meta property="og:description"
+      content="Свободный танец без хореографии и оценок. 24 октября 2026, 15:00. Большая Печёрская, 55/9.">
+<meta property="og:image" content="https://ecstaticnn.ru/images/og-cover.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Экстатик Денс — свободный танец в Нижнем Новгороде">
+
+<!-- Open Graph: параметры события -->
+<meta property="event:start_time"
+      content="2026-10-24T15:00:00+03:00">
+
+<!-- ============================================================
+     TWITTER CARD
+     ============================================================ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Экстатик Денс — Нижний Новгород">
+<meta name="twitter:description"
+      content="Свободный танец без хореографии и оценок. 24 октября 2026, 15:00.">
+<meta name="twitter:image" content="https://ecstaticnn.ru/images/og-cover.jpg">
+<meta name="twitter:image:alt" content="Экстатик Денс — свободный танец в Нижнем Новгороде">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link
   href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Jost:wght@200;300;400&family=Montserrat:wght@200;300&display=swap"
   rel="stylesheet">
+
+<!-- ============================================================
+     JSON-LD: Event (schema.org)
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "DanceEvent",
+  "name": "Экстатик Денс — Нижний Новгород",
+  "description": "Свободный танец без хореографии и оценок. Музыка ведёт от мягкого начала к свободному движению и спокойному завершению.",
+  "startDate": "2026-10-24T15:00:00+03:00",
+  "endDate": "2026-10-24T18:00:00+03:00",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "inLanguage": "ru",
+  "image": [
+    "https://ecstaticnn.ru/images/og-cover.jpg"
+  ],
+  "url": "https://ecstaticnn.ru/",
+  "location": {
+    "@type": "Place",
+    "name": "Большая Печёрская улица, 55/9",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Большая Печёрская улица, 55/9",
+      "addressLocality": "Нижний Новгород",
+      "addressCountry": "RU"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "Экстатик Денс",
+    "url": "https://ecstaticnn.ru/"
+  },
+  "performer": [
+    {
+      "@type": "Person",
+      "name": "Сергей Гарин",
+      "jobTitle": "Ecstatic Dance DJ"
+    },
+    {
+      "@type": "Person",
+      "name": "Вероника Гарина",
+      "jobTitle": "Танцевально-двигательный терапевт"
+    }
+  ],
+  "offers": {
+    "@type": "Offer",
+    "url": "https://cbiletom.ru/poster/index.php?id=369500",
+    "availability": "https://schema.org/InStock",
+    "validFrom": "2026-01-01T00:00:00+03:00"
+  }
+}
+</script>
 
 <style>
 /* ============================================================
@@ -39,7 +131,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 84px;
+  scroll-padding-top: 60px;
 }
 
 body {
@@ -327,8 +419,13 @@ p + p {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  z-index: -1;
+  z-index: 0;
   filter: saturate(.8);
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 2;
 }
 
 .hero__title {
@@ -1112,12 +1209,17 @@ p + p {
    ============================================================ */
 
 .reveal {
-  opacity: 0;
-  transform: translateY(34px);
+  opacity: 1;
+  transform: none;
 
   transition:
     opacity 1.5s var(--ease),
     transform 1.5s var(--ease);
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(34px);
 }
 
 .reveal.is-visible {
@@ -1394,6 +1496,7 @@ p + p {
   <img
     class="hero__bg"
     data-image="hero"
+    src="images/hero/start.jpg"
     alt=""
     fetchpriority="high"
     decoding="async"
@@ -1464,6 +1567,7 @@ p + p {
     <div class="reveal reveal-d3">
       <a
         href="https://cbiletom.ru/poster/index.php?id=369500"
+        data-ticket-link
         target="_blank"
         rel="noopener noreferrer"
         class="btn"
@@ -1538,6 +1642,7 @@ p + p {
 
         <img
           data-image="stages[0]"
+          src="images/stages/about.avif"
           alt="Момент практики Экстатик Денс"
           loading="lazy"
           decoding="async"
@@ -1652,6 +1757,7 @@ p + p {
 
         <img
           data-image="stages[1]"
+          src="images/stages/organic.jpg"
           alt="Момент органики в Экстатик Денс"
           loading="lazy"
           decoding="async"
@@ -1721,6 +1827,7 @@ p + p {
 
         <img
           data-image="stages[2]"
+          src="images/stages/move.jpg"
           alt="Движение в свободном танце"
           loading="lazy"
           decoding="async"
@@ -1790,6 +1897,7 @@ p + p {
 
         <img
           data-image="stages[3]"
+          src="images/stages/peak.jpg"
           alt="Пик практики Экстатик Денс"
           loading="lazy"
           decoding="async"
@@ -1855,6 +1963,7 @@ p + p {
 
         <img
           data-image="stages[4]"
+          src="images/stages/integration.jpg"
           alt="Интеграция после танца"
           loading="lazy"
           decoding="async"
@@ -2070,6 +2179,7 @@ p + p {
 
           <video
             data-image="video[0]"
+            src="video/01.mp4"
             playsinline
             controls
             preload="metadata"
@@ -2077,11 +2187,6 @@ p + p {
           ></video>
 
         </div>
-
-        <p class="video-item__caption">
-          
-        </p>
-
       </div>
 
 
@@ -2091,6 +2196,7 @@ p + p {
 
           <video
             data-image="video[1]"
+            src="video/02.mp4"
             playsinline
             controls
             preload="metadata"
@@ -2098,11 +2204,6 @@ p + p {
           ></video>
 
         </div>
-
-        <p class="video-item__caption">
-          
-        </p>
-
       </div>
 
 
@@ -2112,6 +2213,7 @@ p + p {
 
           <video
             data-image="video[2]"
+            src="video/03.mp4"
             playsinline
             controls
             preload="metadata"
@@ -2119,10 +2221,6 @@ p + p {
           ></video>
 
         </div>
-
-        <p class="video-item__caption">
-          
-        </p>
 
       </div>
 
@@ -2176,6 +2274,7 @@ p + p {
 
           <img
             data-image="people[0]"
+            src="images/people/sergey.jpg"
             alt="Сергей Гарин — Ecstatic Dance DJ"
             loading="lazy"
             decoding="async"
@@ -2206,6 +2305,7 @@ p + p {
 
           <img
             data-image="people[1]"
+            src="images/people/veronica.jpg"
             alt="Вероника — проводник практики"
             loading="lazy"
             decoding="async"
@@ -2310,6 +2410,7 @@ p + p {
 
       <a
         href="https://cbiletom.ru/poster/index.php?id=369500"
+        data-ticket-link
         target="_blank"
         rel="noopener noreferrer"
         class="btn"
@@ -2484,14 +2585,10 @@ p + p {
         <div class="faq__q">
           Что мне надеть на Ecstatic Dance?
         </div>
+
+	<p class="faq__a">
 		Удобную одежду, не сковывающая движений. В зале будет тепло, а в танце даже жарко - легкие ткани и максимальный комфорт.
 		Танцуем мы босиком или в носках - сменная обувь не нужна.
-        <p class="faq__a">
-
-          <span class="ph">
-            
-          </span>
-
           <br>
 
           Базовый принцип — одежда, в которой удобно свободно двигаться.
@@ -2506,8 +2603,6 @@ p + p {
       </div>
 
     </div>
-
-  </div>
 
   <canvas
     class="osc"
@@ -2562,6 +2657,7 @@ p + p {
 
       <a
         href="https://cbiletom.ru/poster/index.php?id=369500"
+        data-ticket-link
         target="_blank"
         rel="noopener noreferrer"
         class="btn"
@@ -2751,6 +2847,7 @@ p + p {
 
   <a
     href="https://cbiletom.ru/poster/index.php?id=369500"
+    data-ticket-link
     target="_blank"
     rel="noopener noreferrer"
   >
@@ -2768,11 +2865,11 @@ p + p {
    ============================================================ */
 
 const EVENT = {
-  iso: null,
-  dateLabel: null,
-  timeLabel: null,
-  fallbackLabel: 'Дата и время уточняется', 
-  title: 'Экстатик / ESO Tango',
+  iso: '2026-10-24T15:00:00+03:00',
+  dateLabel: '24 октября 2026',
+  timeLabel: '15:00',
+  fallbackLabel: 'Дата и время уточняется',
+  title: 'Экстатик Денс — Нижний Новгород',
   venue: 'Большая Печёрская улица, 55/9',
   city: 'Нижний Новгород',
   age: '18+',
@@ -2813,6 +2910,10 @@ function parseDate(value) {
     : date;
 }
 
+
+/* Таймзона события — Нижний Новгород = Москва (UTC+3) */
+const EVENT_TIMEZONE = 'Europe/Moscow';
+
 function formatRuDate(iso) {
 
   const date = parseDate(iso);
@@ -2821,7 +2922,24 @@ function formatRuDate(iso) {
     return null;
   }
 
-  return `${date.getDate()} ${MONTHS_NOM[date.getMonth()]} ${date.getFullYear()}`;
+  const parts = new Intl.DateTimeFormat('ru-RU', {
+    timeZone: EVENT_TIMEZONE,
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric'
+  }).formatToParts(date);
+
+  const get = (type) => parts.find(p => p.type === type)?.value;
+
+  const day = get('day');
+  const monthIdx = parseInt(get('month'), 10) - 1;
+  const year = get('year');
+
+  if (!day || Number.isNaN(monthIdx) || !year) {
+    return null;
+  }
+
+  return `${day} ${MONTHS_NOM[monthIdx]} ${year}`;
 }
 
 function formatTime(iso) {
@@ -2832,12 +2950,13 @@ function formatTime(iso) {
     return null;
   }
 
-  const hours = String(date.getHours()).padStart(2, '0');
-  const minutes = String(date.getMinutes()).padStart(2, '0');
-
-  return `${hours}:${minutes}`;
+  return new Intl.DateTimeFormat('ru-RU', {
+    timeZone: EVENT_TIMEZONE,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(date);
 }
-
 
 /* ============================================================
    ДАННЫЕ СОБЫТИЯ — ОТРИСОВКА В DOM
@@ -2862,7 +2981,7 @@ function applyEventData() {
       element.classList.toggle('ph', !hasDate);
 
       /* если даты нет — прячем весь блок «Дата» */
-      const item = element.closest('.hero__event__item, .info-list__row');
+      const item = element.closest('.hero__event__item, .info-list__row, .cta__when');
       if (item) item.style.display = hasDate ? '' : 'none';
 
     });
@@ -2873,7 +2992,7 @@ function applyEventData() {
       element.classList.toggle('ph', !hasTime);
 
       /* если времени нет — прячем весь блок «Время» */
-      const item = element.closest('.hero__event__item, .info-list__row');
+      const item = element.closest('.hero__event__item, .info-list__row, .cta__when');
       if (item) item.style.display = hasTime ? '' : 'none';
 
     });
@@ -2895,12 +3014,12 @@ function applyEventData() {
       if (label) label.style.display = 'none';
 
       /* прячем весь блок «Время», чтобы не дублировать */
-      const parent = element.closest('.hero__event__item, .info-list__row');
+      const parent = element.closest('.hero__event__item, .info-list__row, .cta__when');
       if (parent) parent.style.display = '';
     });
 
     timeEls.forEach((element) => {
-      const item = element.closest('.hero__event__item, .info-list__row');
+      const item = element.closest('.hero__event__item, .info-list__row, .cta__when');
       if (item) item.style.display = 'none';
     });
 
@@ -3138,11 +3257,9 @@ startCountdown();
 
 
 /* ============================================================
-   ЗАГРУЗКА ДАННЫХ СОБЫТИЯ
-
-   Приоритет источников:
-     1) event.json         — локальный кэш
-     2) Netlify Function   — прокси к cbiletom.ru (обходит CORS)
+   ЗАГРУЗКА ДАТЫ и Времени СОБЫТИЯ
+   из 
+     event.json         — локальный кэш
    ============================================================ */
 
 const EVENT_SOURCES = [
@@ -3487,7 +3604,7 @@ function renderGalleryFromData() {
     const response = await fetch(
       'data/images.json',
       {
-        cache: 'no-store'
+        cache: 'default'
       }
     );
 
@@ -3754,6 +3871,17 @@ resizeAll();
 let startTime =
   performance.now();
 
+const reducedMotion =
+  window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+
+if (reducedMotion.matches) {
+  oscItems.forEach((item) => {
+    item.visible = false;
+  });
+}
+
 
 function draw(now) {
 
@@ -3890,7 +4018,9 @@ function draw(now) {
 }
 
 
-requestAnimationFrame(draw);
+if (!reducedMotion.matches) {
+  requestAnimationFrame(draw);
+}
 
 
 /* ============================================================
@@ -3952,25 +4082,6 @@ if ('IntersectionObserver' in window) {
 }
 
 
-/* ============================================================
-   УЧЁТ REDUCED MOTION
-   ============================================================ */
-
-const reducedMotion =
-  window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  );
-
-
-if (reducedMotion.matches) {
-
-  oscItems.forEach((item) => {
-
-    item.visible = false;
-
-  });
-
-}
 </script>
 
 </body>
