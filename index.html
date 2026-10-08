@@ -347,14 +347,14 @@ p + p {
   transition:
     background .7s var(--ease),
     border-color .7s var(--ease),
-    letter-spacing .7s var(--ease);
+    transform .5s var(--ease);
 }
 
 .btn:hover {
   /* fallback для color-mix() */
   background: rgba(128,128,128,.15);
   background: color-mix(in srgb, currentColor 16%, transparent);
-  letter-spacing: .28em;
+  transform: translateY(-2px);
 }
 
 /* ============================================================
