@@ -395,13 +395,22 @@ p + p {
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 1;
   background:
+    /* вертикальный градиент: тёмный низ, полупрозрачный верх */
+    linear-gradient(
+      180deg,
+      rgba(26,26,46,.35) 0%,
+      rgba(26,26,46,.15) 35%,
+      rgba(26,26,46,.55) 75%,
+      rgba(26,26,46,.88) 100%
+    ),
+    /* диагональный цветовой акцент поверх фото */
     linear-gradient(
       135deg,
-      rgba(85,107,47,.78) 0%,
-      rgba(44,62,80,.72) 50%,
-      rgba(26,26,46,.9) 100%
+      rgba(85,107,47,.45) 0%,
+      rgba(44,62,80,.35) 50%,
+      rgba(26,26,46,.55) 100%
     );
   pointer-events: none;
 }
@@ -2080,6 +2089,13 @@ p + p {
 
   </div>
 
+  <canvas
+    class="osc"
+    data-type="peaks"
+    data-color="#FFFFFF"
+    aria-hidden="true"
+  ></canvas>
+
 </section>
 
 
@@ -2212,6 +2228,12 @@ p + p {
 
   </div>
 
+ <canvas
+    class="osc"
+    data-type="sine"
+    data-color="#FFFFFF"
+    aria-hidden="true"
+  ></canvas>
 </section>
 
 
@@ -2306,7 +2328,12 @@ p + p {
     </p>
 
   </div>
-
+  <canvas
+    class="osc"
+    data-type="peaks"
+    data-color="#FFF0D0"
+    aria-hidden="true"
+  ></canvas>
 </section>
 
 
@@ -2462,7 +2489,12 @@ p + p {
     </div>
 
   </div>
-
+  <canvas
+    class="osc"
+    data-type="flat"
+    data-color="#FFFFFF"
+    aria-hidden="true"
+  ></canvas>
 </section>
 
 
@@ -2749,7 +2781,12 @@ p + p {
 
     </div>
   </div>
-
+ <canvas
+    class="osc"
+    data-type="flat"
+    data-color="#FFFFFF"
+    aria-hidden="true"
+  ></canvas>
 </section>
 
 
