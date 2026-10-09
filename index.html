@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+ <!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=113587851', 'ym');
+
+    ym(113587851, 'init', {
+        clickmap: true,
+        webvisor: true,
+        accurateTrackBounce: true,
+        trackLinks: true
+    });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/113587851" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -3056,6 +3075,23 @@ p + p {
 
 <script>
 'use strict';
+// Отслеживание кликов по кнопкам "Купить билет"
+document.addEventListener('click', function (event) {
+
+    // Ищем ближайший <a> с атрибутом data-ticket-link
+    // (этот атрибут уже стоит на всех трёх кнопках в вашем index.html)
+    const ticketLink = event.target.closest('a[data-ticket-link]');
+
+    if (!ticketLink) {
+        return;
+    }
+
+    // Проверяем, что Метрика загрузилась
+    if (typeof ym === 'function') {
+        ym(113587851, 'reachGoal', 'ticket_click');
+        console.log('[metrika] Цель ticket_click отправлена');
+    }
+});
 
 /* ============================================================
    ОТЛАДКА
