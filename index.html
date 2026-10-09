@@ -3458,39 +3458,6 @@ function applyFromData(data) {
   startCountdown();
 }
 
-  /* --- Резервный путь: date + time (в т.ч. если start невалиден) --- */
-  if (!usedStart) {
-
-    if (data.date) {
-      EVENT.dateLabel = String(data.date).trim();
-    }
-
-    if (data.time) {
-      EVENT.timeLabel = String(data.time).trim();
-    }
-
-    const iso = buildIsoFromLabels(
-      EVENT.dateLabel,
-      EVENT.timeLabel
-    );
-
-    if (iso) {
-      EVENT.iso = iso;
-    }
-
-  }
-
-  if (data.title)      { EVENT.title     = String(data.title); }
-  if (data.venue)      { EVENT.venue     = String(data.venue); }
-  if (data.city)       { EVENT.city      = String(data.city);  }
-  if (data.age)        { EVENT.age       = String(data.age);   }
-  if (data.ticket_url) { EVENT.ticketUrl = String(data.ticket_url); }
-
-  applyEventData();
-  startCountdown();
-}
-
-
 /* ------------------------------------------------------------
    Сборка ISO из строк вида "24 октября 2026" + "16:00"
    ------------------------------------------------------------ */
