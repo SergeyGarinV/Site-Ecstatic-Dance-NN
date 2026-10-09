@@ -23,6 +23,12 @@
     "images/stages/peak.jpg",
     "images/stages/integration.jpg"
   ],
+  "begin":[
+    "images/begin/01.img",
+    "images/begin/02.img",
+    "images/begin/03.img",
+    "images/begin/04.img"
+  ],
   "video":[
     "video/01.mp4",
     "video/02.mp4",
