@@ -667,7 +667,94 @@ p + p {
 .how__lead {
   opacity: .9;
 }
+/* ============================================================
+   ЧЕТЫРЕ КРУГА: ЭТАПЫ НАЧАЛА
+   ============================================================ */
 
+.begin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 44px 36px;
+  max-width: 600px;
+  margin: 56px auto 0;
+}
+
+.begin-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.begin-circle {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+
+  /* fallback для color-mix() */
+  border: 1px solid rgba(255,255,255,.18);
+  border: 1px solid color-mix(in srgb, currentColor 18%, transparent);
+
+  box-shadow: 0 24px 50px -24px rgba(0,0,0,.55);
+  background: rgba(0,0,0,.2);
+}
+
+.begin-circle img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(.9);
+  transition:
+    transform 1.4s var(--ease),
+    filter 1.4s var(--ease);
+}
+
+.begin-circle:hover img {
+  transform: scale(1.05);
+  filter: saturate(1);
+}
+
+.begin-caption {
+  margin-top: 20px;
+  font-family: var(--font-head);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  opacity: .9;
+}
+
+.begin-caption__num {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .3em;
+  opacity: .55;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 640px) {
+
+  .begin-grid {
+    gap: 28px 18px;
+    margin-top: 44px;
+  }
+
+  .begin-caption {
+    margin-top: 14px;
+    font-size: 10.5px;
+    letter-spacing: .16em;
+  }
+
+  .begin-caption__num {
+    font-size: 9px;
+    margin-bottom: 4px;
+  }
+
+}
 /* ============================================================
    ЧТО ЗАБРАТЬ
    ============================================================ */
@@ -1707,31 +1794,119 @@ p + p {
 
   <div class="container">
 
-    <h2 class="title-en reveal">
-      От первого движения до тишины
-    </h2>
+<div class="container">
 
-    <div class="rule reveal"></div>
+  <h2 class="title-en reveal">
+    От первого движения до тишины
+  </h2>
 
-    <div class="how__body reveal reveal-d1">
+  <div class="rule reveal"></div>
 
-      <p class="how__lead">
-        Музыка постепенно меняется: от спокойного начала — к ритму
-        и более свободному движению, затем к пику и постепенному замедлению.
-      </p>
+  <!-- НОВЫЙ БЛОК: 4 круга этапов начала -->
+  <div class="begin-grid reveal reveal-d1">
 
-      <p>
-        Не нужно заранее знать, что делать. Тебя ведёт музыка,
-        а тело постепенно находит своё движение.
-      </p>
+    <div class="begin-item">
 
-      <p>
-        Четыре этапа сменяют друг друга: органика, движение, пик, интеграция.
-      </p>
+      <div class="begin-circle">
+        <img
+          data-image="begin[0]"
+          src="images/begin/01.img"
+          alt="Чай и знакомство"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+
+      <div class="begin-caption">
+        <span class="begin-caption__num">01</span>
+        Чай и Знакомство
+      </div>
+
+    </div>
+
+
+    <div class="begin-item">
+
+      <div class="begin-circle">
+        <img
+          data-image="begin[1]"
+          src="images/begin/02.img"
+          alt="Разминка"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+
+      <div class="begin-caption">
+        <span class="begin-caption__num">02</span>
+        Разминка
+      </div>
+
+    </div>
+
+
+    <div class="begin-item">
+
+      <div class="begin-circle">
+        <img
+          data-image="begin[2]"
+          src="images/begin/03.img"
+          alt="Свободный танец"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+
+      <div class="begin-caption">
+        <span class="begin-caption__num">03</span>
+        Свободный танец
+      </div>
+
+    </div>
+
+
+    <div class="begin-item">
+
+      <div class="begin-circle">
+        <img
+          data-image="begin[3]"
+          src="images/begin/04.img"
+          alt="Саудхилинг"
+          loading="lazy"
+          decoding="async"
+        >
+      </div>
+
+      <div class="begin-caption">
+        <span class="begin-caption__num">04</span>
+        Саудхилинг
+      </div>
 
     </div>
 
   </div>
+
+  <!-- Основной текст секции — оставляем как есть,
+       только меняем класс задержки: d1 → d2 -->
+  <div class="how__body reveal reveal-d2">
+
+    <p class="how__lead">
+      Музыка постепенно меняется: от спокойного начала — к ритму
+      и более свободному движению, затем к пику и постепенному замедлению.
+    </p>
+
+    <p>
+      Не нужно заранее знать, что делать. Тебя ведёт музыка,
+      а тело постепенно находит своё движение.
+    </p>
+
+    <p>
+      Четыре этапа сменяют друг друга: органика, движение, пик, интеграция.
+    </p>
+
+  </div>
+
+</div>
 
   <canvas
     class="osc"
