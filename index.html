@@ -1661,19 +1661,16 @@ p + p {
       Свобода движения. Глубина присутствия.
     </p>
 
-    <div class="hero__event reveal reveal-d3">
-
-      <span class="hero__event__item">
-        <span class="hero__event__label">Дата</span>
-        <span data-event="date">24 октября 2026</span>
-      </span>
-
-      <span class="hero__event__item">
-        <span class="hero__event__label">Время</span>
-        <span data-event="time">15:00</span>
-      </span>
-
-    </div>
+<div class="hero__event reveal reveal-d3">
+  <span class="hero__event__item">
+    <span class="hero__event__label">Дата</span>
+    <span data-event="date"></span>
+  </span>
+  <span class="hero__event__item">
+    <span class="hero__event__label">Время</span>
+    <span data-event="time"></span>
+  </span>
+</div>
 
     <div
       class="countdown reveal reveal-d3"
@@ -2611,32 +2608,17 @@ p + p {
     <div class="info-list reveal reveal-d2">
 
       <div class="info-list__row">
-
-        <div class="info-list__label">
-          Дата
-        </div>
-
-        <div class="info-list__value">
-          <span data-event="date">
-            24 октября 2026
-          </span>
-        </div>
-
-      </div>
-
-      <div class="info-list__row">
-
-        <div class="info-list__label">
-          Время
-        </div>
-
-        <div class="info-list__value">
-          <span data-event="time">
-            15:00
-          </span>
-        </div>
-
-      </div>
+  <div class="info-list__label">Дата</div>
+  <div class="info-list__value">
+    <span data-event="date"></span>
+  </div>
+</div>
+<div class="info-list__row">
+  <div class="info-list__label">Время</div>
+  <div class="info-list__value">
+    <span data-event="time"></span>
+  </div>
+</div>
 
     </div>
 
@@ -2864,19 +2846,11 @@ p + p {
 
     </div>
 
-    <div class="cta__when reveal reveal-d2">
-
-      <span data-event="date">
-        24 октября 2026
-      </span>
-
-      <span class="cta__when-sep" aria-hidden="true">·</span>
-
-      <span data-event="time">
-        15:00
-      </span>
-
-    </div>
+   <div class="cta__when reveal reveal-d2">
+  <span data-event="date"></span>
+  <span class="cta__when-sep" aria-hidden="true">·</span>
+  <span data-event="time"></span>
+</div>
 
     <div class="reveal reveal-d3">
 
@@ -3211,55 +3185,57 @@ function applyEventData() {
   const hasDate = Boolean(EVENT.dateLabel);
   const hasTime = Boolean(EVENT.timeLabel);
 
-  if (hasDate || hasTime) {
+  /* --- Нет данных из event.json: пишем «Дата и время уточняется» --- */
+  if (!hasDate && !hasTime) {
 
     dateEls.forEach((element) => {
 
-      element.textContent = hasDate ? EVENT.dateLabel : '';
-      element.classList.toggle('ph', !hasDate);
-
-      const item = element.closest('.hero__event__item, .info-list__row');
-      if (item) item.style.display = hasDate ? '' : 'none';
-
-    });
-
-    timeEls.forEach((element) => {
-
-      element.textContent = hasTime ? EVENT.timeLabel : '';
-      element.classList.toggle('ph', !hasTime);
-
-      /* Скрываем только конкретный span времени, не весь .cta__when */
-      const item = element.closest('.hero__event__item, .info-list__row');
-      if (item) item.style.display = hasTime ? '' : 'none';
-
-    });
-
-  } else {
-
-    dateEls.forEach((element) => {
       element.textContent = EVENT.fallbackLabel;
       element.classList.remove('ph');
 
+      /* Скрываем подпись «Дата», чтобы не было двух надписей подряд */
       const label = element.parentElement?.querySelector(
         '.hero__event__label, .info-list__label'
       );
       if (label) label.style.display = 'none';
 
-      const parent = element.closest('.hero__event__item, .info-list__row');
-      if (parent) parent.style.display = '';
+      /* Сам блок с датой показываем */
+      const row = element.closest('.hero__event__item, .info-list__row');
+      if (row) row.style.display = '';
     });
 
+    /* Блок с временем полностью скрываем */
     timeEls.forEach((element) => {
-      const item = element.closest('.hero__event__item, .info-list__row');
-      if (item) item.style.display = 'none';
+      const row = element.closest('.hero__event__item, .info-list__row');
+      if (row) row.style.display = 'none';
     });
 
+    applyCtaWhen();
+    return;
   }
 
-  document.querySelectorAll('a[data-ticket-link]').forEach((link) => {
-    if (EVENT.ticketUrl) {
-      link.href = EVENT.ticketUrl;
-    }
+  /* --- Есть данные из event.json: показываем реальные значения --- */
+  dateEls.forEach((element) => {
+
+    element.textContent = hasDate ? EVENT.dateLabel : '';
+    element.classList.toggle('ph', !hasDate);
+
+    const label = element.parentElement?.querySelector(
+      '.hero__event__label, .info-list__label'
+    );
+    if (label) label.style.display = '';
+
+    const row = element.closest('.hero__event__item, .info-list__row');
+    if (row) row.style.display = hasDate ? '' : 'none';
+  });
+
+  timeEls.forEach((element) => {
+
+    element.textContent = hasTime ? EVENT.timeLabel : '';
+    element.classList.toggle('ph', !hasTime);
+
+    const row = element.closest('.hero__event__item, .info-list__row');
+    if (row) row.style.display = hasTime ? '' : 'none';
   });
 
   applyCtaWhen();
@@ -3439,8 +3415,8 @@ function applyFromData(data) {
     return;
   }
 
-  /* --- Основной путь: пришёл ISO-старт --- */
-  let usedStart = false;
+  /* --- Источник 1: start (ISO). От него пляшем по умолчанию. --- */
+  let gotFromStart = false;
 
   if (data.start) {
 
@@ -3449,25 +3425,38 @@ function applyFromData(data) {
     if (parsed) {
 
       EVENT.iso = data.start;
-
-      EVENT.dateLabel =
-        formatRuDate(data.start) || EVENT.dateLabel;
-
-      EVENT.timeLabel =
-        formatTime(data.start) || EVENT.timeLabel;
-
-      usedStart = true;
+      EVENT.dateLabel = formatRuDate(data.start);
+      EVENT.timeLabel = formatTime(data.start);
+      gotFromStart = true;
 
     } else {
 
-      debugWarn(
-        '[event] Невалидный ISO в поле start:',
-        data.start
-      );
+      debugWarn('[event] Невалидный ISO в поле start:', data.start);
 
     }
-
   }
+
+  /* --- Источник 2: date + time как строки (если start не сработал) --- */
+  if (!gotFromStart) {
+
+    if (data.date) EVENT.dateLabel = String(data.date).trim();
+    if (data.time) EVENT.timeLabel = String(data.time).trim();
+
+    /* Пробуем собрать ISO для обратного отсчёта */
+    const iso = buildIsoFromLabels(EVENT.dateLabel, EVENT.timeLabel);
+    if (iso) EVENT.iso = iso;
+  }
+
+  /* --- Остальные поля события --- */
+  if (data.title)      EVENT.title     = String(data.title);
+  if (data.venue)      EVENT.venue     = String(data.venue);
+  if (data.city)       EVENT.city      = String(data.city);
+  if (data.age)        EVENT.age       = String(data.age);
+  if (data.ticket_url) EVENT.ticketUrl = String(data.ticket_url);
+
+  applyEventData();
+  startCountdown();
+}
 
   /* --- Резервный путь: date + time (в т.ч. если start невалиден) --- */
   if (!usedStart) {
