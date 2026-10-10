@@ -1243,12 +1243,14 @@ p + p {
 }
 
 .contact-icons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 34px;
-  margin-top: 50px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(88px, 1fr));
+  gap: 28px;
+  margin: 50px auto 0;
+  max-width: 660px;
+  justify-items: center;
 }
+
 
 .contact-icon {
   display: inline-flex;
