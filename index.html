@@ -1289,7 +1289,15 @@ p + p {
   height: 22px;
   display: block;
 }
-
+/* Boosty и другие иконки без SVG — текстовая буква в круге */
+.contact-icon__circle--text {
+  font-family: var(--font-head);
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: inherit;
+}
 .contact-icon__label {
   font-family: var(--font-head);
   font-size: 10.5px;
@@ -3205,6 +3213,24 @@ p + p {
 
       </a>
 
+
+      <a
+  href="https://boosty.to/djnn"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="contact-icon"
+  aria-label="Boosty — послушать сеты"
+>
+
+  <span class="contact-icon__circle contact-icon__circle--text">
+    B
+  </span>
+
+  <span class="contact-icon__label">
+    Послушать сеты
+  </span>
+
+</a>
     </div>
   </div>
  <canvas
