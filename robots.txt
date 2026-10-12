@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sergeygarinv.github.io/Site-Ecstatic-Dance-NN/sitemap.xml
