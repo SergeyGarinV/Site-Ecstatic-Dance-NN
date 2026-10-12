@@ -1735,7 +1735,7 @@ p + p {
 
     ym(113587851, 'init', {
         clickmap: true,
-        webvisor: true,
+        webvisor: false, <!--  записывает поведение посетителей необходимость cookie-consent-->
         accurateTrackBounce: true,
         trackLinks: true
     });
@@ -4162,8 +4162,19 @@ function renderGalleryFromData() {
   for (const url of SOURCES) {
 
     try {
+      // Тот же timeout-подход, что и у event.json
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 8000);
 
-      const response = await fetch(url, { cache: 'default' });
+      let response;
+      try {
+        response = await fetch(url, {
+          cache: 'default',
+          signal: controller.signal
+        });
+      } finally {
+        clearTimeout(timer);
+      }
 
       if (!response.ok) {
         debugWarn(`[images] ${url}: HTTP ${response.status}`);
