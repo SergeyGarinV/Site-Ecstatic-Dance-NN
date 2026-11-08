@@ -487,6 +487,47 @@ p + p {
 }
 
 /* ============================================================
+   ДЕЙСТВИЯ НА ПЕРВОМ ЭКРАНЕ
+   ============================================================ */
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
+
+.hero__follow {
+  max-width: 390px;
+}
+
+.hero__follow-text {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  opacity: .72;
+}
+
+.hero__follow-link {
+  display: inline-block;
+  color: inherit;
+  font-family: var(--font-head);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: .9;
+  border-bottom: 1px solid rgba(242,237,228,.45);
+  padding-bottom: 4px;
+  transition: opacity .3s var(--ease);
+}
+
+.hero__follow-link:hover {
+  opacity: 1;
+}
+
+/* ============================================================
    ОСЦИЛЛОГРАММА
    ============================================================ */
 
@@ -510,7 +551,7 @@ p + p {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 160px 0 180px;
+  padding: 160px 0 240px;
   background:
     linear-gradient(
       135deg,
@@ -1660,12 +1701,12 @@ p + p {
   }
 
   .hero {
-    padding: 130px 0 150px;
+    padding: 130px 0 190px;
     min-height: auto;
   }
 
   .osc {
-    height: 100px;
+    height: 80px;
   }
 
   .info-list__label {
@@ -2126,7 +2167,6 @@ p + p {
 
 
 <!-- Таймер до повышения цены -->
-<!-- Таймер до повышения цены -->
 <p class="countdown-heading reveal reveal-d3">
   До повышения цены
 </p>
@@ -2173,24 +2213,40 @@ p + p {
 <p id="price-timer-status" class="price-timer-status" hidden></p>
 
 
-    <div class="reveal reveal-d3">
-      <a
-        href="https://cbiletom.ru/poster/index.php?id=369500"
-        data-ticket-link
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn"
-      >
-        Купить билет от 1 555 ₽
-      </a>
+   <div class="hero__actions reveal reveal-d3">
 
-      <a href="https://vk.ru/djsergeygarin"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn">
-        Подписаться в VK
-      </a>
+  <!-- Основное действие: покупка билета -->
+  <a
+    href="https://cbiletom.ru/poster/index.php?id=369500"
+    data-ticket-link
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn"
+  >
+    Купить билет
+  </a>
+
+  <!-- Дополнительное действие: анонсы следующих мероприятий -->
+  <div class="hero__follow">
+
+    <p class="hero__follow-text">
+      Хотите узнать о следующем мероприятии?
+      Подписывайтесь на нашу страницу ВКонтакте —
+      там публикуем анонсы новых встреч.
+    </p>
+
+    <a
+      href="https://vk.ru/djsergeygarin"
+      class="hero__follow-link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Следить за анонсами в VK →
+    </a>
+
   </div>
+
+</div>
 
   <canvas
     class="osc"
