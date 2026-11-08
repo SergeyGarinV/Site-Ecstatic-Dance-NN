@@ -7,5 +7,11 @@
   "venue": "Большая Печёрская улица, 55/9",
   "city": "Нижний Новгород",
   "age": "18+",
-  "ticket_url": "https://cbiletom.ru/poster/index.php?id=369500"
+  "ticket_url": "https://cbiletom.ru/poster/index.php?id=369500",
+
+"pricing": {
+  "currentPrice": 1555,
+  "nextPrice": 1993,
+  "priceIncreaseAt": "2026-11-21T00:00:00+03:00"
+}
 }

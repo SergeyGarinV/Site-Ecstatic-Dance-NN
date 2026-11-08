@@ -385,6 +385,41 @@ section {
   opacity: 1;
   border-color: currentColor;
 }
+/* Кнопка мобильного меню — скрыта на компьютере */
+
+.nav__toggle {
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,.3);
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav__toggle span {
+  display: block;
+  width: 20px;
+  height: 1px;
+  background: #F2EDE4;
+  transition: transform .3s var(--ease), opacity .3s var(--ease);
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
 
 /* ============================================================
    ТИПОГРАФИКА
@@ -554,6 +589,20 @@ p + p {
   margin-bottom: 40px;
 }
 
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .hero__actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .hero__lead {
   font-family: var(--font-head);
   font-weight: 300;
@@ -645,7 +694,57 @@ p + p {
 .countdown--empty {
   display: none;
 }
+/* Таймер повышения цены */
 
+.countdown-heading {
+  font-family: var(--font-head);
+  font-size: 12px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  opacity: .75;
+  margin-bottom: 18px;
+}
+
+.price-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin: -12px 0 30px;
+}
+
+.price-info div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.price-info span {
+  font-family: var(--font-head);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  opacity: .6;
+}
+
+.price-info strong {
+  font-family: var(--font-head);
+  font-size: 19px;
+  font-weight: 400;
+}
+
+.price-timer-status {
+  font-family: var(--font-head);
+  font-size: 14px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin: 0 0 28px;
+}
+
+@media (max-width: 480px) {
+  .price-info {
+    gap: 16px 22px;
+  }
+}
 /* ============================================================
    SCROLL HINT
    ============================================================ */
@@ -1615,16 +1714,49 @@ p + p {
   }
 
   .nav__inner {
-    padding: 12px 20px;
-  }
+  padding: 10px 20px;
+}
 
-  .nav__links {
-    gap: 16px;
-  }
+.nav__toggle {
+  display: flex;
+  flex-shrink: 0;
+}
 
-  .nav__links a {
-    font-size: 10px;
-  }
+.nav__links {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  flex-direction: column;
+  gap: 0;
+
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+
+  padding: 8px 20px 16px;
+
+  background: rgba(26,26,46,.97);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.nav__links.is-open {
+  display: flex;
+}
+
+.nav__links a {
+  font-size: 11px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+
+.nav__links a:last-child {
+  border-bottom: none;
+}
 
   .contact-icons {
     gap: 22px;
@@ -1836,6 +1968,51 @@ p + p {
 
 }
 
+/* Таймер до повышения цены */
+.price-timer {
+    text-align: center;
+    margin: 24px auto;
+    max-width: 500px;
+}
+
+.price-timer h3 {
+    margin-bottom: 14px;
+}
+
+.price-timer__countdown {
+    font-size: clamp(20px, 4vw, 30px);
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.price-timer__prices {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.price-timer__prices div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.price-timer__prices span {
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+.price-timer__prices strong {
+    font-size: 20px;
+}
+
+@media (max-width: 480px) {
+    .price-timer__prices {
+        gap: 20px;
+    }
+}
+
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -1865,13 +2042,28 @@ p + p {
      ============================================================ -->
 
 <nav class="nav" aria-label="Основная навигация">
+
   <div class="nav__inner">
 
     <a href="#top" class="nav__brand">
       Экстатик Денс
     </a>
 
-    <div class="nav__links">
+    <button
+      class="nav__toggle"
+      id="navToggle"
+      type="button"
+      aria-label="Открыть меню"
+      aria-expanded="false"
+      aria-controls="navLinks"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav__links" id="navLinks">
+
       <a href="#about">О практике</a>
       <a href="#how">Как проходит</a>
       <a href="#why">Зачем приходить</a>
@@ -1879,11 +2071,12 @@ p + p {
       <a href="#voices">Отзывы</a>
       <a href="#faq">FAQ</a>
       <a href="#join">Твой билет</a>
+
     </div>
 
   </div>
-</nav>
 
+</nav>
 
 <!-- ============================================================
      1. ПЕРВЫЙ ЭКРАН
@@ -1911,12 +2104,13 @@ p + p {
   <!--  <div class="hero__subtitle reveal reveal-d1">Нижний Новгород </div> -->
 
     <p class="hero__lead reveal reveal-d1">
-      Свободный танец без хореографии
+      Два часа музыки и свободного движения, чтобы выдохнуть, почувствовать себя и насладится собой.
     </p>
 
     <p class="hero__text reveal reveal-d2">
-      Пространство, где тело говорит на языке танца.<br>
-      Свобода движения. Глубина присутствия.
+      
+Пространство, где тело говорит на языке танца.
+Свобода движения. Глубина присутствия.
     </p>
 
 <div class="hero__event reveal reveal-d3">
@@ -1930,34 +2124,54 @@ p + p {
   </span>
 </div>
 
-    <div
-      class="countdown reveal reveal-d3"
-      id="countdown"
-      aria-label="До события осталось"
-      aria-live="off"
-    >
 
-      <div class="countdown__item">
-        <span class="countdown__num" data-cd="days">—</span>
-        <span class="countdown__label">дней</span>
-      </div>
+<!-- Таймер до повышения цены -->
+<!-- Таймер до повышения цены -->
+<p class="countdown-heading reveal reveal-d3">
+  До повышения цены
+</p>
 
-      <div class="countdown__item">
-        <span class="countdown__num" data-cd="hours">—</span>
-        <span class="countdown__label">часов</span>
-      </div>
+<div
+  class="countdown reveal reveal-d3"
+  id="countdown"
+  aria-label="До повышения цены"
+  aria-live="off"
+>
+  <div class="countdown__item">
+    <span class="countdown__num" data-cd="days">—</span>
+    <span class="countdown__label">дней</span>
+  </div>
 
-      <div class="countdown__item">
-        <span class="countdown__num" data-cd="mins">—</span>
-        <span class="countdown__label">минут</span>
-      </div>
+  <div class="countdown__item">
+    <span class="countdown__num" data-cd="hours">—</span>
+    <span class="countdown__label">часов</span>
+  </div>
 
-      <div class="countdown__item">
-        <span class="countdown__num" data-cd="secs">—</span>
-        <span class="countdown__label">секунд</span>
-      </div>
+  <div class="countdown__item">
+    <span class="countdown__num" data-cd="mins">—</span>
+    <span class="countdown__label">минут</span>
+  </div>
 
-    </div>
+  <div class="countdown__item">
+    <span class="countdown__num" data-cd="secs">—</span>
+    <span class="countdown__label">секунд</span>
+  </div>
+</div>
+
+<div class="price-info reveal reveal-d3">
+  <div>
+    <span>Сейчас</span>
+    <strong id="price-current">1 555 ₽</strong>
+  </div>
+
+  <div>
+    <span>После повышения</span>
+    <strong id="price-next">1 993 ₽</strong>
+  </div>
+</div>
+
+<p id="price-timer-status" class="price-timer-status" hidden></p>
+
 
     <div class="reveal reveal-d3">
       <a
@@ -1967,9 +2181,17 @@ p + p {
         rel="noopener noreferrer"
         class="btn"
       >
-        Купить билет
+        Купить билет от 1 555 ₽
       </a>
     </div>
+    <div class="reveal reveal-d3">
+<a href="https://vk.ru/djsergeygarin"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="btn"
+  Подписаться в VK
+</a>
+</div>
 
   </div>
 
@@ -1986,6 +2208,39 @@ p + p {
 
 </section>
 
+<!-- ============================================================
+     1.2. ТРИ ЭКРАНА
+     ============================================================ -->
+<section class="situations">
+  <h2>Возможно, тебе знакомо...</h2>
+
+  <div class="situations-grid">
+    <article>
+      <h3>Хочется переключиться после работы</h3>
+      <p>
+        Отложить задачи и постоянные мысли, выдохнуть
+        и провести время в музыке и движении.
+      </p>
+    </article>
+
+    <article>
+      <h3>Хочется побыть среди людей без обязательств</h3>
+      <p>
+        Почувствовать себя частью пространства,
+        не заставляя себя знакомиться, разговаривать
+        или взаимодействовать.
+      </p>
+    </article>
+
+    <article>
+      <h3>Хочется больше свободы в движении</h3>
+      <p>
+        Отпустить привычные движения, попробовать
+        что-то новое и посмотреть, как тело откликается музыке.
+      </p>
+    </article>
+  </div>
+</section>
 
 <!-- ============================================================
      2. О ПРАКТИКЕ
@@ -2018,7 +2273,7 @@ p + p {
             как чувствуешь.
           </p>
 
-          <p>
+          <p class="stage__poem">
             Можно танцевать активно.<br>
             Можно замедлиться.<br>
             Можно закрыть глаза.<br>
@@ -2089,21 +2344,57 @@ p + p {
   <div class="how__layout">
 
     <!-- Текст секции -->
-    <div class="how__body reveal reveal-d1">
+       
+        <div class="how__body reveal reveal-d1">
+            <h3>Знакомимся и создаём пространство для танца</h3>
+            <p>
+                Встречаемся, знакомимся с пространством и принципами практики.
+                Я рассказываю о правилах, которые помогают каждому
+                чувствовать себя спокойно и свободно.
+            </p>
+        </div>
 
-      <p class="how__lead">
-        Музыка постепенно меняется: от спокойного начала — к ритму
-        и более свободному движению, затем к пику и постепенному замедлению.
-      </p>
+        <div class="how__body reveal reveal-d1">
+            <h3>Настраиваемся на движение</h3>
+            <p>
+                Начинаем с небольшого погружения в свои ощущения:
+                обращаем внимание на дыхание и тело,
+                постепенно переключаемся на музыку.
+            </p>
+        </div>
 
-      <p>
-        Не нужно заранее знать, что делать. Тебя ведёт музыка,
-        а тело постепенно находит своё движение.
-      </p>
+        <div class="how__body reveal reveal-d1">
+            <h3>Отпускаем привычные движения</h3>
+            <p>
+                Музыка становится ритмичнее и энергичнее.
+                Начинается свободный танец.
+            </p>
+            <p>
+                Здесь нет хореографии и правильных движений.
+                Можно плавно двигаться, экспериментировать,
+                активно включаться в ритм или просто слушать музыку.
+                Можно остановиться, отдохнуть и вернуться в танец,
+                когда захочется.
+            </p>
+        </div>
 
-      <p>
-        Четыре этапа сменяют друг друга: органика, движение, пик, интеграция.
-      </p>
+        <div class="how__body reveal reveal-d1">
+            <h3>Мягко завершаем</h3>
+            <p>
+                Постепенно замедляемся, отдыхаем, остаёмся в тишине
+                и слушаем живые инструменты.
+            </p>
+            <p>
+                А после практики можно остаться на чай,
+                познакомиться с другими участниками
+                и поделиться впечатлениями.
+            </p>
+        </div>
+
+        <p class="how__body reveal reveal-d1">
+            Не нужно заранее знать, что ты должен почувствовать
+            или как должен двигаться. Достаточно прийти и попробовать.
+        </p>
 
     </div>
 
@@ -2144,7 +2435,7 @@ p + p {
 
         <div class="begin-caption">
           <span class="begin-caption__num">02</span>
-          Разминка
+          Настройка
         </div>
 
       </div>
@@ -2184,7 +2475,7 @@ p + p {
 
         <div class="begin-caption">
           <span class="begin-caption__num">04</span>
-          Саудхилинг
+          Завершение
         </div>
 
       </div>
@@ -2221,7 +2512,7 @@ p + p {
       <div class="stage__text">
 
         <h2 class="title-en reveal">
-          Органика
+          Знакомимся и создаём пространство для танца
         </h2>
 
         <div class="rule reveal"></div>
@@ -2288,7 +2579,7 @@ p + p {
       <div class="stage__text">
 
         <h2 class="title-en reveal">
-          Движение
+          Настраиваемся на движение
         </h2>
 
         <div class="rule reveal"></div>
@@ -2358,7 +2649,7 @@ p + p {
       <div class="stage__text">
 
         <h2 class="title-en reveal">
-          Пик
+          Отпускаем привычные движения
         </h2>
 
         <div class="rule reveal"></div>
@@ -2428,7 +2719,7 @@ p + p {
       <div class="stage__text">
 
         <h2 class="title-en reveal">
-          Интеграция
+          Мягко завершаем
         </h2>
 
         <div class="rule reveal"></div>
@@ -2792,6 +3083,9 @@ p + p {
           Создаёт музыкальное путешествие:
       от спокойного начала через ритм и движение
       к пику и постепенному завершению.
+
+      В своей музыке я люблю глубину, атмосферу, живой пульс и контрасты. 
+      Особенно меня вдохновляет момент, когда пространство наполняется радостью, теплом и ощущением близости между людьми.
 
         </p>
 
@@ -3756,22 +4050,33 @@ function stopCountdown() {
 function startCountdown() {
 
   const root = document.getElementById('countdown');
+  const status = document.getElementById('price-timer-status');
 
-  if (!root) {
+  const currentPriceElement = document.getElementById('price-current');
+  const nextPriceElement = document.getElementById('price-next');
+
+  const heroButton = document.getElementById('hero-ticket-button');
+
+  if (!root || !EVENT.pricing) {
     return;
   }
 
   stopCountdown();
 
-  if (!EVENT.iso) {
-    root.classList.add('countdown--empty');
-    return;
-  }
+  const pricing = EVENT.pricing;
+  const target = parseDate(pricing.priceIncreaseAt)?.getTime();
 
-  const target = parseDate(EVENT.iso)?.getTime();
+  const formatPrice = (price) =>
+    new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
 
   if (!Number.isFinite(target)) {
     root.classList.add('countdown--empty');
+
+    if (status) {
+      status.hidden = false;
+      status.textContent = 'Дата повышения цены уточняется';
+    }
+
     return;
   }
 
@@ -3782,60 +4087,69 @@ function startCountdown() {
     secs: root.querySelector('[data-cd="secs"]')
   };
 
-  if (
-    !fields.days ||
-    !fields.hours ||
-    !fields.mins ||
-    !fields.secs
-  ) {
-    root.classList.add('countdown--empty');
-    return;
-  }
-
-  root.classList.remove('countdown--empty');
-
-  const pad = (value, length = 2) =>
-    String(value).padStart(length, '0');
-
-
   function tick() {
 
     const diff = target - Date.now();
 
+    // Срок повышения цены наступил
     if (diff <= 0) {
 
-      fields.days.textContent = '00';
-      fields.hours.textContent = '00';
-      fields.mins.textContent = '00';
-      fields.secs.textContent = '00';
+      root.classList.add('countdown--empty');
+
+      if (status) {
+        status.hidden = false;
+        status.textContent = 'Цена повышена';
+      }
+
+      if (currentPriceElement) {
+        currentPriceElement.textContent =
+          formatPrice(pricing.nextPrice);
+      }
+
+      if (nextPriceElement) {
+        nextPriceElement.parentElement.hidden = true;
+      }
+
+      if (heroButton) {
+        heroButton.textContent =
+          'Купить билет от ' + formatPrice(pricing.nextPrice);
+      }
 
       stopCountdown();
-
       return;
     }
 
+    root.classList.remove('countdown--empty');
+
+    if (status) {
+      status.hidden = true;
+    }
+
     const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
 
-    const hours = Math.floor(
-      (diff % 86400000) / 3600000
-    );
+    fields.days.textContent = String(days).padStart(2, '0');
+    fields.hours.textContent = String(hours).padStart(2, '0');
+    fields.mins.textContent = String(minutes).padStart(2, '0');
+    fields.secs.textContent = String(seconds).padStart(2, '0');
 
-    const minutes = Math.floor(
-      (diff % 3600000) / 60000
-    );
+    if (currentPriceElement) {
+      currentPriceElement.textContent =
+        formatPrice(pricing.currentPrice);
+    }
 
-    const seconds = Math.floor(
-      (diff % 60000) / 1000
-    );
+    if (nextPriceElement) {
+      nextPriceElement.textContent =
+        formatPrice(pricing.nextPrice);
+    }
 
-    fields.days.textContent =
-      pad(days, days >= 100 ? 3 : 2);
-
-    fields.hours.textContent = pad(hours);
-    fields.mins.textContent = pad(minutes);
-    fields.secs.textContent = pad(seconds);
+    if (heroButton) {
+      heroButton.textContent =
+        'Купить билет от ' + formatPrice(pricing.currentPrice);
+    }
   }
-
 
   tick();
 
@@ -3891,6 +4205,9 @@ function applyFromData(data) {
   if (data.city)       EVENT.city      = String(data.city);
   if (data.age)        EVENT.age       = String(data.age);
   if (data.ticket_url) EVENT.ticketUrl = String(data.ticket_url);
+  if (data.pricing && typeof data.pricing === 'object') {
+  EVENT.pricing = data.pricing;
+}
 
   applyEventData();
   startCountdown();
@@ -4777,6 +5094,69 @@ if ('IntersectionObserver' in window) {
 
 }
 
+/* ============================================================
+   МОБИЛЬНОЕ МЕНЮ
+   ============================================================ */
+
+(function initMobileMenu() {
+
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('navLinks');
+
+  if (!toggle || !menu) return;
+
+  function openMenu() {
+    menu.classList.add('is-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Закрыть меню');
+  }
+
+  function closeMenu() {
+    menu.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Открыть меню');
+  }
+
+  toggle.addEventListener('click', function () {
+
+    const isOpen =
+      toggle.getAttribute('aria-expanded') === 'true';
+
+    if (isOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+
+  });
+
+  // Закрываем меню после перехода к разделу
+  menu.querySelectorAll('a').forEach(function (link) {
+
+    link.addEventListener('click', closeMenu);
+
+  });
+
+  // Закрываем меню клавишей Escape
+  document.addEventListener('keydown', function (event) {
+
+    if (event.key === 'Escape') {
+      closeMenu();
+    }
+
+  });
+
+  // При переходе на десктоп закрываем мобильное меню
+  window.addEventListener('resize', function () {
+
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+
+  });
+
+})();
+
 // Отслеживание кликов по кнопкам "Купить билет"
 document.addEventListener('click', function (event) {
 
@@ -4794,6 +5174,70 @@ document.addEventListener('click', function (event) {
         console.log('[metrika] Цель ticket_click отправлена');
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', async function () {
+    const timer = document.getElementById('price-timer-countdown');
+    const currentPriceElement = document.getElementById('current-ticket-price');
+    const nextPriceElement = document.getElementById('next-ticket-price');
+
+    if (!timer) return;
+
+    try {
+        const response = await fetch('./event.json');
+
+        if (!response.ok) {
+            throw new Error('Не удалось загрузить event.json');
+        }
+
+        const event = await response.json();
+        const pricing = event.pricing;
+
+        if (!pricing || !pricing.priceIncreaseAt) {
+            throw new Error('Не найдены данные о повышении цены');
+        }
+
+        const increaseDate = new Date(pricing.priceIncreaseAt);
+
+        if (Number.isNaN(increaseDate.getTime())) {
+            throw new Error('Неверная дата повышения цены');
+        }
+
+        const formatPrice = price =>
+            new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
+
+        function updateTimer() {
+            const now = Date.now();
+            const remaining = increaseDate.getTime() - now;
+
+            if (remaining <= 0) {
+                timer.textContent = 'Цена повышена';
+                currentPriceElement.textContent = formatPrice(pricing.nextPrice);
+                nextPriceElement.textContent = '—';
+                return;
+            }
+
+            const days = Math.floor(remaining / 86400000);
+            const hours = Math.floor((remaining % 86400000) / 3600000);
+            const minutes = Math.floor((remaining % 3600000) / 60000);
+            const seconds = Math.floor((remaining % 60000) / 1000);
+
+            timer.textContent =
+                `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
+
+            currentPriceElement.textContent = formatPrice(pricing.currentPrice);
+            nextPriceElement.textContent = formatPrice(pricing.nextPrice);
+        }
+
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+    } catch (error) {
+        console.error('Ошибка таймера:', error);
+        timer.textContent = 'Следите за изменением стоимости билетов';
+    }
+});
+
 
 </script>
 
