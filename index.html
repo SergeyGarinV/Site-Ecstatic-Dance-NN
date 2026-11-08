@@ -2222,11 +2222,11 @@ p + p {
     data-ticket-link
     target="_blank"
     rel="noopener noreferrer"
-    class="btn"
-  >
+     class="btn"
+   >
     Купить билет
-  </a>
-
+   </a>
+   </div>
   <!-- Дополнительное действие: анонсы следующих мероприятий -->
   <div class="hero__follow">
 
@@ -2410,7 +2410,6 @@ p + p {
             или как должен двигаться. Достаточно прийти и попробовать.
         </p>
 
-    </div>
 
     <!-- Сетка кругов -->
     <div class="begin-grid reveal reveal-d2">
@@ -3540,7 +3539,6 @@ p + p {
 
     </div>
 
-  </div>
  <canvas
     class="osc"
     data-type="sine"
@@ -5188,70 +5186,6 @@ document.addEventListener('click', function (event) {
         console.log('[metrika] Цель ticket_click отправлена');
     }
 });
-
-
-document.addEventListener('DOMContentLoaded', async function () {
-    const timer = document.getElementById('price-timer-countdown');
-    const currentPriceElement = document.getElementById('current-ticket-price');
-    const nextPriceElement = document.getElementById('next-ticket-price');
-
-    if (!timer) return;
-
-    try {
-        const response = await fetch('./event.json');
-
-        if (!response.ok) {
-            throw new Error('Не удалось загрузить event.json');
-        }
-
-        const event = await response.json();
-        const pricing = event.pricing;
-
-        if (!pricing || !pricing.priceIncreaseAt) {
-            throw new Error('Не найдены данные о повышении цены');
-        }
-
-        const increaseDate = new Date(pricing.priceIncreaseAt);
-
-        if (Number.isNaN(increaseDate.getTime())) {
-            throw new Error('Неверная дата повышения цены');
-        }
-
-        const formatPrice = price =>
-            new Intl.NumberFormat('ru-RU').format(price) + ' ₽';
-
-        function updateTimer() {
-            const now = Date.now();
-            const remaining = increaseDate.getTime() - now;
-
-            if (remaining <= 0) {
-                timer.textContent = 'Цена повышена';
-                currentPriceElement.textContent = formatPrice(pricing.nextPrice);
-                nextPriceElement.textContent = '—';
-                return;
-            }
-
-            const days = Math.floor(remaining / 86400000);
-            const hours = Math.floor((remaining % 86400000) / 3600000);
-            const minutes = Math.floor((remaining % 3600000) / 60000);
-            const seconds = Math.floor((remaining % 60000) / 1000);
-
-            timer.textContent =
-                `${days} дн. ${hours} ч. ${minutes} мин. ${seconds} сек.`;
-
-            currentPriceElement.textContent = formatPrice(pricing.currentPrice);
-            nextPriceElement.textContent = formatPrice(pricing.nextPrice);
-        }
-
-        updateTimer();
-        setInterval(updateTimer, 1000);
-
-    } catch (error) {
-        console.error('Ошибка таймера:', error);
-        timer.textContent = 'Следите за изменением стоимости билетов';
-    }
-});
-
 
 </script>
 
