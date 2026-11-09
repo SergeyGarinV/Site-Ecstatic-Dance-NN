@@ -2002,51 +2002,6 @@ p + p {
 
 }
 
-/* Таймер до повышения цены */
-.price-timer {
-    text-align: center;
-    margin: 24px auto;
-    max-width: 500px;
-}
-
-.price-timer h3 {
-    margin-bottom: 14px;
-}
-
-.price-timer__countdown {
-    font-size: clamp(20px, 4vw, 30px);
-    font-weight: 700;
-    margin-bottom: 18px;
-}
-
-.price-timer__prices {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.price-timer__prices div {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.price-timer__prices span {
-    font-size: 14px;
-    opacity: 0.75;
-}
-
-.price-timer__prices strong {
-    font-size: 20px;
-}
-
-@media (max-width: 480px) {
-    .price-timer__prices {
-        gap: 20px;
-    }
-}
-
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -2132,39 +2087,36 @@ p + p {
     <h1 class="hero__title reveal">
       Экстатик Денс<br>
       <span class="hero__subtitle reveal reveal-d1">Нижний Новгород</span>
-      <span class="visually-hidden">в Нижнем Новгороде</span>
+      <span class="visually-hidden">свободный танец и практика телесного движения</span>
     </h1>
-
-  <!--  <div class="hero__subtitle reveal reveal-d1">Нижний Новгород </div> -->
 
     <p class="hero__lead reveal reveal-d1">
       Два часа музыки и свободного движения, чтобы выдохнуть, почувствовать себя и насладится собой.
     </p>
 
     <p class="hero__text reveal reveal-d2">
-      
-Пространство, где тело говорит на языке танца.
-Свобода движения. Глубина присутствия.
+      Пространство, где тело говорит на языке танца.
+      Свобода движения. Глубина присутствия.
     </p>
 
-<div class="hero__event reveal reveal-d3">
-  <span class="hero__event__item">
-    <span class="hero__event__label">Дата</span>
-    <span data-event="date"></span>
-  </span>
-  <span class="hero__event__item">
-    <span class="hero__event__label">Время</span>
-    <span data-event="time"></span>
-  </span>
-</div>
+    <div class="hero__event reveal reveal-d3">
+      <span class="hero__event__item">
+        <span class="hero__event__label">Дата</span>
+        <span data-event="date"></span>
+      </span>
+      <span class="hero__event__item">
+        <span class="hero__event__label">Время</span>
+        <span data-event="time"></span>
+      </span>
+    </div>
 
 
-<!-- Таймер до повышения цены -->
-<p class="countdown-heading reveal reveal-d3">
-  До повышения цены
-</p>
+       <!-- Таймер до повышения цены -->
+    <p class="countdown-heading reveal reveal-d3">
+      До повышения цены
+    </p>
 
-<div
+    <div
   class="countdown reveal reveal-d3"
   id="countdown"
   aria-label="До повышения цены"
@@ -2189,9 +2141,9 @@ p + p {
     <span class="countdown__num" data-cd="secs">—</span>
     <span class="countdown__label">секунд</span>
   </div>
-</div>
+    </div>
 
-<div class="price-info reveal reveal-d3">
+    <div class="price-info reveal reveal-d3">
   <div>
     <span>Сейчас</span>
     <strong id="price-current">1 555 ₽</strong>
@@ -2201,12 +2153,12 @@ p + p {
     <span>После повышения</span>
     <strong id="price-next">1 993 ₽</strong>
   </div>
-</div>
+    </div>
 
-<p id="price-timer-status" class="price-timer-status" hidden></p>
+    <p id="price-timer-status" class="price-timer-status" hidden></p>
 
-<!-- Основное действие: покупка билета -->
-<div class="hero__actions reveal reveal-d3">
+    <!-- Основное действие: покупка билета -->
+    <div class="hero__actions reveal reveal-d3">
   <a
     href="https://cbiletom.ru/poster/index.php?id=369500"
     data-ticket-link
@@ -2215,9 +2167,9 @@ p + p {
      class="btn">
     Купить билет
   </a>
-</div>
-  <!-- Дополнительное действие: анонсы следующих мероприятий -->
-  <div class="hero__follow">
+    </div>
+    <!-- Дополнительное действие: анонсы следующих мероприятий -->
+    <div class="hero__follow">
 
     <p class="hero__follow-text">
       Хотите узнать о следующем мероприятии?
@@ -2234,12 +2186,12 @@ p + p {
       Следить за анонсами в VK →
     </a>
 
-  </div>
+    </div>
 
-<div></div>
-  <div class="scroll-hint" aria-hidden="true">
+    <div class="scroll-hint" aria-hidden="true">
     Листайте
-  </div>
+    </div>
+</div>
 
   <canvas
     class="osc"
@@ -2247,6 +2199,8 @@ p + p {
     data-color="#C9E4A8"
     aria-hidden="true"
   ></canvas>
+
+
 </section>
 
 <!-- ============================================================
@@ -2306,7 +2260,7 @@ p + p {
             type="image/avif"
           >
           <img
-            src="images/stages/about.jpg"
+            src="images/stages/about.avif"
             alt="Свободный танец на мероприятии Ecstatic Dance"
             loading="lazy"
             decoding="async"
@@ -4068,8 +4022,6 @@ function startCountdown() {
   const currentPriceElement = document.getElementById('price-current');
   const nextPriceElement = document.getElementById('price-next');
 
-  const heroButton = document.getElementById('hero-ticket-button');
-
   if (!root || !EVENT.pricing) {
     return;
   }
@@ -4123,11 +4075,6 @@ function startCountdown() {
         nextPriceElement.parentElement.hidden = true;
       }
 
-      if (heroButton) {
-        heroButton.textContent =
-          'Купить билет от ' + formatPrice(pricing.nextPrice);
-      }
-
       stopCountdown();
       return;
     }
@@ -4156,11 +4103,6 @@ function startCountdown() {
     if (nextPriceElement) {
       nextPriceElement.textContent =
         formatPrice(pricing.nextPrice);
-    }
-
-    if (heroButton) {
-      heroButton.textContent =
-        'Купить билет от ' + formatPrice(pricing.currentPrice);
     }
   }
 
