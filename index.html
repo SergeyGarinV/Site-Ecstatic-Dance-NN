@@ -3884,6 +3884,12 @@ function applyEventData() {
   const hasDate = Boolean(EVENT.dateLabel);
   const hasTime = Boolean(EVENT.timeLabel);
 
+  /* Скрыть кнопку "Купить билет" в hero, если дата не задана */
+  const heroTicketBtn = document.querySelector('.hero__actions [data-ticket-link]');
+  if (heroTicketBtn) {
+    heroTicketBtn.style.display = hasDate ? '' : 'none';
+  }
+  
   /* --- Нет данных из event.json: пишем «Дата и время уточняется» --- */
   if (!hasDate && !hasTime) {
 
