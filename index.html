@@ -4607,7 +4607,6 @@ function renderGalleryFromData() {
 
 })();
 
-
 /* ============================================================
    ОСЦИЛЛОГРАММА
    ============================================================ */
@@ -4731,40 +4730,29 @@ document.querySelectorAll('canvas.osc').forEach(
     oscItems.push(item);
 
 
-      if ('IntersectionObserver' in window) {
+    if ('IntersectionObserver' in window) {
 
-  const observer =
-    new IntersectionObserver(
-      (entries) => {
+      const observer =
+        new IntersectionObserver(
+          (entries) => {
 
-        entries.forEach((entry) => {
+            entries.forEach((entry) => {
 
-          item.visible =
-            entry.isIntersecting;
+              item.visible =
+                entry.isIntersecting;
 
-          // ВАЖНО: при появлении в зоне видимости
-          // перепроверяем размер — вдруг при загрузке был 0
-          if (entry.isIntersecting) {
-            resizeCanvas(item);
+            });
 
-            // Если сейчас статичный режим — сразу перерисовать
-            if (reducedMotion.matches) {
-              drawItemFrame(item, 0);
-            }
+          },
+          {
+            rootMargin: '120px'
           }
-
-        });
-
-      },
-      {
-        rootMargin: '120px'
-      }
-    );
+        );
 
 
-  observer.observe(canvas);
+      observer.observe(canvas);
 
-}
+    }
 
   }
 );
@@ -4822,130 +4810,6 @@ function resizeAll() {
 }
 
 
-/* --- Новые настройки --- */
-const reducedMotion =
-  window.matchMedia('(prefers-reduced-motion: reduce)');
-
-let startTime = performance.now();
-
-/* --- Отрисовка одного кадра для одного canvas --- */
-function drawItemFrame(item, elapsed) {
-  if (!item.visible) return;
-
-  if (!item.w || !item.h) {
-    resizeCanvas(item);
-    if (!item.w || !item.h) return;
-  }
-
-  const { ctx, w, h, color, type } = item;
-  const midY = h / 2;
-  const amplitude = h * 0.36;
-
-  ctx.clearRect(0, 0, w, h);
-  ctx.strokeStyle = color;
-  ctx.globalAlpha = .85;
-  ctx.lineWidth = 1.2;
-  ctx.lineJoin = 'round';
-  ctx.lineCap = 'round';
-  ctx.beginPath();
-
-  const step = 3;
-  for (let x = 0; x <= w; x += step) {
-    const u = w > 0 ? x / w : 0;
-    const taper = Math.sin(Math.PI * u);
-    const value = waveValue(type, u, elapsed + item.phase);
-    const y = midY - value * amplitude * taper;
-    if (x === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-  ctx.globalAlpha = 1;
-}
-
-/* --- Один статичный кадр для всех canvas --- */
-function renderStaticFrame() {
-  oscItems.forEach((item) => drawItemFrame(item, 0));
-}
-
-/* --- Обновляем при ресайзе окна --- */
-window.addEventListener('resize', () => {
-  resizeAll();
-  if (reducedMotion.matches) renderStaticFrame();
-}, { passive: true });
-
-window.addEventListener('load', () => {
-  resizeAll();
-  if (reducedMotion.matches) renderStaticFrame();
-
-  // Страховка: пересчитать ещё раз через 300мс и 1200мс
-  // (на случай, если шрифты или картинки поменяли layout)
-  setTimeout(() => {
-    resizeAll();
-    if (reducedMotion.matches) renderStaticFrame();
-  }, 300);
-
-  setTimeout(() => {
-    resizeAll();
-    if (reducedMotion.matches) renderStaticFrame();
-  }, 1200);
-}, { once: true });
-
-resizeAll();
-
-/* ---- Ограничение FPS и отключение при скрытой вкладке ---- */
-
-const FRAME_INTERVAL = 1000 / 30;
-let lastDraw = 0;
-let paused = document.hidden;
-
-document.addEventListener('visibilitychange', () => {
-  paused = document.hidden;
-  if (!paused) {
-    lastDraw = 0;
-    if (!reducedMotion.matches) requestAnimationFrame(draw);
-    else renderStaticFrame();
-  }
-});
-
-/* --- Анимационный цикл --- */
-function draw(now) {
-  if (paused) return;
-  if (now - lastDraw < FRAME_INTERVAL) {
-    requestAnimationFrame(draw);
-    return;
-  }
-  lastDraw = now;
-  const elapsed = (now - startTime) / 1000;
-  oscItems.forEach((item) => drawItemFrame(item, elapsed));
-  requestAnimationFrame(draw);
-}
-
-/* --- Запуск --- */
-if (reducedMotion.matches) {
-  renderStaticFrame();
-} else {
-  requestAnimationFrame(draw);
-}
-
-/* --- Страховка: следим за изменением размера canvas --- */
-if ('ResizeObserver' in window) {
-  const ro = new ResizeObserver((entries) => {
-    entries.forEach((entry) => {
-      const canvas = entry.target;
-      const item = oscItems.find((it) => it.canvas === canvas);
-      if (!item) return;
-
-      resizeCanvas(item);
-
-      if (reducedMotion.matches) {
-        drawItemFrame(item, 0);
-      }
-    });
-  });
-
-  oscItems.forEach((item) => ro.observe(item.canvas));
-}
-/* ===######################УДАЛИТЬ
 window.addEventListener(
   'resize',
   resizeAll,
@@ -4970,17 +4834,17 @@ const reducedMotion =
   window.matchMedia(
     '(prefers-reduced-motion: reduce)'
   );
-
+/* Режии уменьшить движение*//*
 if (reducedMotion.matches) {
   oscItems.forEach((item) => {
     item.visible = false;
   });
 }
+*/
 
+/* ---- Ограничение FPS и отключение при скрытой вкладке ---- */
 
-/* ---- Ограничение FPS и отключение при скрытой вкладке ---- *//*
-
-const FRAME_INTERVAL = 1000 / 30;  /* ~30 fps *//*
+const FRAME_INTERVAL = 1000 / 30;  /* ~30 fps */
 let lastDraw = 0;
 let paused = document.hidden;
 
@@ -5048,7 +4912,7 @@ function draw(now) {
     );
 
 
-    /* shadowBlur убран — дорогая операция для производительности *//*
+    /* shadowBlur убран — дорогая операция для производительности */
 
     ctx.strokeStyle =
       color;
@@ -5139,7 +5003,6 @@ function draw(now) {
 if (!reducedMotion.matches) {
   requestAnimationFrame(draw);
 }
-Конец блока УДАЛЕНИЕ-----------*/
 
 /* ============================================================
    ПЛАВНОЕ ПОЯВЛЕНИЕ
