@@ -4731,29 +4731,40 @@ document.querySelectorAll('canvas.osc').forEach(
     oscItems.push(item);
 
 
-    if ('IntersectionObserver' in window) {
+      if ('IntersectionObserver' in window) {
 
-      const observer =
-        new IntersectionObserver(
-          (entries) => {
+  const observer =
+    new IntersectionObserver(
+      (entries) => {
 
-            entries.forEach((entry) => {
+        entries.forEach((entry) => {
 
-              item.visible =
-                entry.isIntersecting;
+          item.visible =
+            entry.isIntersecting;
 
-            });
+          // ВАЖНО: при появлении в зоне видимости
+          // перепроверяем размер — вдруг при загрузке был 0
+          if (entry.isIntersecting) {
+            resizeCanvas(item);
 
-          },
-          {
-            rootMargin: '120px'
+            // Если сейчас статичный режим — сразу перерисовать
+            if (reducedMotion.matches) {
+              drawItemFrame(item, 0);
+            }
           }
-        );
+
+        });
+
+      },
+      {
+        rootMargin: '120px'
+      }
+    );
 
 
-      observer.observe(canvas);
+  observer.observe(canvas);
 
-    }
+}
 
   }
 );
@@ -4819,7 +4830,12 @@ let startTime = performance.now();
 
 /* --- Отрисовка одного кадра для одного canvas --- */
 function drawItemFrame(item, elapsed) {
-  if (!item.visible || !item.w || !item.h) return;
+  if (!item.visible) return;
+
+  if (!item.w || !item.h) {
+    resizeCanvas(item);
+    if (!item.w || !item.h) return;
+  }
 
   const { ctx, w, h, color, type } = item;
   const midY = h / 2;
@@ -4860,6 +4876,18 @@ window.addEventListener('resize', () => {
 window.addEventListener('load', () => {
   resizeAll();
   if (reducedMotion.matches) renderStaticFrame();
+
+  // Страховка: пересчитать ещё раз через 300мс и 1200мс
+  // (на случай, если шрифты или картинки поменяли layout)
+  setTimeout(() => {
+    resizeAll();
+    if (reducedMotion.matches) renderStaticFrame();
+  }, 300);
+
+  setTimeout(() => {
+    resizeAll();
+    if (reducedMotion.matches) renderStaticFrame();
+  }, 1200);
 }, { once: true });
 
 resizeAll();
@@ -4897,6 +4925,25 @@ if (reducedMotion.matches) {
   renderStaticFrame();
 } else {
   requestAnimationFrame(draw);
+}
+
+/* --- Страховка: следим за изменением размера canvas --- */
+if ('ResizeObserver' in window) {
+  const ro = new ResizeObserver((entries) => {
+    entries.forEach((entry) => {
+      const canvas = entry.target;
+      const item = oscItems.find((it) => it.canvas === canvas);
+      if (!item) return;
+
+      resizeCanvas(item);
+
+      if (reducedMotion.matches) {
+        drawItemFrame(item, 0);
+      }
+    });
+  });
+
+  oscItems.forEach((item) => ro.observe(item.canvas));
 }
 /* ===######################УДАЛИТЬ
 window.addEventListener(
