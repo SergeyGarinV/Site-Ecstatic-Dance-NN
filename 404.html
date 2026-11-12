@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, follow">
+  <title>Страница не найдена — Экстатик Денс</title>
+
+  <link rel="icon" href="images/favicon/favicon.ico" sizes="any">
+
+  <!-- Те же шрифты, что на основном сайте -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Jost:wght@200;300;400&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --font-head: 'Jost', sans-serif;
+      --font-body: 'Inter', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.65;
+      color: #F2EDE4;
+      background:
+        linear-gradient(
+          135deg,
+          #556B2F 0%,
+          #2C3E50 50%,
+          #1A1A2E 100%
+        );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .code {
+      font-family: var(--font-head);
+      font-weight: 200;
+      font-size: clamp(96px, 22vw, 180px);
+      line-height: 1;
+      letter-spacing: .06em;
+      opacity: .35;
+      margin-bottom: 24px;
+    }
+
+    .title {
+      font-family: var(--font-head);
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font-size: clamp(16px, 2vw, 22px);
+      margin-bottom: 24px;
+    }
+
+    .text {
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 1.7;
+      opacity: .85;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 17px 46px;
+      border: 1px solid currentColor;
+      color: inherit;
+      text-decoration: none;
+      font-family: var(--font-head);
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      transition: background .5s ease, transform .5s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, .08);
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <main class="wrap">
+    <div class="code" aria-hidden="true">404</div>
+
+    <h1 class="title">Страница не найдена</h1>
+
+    <p class="text">
+      Возможно, ссылка устарела, страница переехала<br>
+      или в адресе есть опечатка.
+    </p>
+
+    <a href="/Site-Ecstatic-Dance-NN/" class="btn">
+      На главную
+    </a>
+  </main>
+
+</body>
+</html>
