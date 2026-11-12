@@ -1,15 +1,42 @@
 {
   "gallery": [
-    "images/gallery/01.jpg",
-    "images/gallery/02.jpg",
-    "images/gallery/03.jpg",
-    "images/gallery/04.jpg",
-    "images/gallery/05.jpg",
-    "images/gallery/06.jpg",
-    "images/gallery/07.jpg",
-    "images/gallery/08.jpg",
-    "images/gallery/09.jpg"
-  ],
+  {
+    "src": "images/gallery/01.jpg",
+    "alt": "Свободный танец на Экстатик Денс в Нижнем Новгороде — участники двигаются в своём темпе"
+  },
+  {
+    "src": "images/gallery/02.jpg",
+    "alt": "Участники Ecstatic Dance танцуют босиком в тёмном зале"
+  },
+  {
+    "src": "images/gallery/03.jpg",
+    "alt": "Спонтанное движение под музыку на практике свободного танца"
+  },
+  {
+    "src": "images/gallery/04.jpg",
+    "alt": "Группа на танцполе Экстатик Денс — атмосфера общего присутствия"
+  },
+  {
+    "src": "images/gallery/05.jpg",
+    "alt": "Момент пика практики: энергичный танец без хореографии"
+  },
+  {
+    "src": "images/gallery/06.jpg",
+    "alt": "Закрытые глаза и медленное движение — погружение в телесные ощущения"
+  },
+  {
+    "src": "images/gallery/07.jpg",
+    "alt": "Участники свободного танца в контакте с музыкой и пространством"
+  },
+  {
+    "src": "images/gallery/08.jpg",
+    "alt": "Завершение Экстатик Денс — спокойное движение и тишина в зале"
+  },
+  {
+    "src": "images/gallery/09.jpg",
+    "alt": "Экстатик Денс в Нижнем Новгороде — живая атмосфера танцевальной практики"
+  }
+],
   "hero": [
     "images/hero/start.jpg"
   ],

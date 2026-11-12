@@ -1694,7 +1694,7 @@ p + p {
   }
 
   .hero {
-    padding: 130px 0 190px;
+    padding: 100px 0 140px; 
     min-height: auto;
   }
 
@@ -4458,7 +4458,7 @@ function applyImagesFromData() {
 /* ------------------------------------------------------------
    ГАЛЕРЕЯ
    ------------------------------------------------------------ */
-
+/*Старая функция Гарелерии
 function renderGalleryFromData() {
 
   const container =
@@ -4534,7 +4534,105 @@ function renderGalleryFromData() {
     fragment.appendChild(figure);
 
   });
+*/
+function renderGalleryFromData() {
 
+  const container =
+    document.getElementById('randomPhotos');
+
+  if (!container || !IMAGES_DATA) {
+    return;
+  }
+
+  const list = Array.isArray(IMAGES_DATA.gallery)
+    ? IMAGES_DATA.gallery
+    : [];
+
+
+  if (list.length === 0) {
+
+    debugWarn(
+      'Массив gallery в data/images.json пуст.'
+    );
+
+    return;
+  }
+
+
+  const LIMIT =
+    Math.min(8, list.length);
+
+
+  // Перемешиваем с сохранением полей src и alt
+  const shuffled = list
+    .map((item) => {
+      // Поддержка обоих форматов: старый (строка) и новый (объект)
+      if (typeof item === 'string') {
+        return { src: item, alt: '', random: Math.random() };
+      }
+      return {
+        src: item.src,
+        alt: item.alt || '',
+        random: Math.random()
+      };
+    })
+    .sort((a, b) => a.random - b.random)
+    .slice(0, LIMIT);
+
+
+  const fragment =
+    document.createDocumentFragment();
+
+
+  shuffled.forEach(({ src, alt }, index) => {
+
+    const resolved =
+      resolveAssetPath(src);
+
+    if (!resolved) {
+      return;
+    }
+
+
+    const figure =
+      document.createElement('figure');
+
+    figure.className = 'photo';
+
+
+    const image =
+      document.createElement('img');
+
+    image.src = resolved;
+
+    // Если alt пришёл из JSON — используем его.
+    // Если нет (старый формат) — fallback на прежний шаблон.
+    image.alt = alt || `Экстатик Денс — кадр ${index + 1} из ${shuffled.length}`;
+
+    image.loading = 'lazy';
+
+    image.decoding = 'async';
+
+
+    figure.appendChild(image);
+
+    fragment.appendChild(figure);
+
+  });
+
+
+  /* сохраняем <noscript> внутри контейнера */
+  const noscript = container.querySelector('noscript');
+
+  container.replaceChildren();
+
+  if (noscript) {
+    container.appendChild(noscript);
+  }
+
+  container.appendChild(fragment);
+
+};
 
   /* сохраняем <noscript> внутри контейнера */
   const noscript = container.querySelector('noscript');
