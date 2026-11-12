@@ -17,7 +17,7 @@
     "alt": "Группа на танцполе Экстатик Денс — атмосфера общего присутствия"
   },
   {
-    "src": "images/gallery/05.jpg",
+    "src": "images/gallery/05.png",
     "alt": "Момент пика практики: энергичный танец без хореографии"
   },
   {
@@ -25,7 +25,7 @@
     "alt": "Закрытые глаза и медленное движение — погружение в телесные ощущения"
   },
   {
-    "src": "images/gallery/07.jpg",
+    "src": "images/gallery/07.png",
     "alt": "Участники свободного танца в контакте с музыкой и пространством"
   },
   {
@@ -48,7 +48,7 @@
   "stages":[
     "images/stages/about.jpg",
     "images/stages/organic.jpg", 
-    "images/stages/move.jpg",
+    "images/stages/move.png",
     "images/stages/peak.jpg",
     "images/stages/integration.jpg"
   ],
